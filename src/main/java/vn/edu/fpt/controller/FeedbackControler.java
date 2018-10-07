@@ -32,19 +32,13 @@ public class FeedbackControler {
         Date a = feedbackDTO.getTime();
         long time = a.getTime();
 
-        FeedbackDTO feedbackDTO1 = feedbackDTO;//debug
 
         return (feedbackService.sendFeedback( feedbackDTO.getFeedbackDescription(),feedbackDTO.getFeedbackPhotoList(),time));
     }
 
-    @PostMapping( value = "/uploadImage"
-//            ,consumes = "application/json",
-//            produces = "application/json"
-    )
+    @PostMapping( value = "/uploadImage")
 
     public String uploadImage(@RequestPart(name = "img") MultipartFile img ) throws IOException {
-
-        System.out.println("Request  update photo "+ img.getOriginalFilename());
         return feedbackService.uploadImage(img);
     }
 }
