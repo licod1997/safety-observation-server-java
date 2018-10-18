@@ -1,0 +1,17 @@
+#dataTable2 > tbody > tr {
+    cursor: pointer;
+}
+
+#modal-feedback-description {
+    word-break: break-word;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.feedback-unread {
+    background-color: #edf2fa !important;
+}
+
+.feedback-unread:hover {
+    background-color: rgba(0, 0, 0, .075) !important;
+}

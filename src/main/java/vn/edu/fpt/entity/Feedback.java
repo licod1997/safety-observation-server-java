@@ -16,6 +16,8 @@ public class Feedback {
     @Temporal( TemporalType.TIMESTAMP )
     @Column( name = "time" )
     private Date time;
+    @Column( name = "is_read" )
+    private Boolean isRead;
     @OneToMany( mappedBy = "feedback", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = FeedbackPhoto.class )
     private List<FeedbackPhoto> feedbackPhotoList;
 
@@ -54,13 +56,20 @@ public class Feedback {
         this.feedbackPhotoList = feedbackPhotoList;
     }
 
+    public Boolean getRead() {
+        return isRead;
+    }
+
+    public void setRead( Boolean read ) {
+        isRead = read;
+    }
+
     @Override
     public String toString() {
         return "Feedback{" +
                 "id=" + id +
                 ", feedbackDescription='" + feedbackDescription + '\'' +
                 ", time=" + time +
-                ", feedbackPhotoList=" + feedbackPhotoList +
-                '}';
+                '}' + "\n";
     }
 }
