@@ -39,6 +39,7 @@ public class FeedbackControler {
     @PostMapping( value = "/uploadImage")
 
     public String uploadImage(@RequestPart(name = "img") MultipartFile img ) throws IOException {
-        return feedbackService.uploadImage(img);
+        String result = feedbackService.uploadImage(img);
+        return result;
     }
 }

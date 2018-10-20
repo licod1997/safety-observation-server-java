@@ -7,7 +7,7 @@ import java.util.List;
 public class FeedbackDTO {
     private String feedbackDescription;
     private Date time;
-    private FeedbackPhotoDTO[] feedbackPhotoList; //???? request gửi hình vào list này à?
+    private FeedbackPhotoDTO[] feedbackPhotoList;
 
     public FeedbackDTO() {
     }
