@@ -32,61 +32,64 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Transactional
     @Override
-    public String sendFeedback( String description, FeedbackPhotoDTO[] listFeedbackPhotoDTO, Long time ) {
+    public String sendFeedback(String description, FeedbackPhotoDTO[] listFeedbackPhotoDTO, Long time) {
 
-//        if (description.isEmpty()|| listFeedbackPhotoDTO.length == 0){
-//            return "Some thing went wrong... Send feedback failed";
-//        }
 
-        if ( listFeedbackPhotoDTO.length == 0 || listFeedbackPhotoDTO == null ) return "List photo is empty";
+
+        if (listFeedbackPhotoDTO.length == 0  || listFeedbackPhotoDTO == null)return "empty_list_image";
+        //check exist image
+        for(int i = 0; i < listFeedbackPhotoDTO.length; i++){
+            if(feedbackPhotoRepository.findByPhotoName(listFeedbackPhotoDTO[i].getPhotoName())!= null){
+                return "exist_image";
+            }
+        }
+
 
         //convert feedbackphotoDTO to feedbackphoto entities
         List<FeedbackPhoto> listFeedbackPhoto = new ArrayList<>();
 
         int size = listFeedbackPhotoDTO.length;
 
-        for ( int i = 0; i < listFeedbackPhotoDTO.length; i++ ) {
+        for(int i = 0 ;i < listFeedbackPhotoDTO.length ; i++){
             FeedbackPhoto feedbackPhoto = new FeedbackPhoto();
 
-            feedbackPhoto.setPhotoDirectory( listFeedbackPhotoDTO[i].getPhotoDirectory() );
+            feedbackPhoto.setPhotoDirectory(listFeedbackPhotoDTO[i].getPhotoDirectory());
 
-            feedbackPhoto.setPhotoName( listFeedbackPhotoDTO[i].getPhotoName() );
-            listFeedbackPhoto.add( feedbackPhoto );
+            feedbackPhoto.setPhotoName(listFeedbackPhotoDTO[i].getPhotoName());
+            listFeedbackPhoto.add(feedbackPhoto);
         }
 
         //save feedback
         Feedback feedback = new Feedback();
 
-        feedback.setTime( new Date( time ) );
-        feedback.setFeedbackPhotoList( listFeedbackPhoto );
-        feedback.setFeedbackDescription( description.trim() );
-        feedback.setRead( false );
-        feedbackRepository.saveAndFlush( feedback );
+        feedback.setTime(new Date(time));
+        feedback.setFeedbackPhotoList(listFeedbackPhoto);
+        feedback.setFeedbackDescription(description.trim());
+
+        feedbackRepository.saveAndFlush(feedback);
 
 
         //save feedbackphoto;
 
-        for ( int i = 0; i < listFeedbackPhoto.size(); i++ ) {
-            listFeedbackPhoto.get( i ).setFeedback( feedback );
-            listFeedbackPhoto.get( i ).setPhotoDirectory( fileStorageLocation.toString() );
-            feedbackPhotoRepository.save( listFeedbackPhoto.get( i ) );
+        for(int i=0; i<listFeedbackPhoto.size();i++){
+            listFeedbackPhoto.get(i).setFeedback(feedback);
+            listFeedbackPhoto.get(i).setPhotoDirectory(fileStorageLocation.toString());
+            feedbackPhotoRepository.save(listFeedbackPhoto.get(i));
         }
 
-        return "Send feedback successfully...";
+        return "send_feedback_successfully";
     }
 
     @Override
-    public String uploadImage( MultipartFile img ) throws RuntimeException, IOException {
+    public String uploadImage(MultipartFile img) throws RuntimeException, IOException {
 
-        String fileName = StringUtils.cleanPath( img.getOriginalFilename() );
-        Files.createDirectories( fileStorageLocation );
 
-        byte[] bytes = img.getBytes();
+        String fileName = StringUtils.cleanPath(img.getOriginalFilename());
+        Files.createDirectories(fileStorageLocation);
 
-        Path targetLocation = fileStorageLocation.resolve( fileName );
-        Files.copy( img.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING );
-
-        return "Uploaded Image: " + img.getName() + "/n file size: " + img.getSize();
+        Path targetLocation = fileStorageLocation.resolve(fileName);
+        Files.copy(img.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+        return  "upload_image_successfully";
 
     }
 
