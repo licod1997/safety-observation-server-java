@@ -26,6 +26,19 @@
                                          // have the same number of elements
       }
     };
+      // var rejectBtns = elem.querySelector('.btn-reject').querySelectorAll('div');
+      // var onRejectClick = function (index) {
+      //     if(index >= (images.length/2)  ){
+      //
+      //         showPrev();
+      //     }else{
+      //       showNext();
+      //     }
+      // };
+      //
+      // for (var i=0; i < rejectBtns.length; i+=1) {
+      //     rejectBtns[i].addEventListener('click', onRejectClick, false);
+      // }
 
     var showPrev = function () {
       activateImage(activeImageIndex - 1);

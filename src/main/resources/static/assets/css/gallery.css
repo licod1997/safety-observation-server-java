@@ -23,6 +23,24 @@
 .gallery .images > div.active {
   opacity: 1;
 }
+.gallery .images > div.active:after {
+  display: block;
+  position: absolute;
+  top: 0;
+  right:0 ;
+  width: 50px;
+  content: "Reject";
+  font-weight: bold;
+  height: 50px;
+  border-radius: 100%;
+  background-color: #F44336;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  margin: 10px;
+  z-index: 9999;
+
+}
 .gallery .images > span {
   cursor: pointer;
   width: 50px;
@@ -99,8 +117,8 @@ height: 120px;
   }
 }
 .gallery .thumbs > div.active {
-  border-color: silver;
+  border-color: #2196f3;
 }
 .gallery .thumbs > div.active:before {
-  border-bottom-color: silver;
+  border-bottom-color: #2196f3;
 }

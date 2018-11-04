@@ -25,4 +25,8 @@
     font-weight: 600;
     background-color: #21ce2c;
     color: white;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
 }

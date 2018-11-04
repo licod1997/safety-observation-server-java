@@ -127,12 +127,12 @@
                                 <h4 class="header-title">Phản Hồi</h4>
                                 <div class="data-tables datatable-primary">
                                     <table id="dataTable3">
-                                        <tr>
+                                        <thead>
                                             <th>Người Gửi</th>
-                                            <th>Nội Dung</th>
+                                            <th style="text-align: left">Nội Dung</th>
                                             <th style="text-align: right">Thời Gian</th>
-
-                                        </tr>
+                                            <th style="text-align: right">Chi Tiết </th>
+                                        </thead>
                                     </table>
                                     <script>
                                         var firstNotificationId;
@@ -145,42 +145,48 @@
                                                 <th>Thời điểm</th>
                                             </tr>
                                         </thead>
+
                                         <tbody style="text-align: left">
                                             <th:block th:fragment="feedbackTable">
-                                                <tr th:each="feedback : ${feedbackList}" data-toggle="modal" class="" data-target="#modal" th:classappend="${feedback.getRead()} ? feedback-read : feedback-unread">
+                                                <tr th:each="feedback : ${feedbackList}"  th:classappend="${feedback.getRead()} ? feedback-read : feedback-unread">
 
+                                                        <td th:text="'Licod đã gửi phản hồi'"></td>
 
+                                                        <td>
+                                                            <div class="feedback-description" th:text="${feedback.feedbackDescription}"></div>
+                                                        </td>
 
-                                                    <td th:text="'Licod đã gửi phản hồi'"></td>
+                                                        <td>
+                                                            <div class="feedback-time" th:text="'Ngày ' + ${#dates.day(feedback.time)}
+                                                                                            +' Tháng ' + ${#dates.month(feedback.time)}
+                                                                                            +' Năm ' + ${#dates.year(feedback.time)}
+                                                                                            +' lúc ' + ${#dates.format(feedback.time, 'HH:mm')}">
 
-                                                    <td>
-                                                        <div class="feedback-description" th:text="${feedback.feedbackDescription}"></div>
+                                                            </div>
+
+                                                        </td>
+
+                                                        <!--<td style="display: none">-->
+                                                            <!--<div class="feeedback-username" th:text="'Licod'"></div>-->
+                                                            <!--<div class="feedback-id" th:text="${feedback.id}"></div>-->
+                                                            <!--<div class="feedback-time" th:text="${#dates.day(feedback.time)}-->
+                                                                                            <!--+' Tháng ' + ${#dates.month(feedback.time)}-->
+                                                                                            <!--+' Năm ' + ${#dates.year(feedback.time)}-->
+                                                                                            <!--+' lúc ' + ${#dates.format(feedback.time, 'HH:mm')} "></div>-->
+                                                            <!--<div class="feedback-description" th:text="${feedback.feedbackDescription}">-->
+
+                                                            <!--</div>-->
+
+                                                            <!--<div class="feedback-photo" th:each="photo : ${feedback.feedbackPhotoList}">-->
+                                                                <!--<div class="feedback-photo-id" th:text="${photo.id}"></div>-->
+                                                                <!--<div class="feedback-photo-url" th:text="'http://localhost:8080/' + ${photo.photoName}"></div>-->
+                                                            <!--</div>-->
+
+                                                        <!--</td>-->
+                                                    <td style="text-align: right">
+                                                        <a href="/chi-tiet-phan-hoi.html" th:text="${feedback.getId()}" >Chi tiết </a>
                                                     </td>
-                                                    <td>
-                                                        <div class="feedback-time" th:text="${#dates.day(feedback.time)} +
-                                                                                                                                                 ' Tháng ' + ${#dates.month(feedback.time)} +
-                                                                                                                                                 ' Năm ' + ${#dates.year(feedback.time)} +
-                                                                                                                                                 ' lúc ' + ${#dates.format(feedback.time, 'HH:mm')} "></div>
 
-                                                    </td>
-
-                                                    <td style="display: none">
-                                                        <div class="feeedback-username" th:text="'Licod'"></div>
-                                                        <div class="feedback-id" th:text="${feedback.id}"></div>
-                                                        <div class="feedback-time" th:text="${#dates.day(feedback.time)} +
-                                                                                                                                                 ' Tháng ' + ${#dates.month(feedback.time)} +
-                                                                                                                                                 ' Năm ' + ${#dates.year(feedback.time)} +
-                                                                                                                                                 ' lúc ' + ${#dates.format(feedback.time, 'HH:mm')} "></div>
-                                                        <div class="feedback-description" th:text="${feedback.feedbackDescription}">
-
-                                                        </div>
-
-                                                        <div class="feedback-photo" th:each="photo : ${feedback.feedbackPhotoList}">
-                                                            <div class="feedback-photo-id" th:text="${photo.id}"></div>
-                                                            <div class="feedback-photo-url" th:text="'http://localhost:8080/' + ${photo.photoName}"></div>
-                                                        </div>
-
-                                                    </td>
 
                                                 </tr>
                                             </th:block>
@@ -219,7 +225,7 @@
                             </script>
                             <div id="mygallery" class="gallery">
                                 <div class="images">
-                                    <div class="active" style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-1.jpg)"></div>
+                                    <div class="active" style="background-image: url(C:\Users\ANHNDNSE61922\Desktop\web-layout\templates\img\photo-1.jpg)"></div>
                                     <span class="left"></span>
                                     <span class="right"></span>
                                 </div>
@@ -251,7 +257,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
