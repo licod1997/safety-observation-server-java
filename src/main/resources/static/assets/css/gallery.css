@@ -23,7 +23,7 @@
 .gallery .images > div.active {
   opacity: 1;
 }
-.gallery .images > div.active:after {
+.button-reject {
   display: block;
   position: absolute;
   top: 0;

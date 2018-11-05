@@ -124,28 +124,28 @@
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Phản Hồi</h4>
+                                <h4 class="header-title">Chi tiết phản hồi</h4>
                                 <div class="data-tables datatable-primary">
                                     <div class="row">
                                         <div class="col-8">
 
                                             <div id="mygallery" class="gallery">
-                                                <div class="images">
-                                                    <div class="active" style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-1.jpg)"></div>
-                                                    <div style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-2.jpg)"></div>
-                                                    <div style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-3.jpg)"></div>
-                                                    <div style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-4.jpg)"></div>
-                                                    <div style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-5.jpg)"></div>
+                                                <div class="images" >
+                                                    <div
+                                                            th:each="photo : ${feedback.getFeedbackPhotoList()}"
+                                                            th:style="'background-image:url(http://localhost:8080/' +${photo.photoName} +');'"
+                                                            th:classappend="${feedback.getFeedbackPhotoList().get(0).getId() == photo.getId()? 'active' : ''}"
+                                                    ></div>
 
                                                     <span class="left"></span>
                                                     <span class="right"></span>
                                                 </div>
-                                                <div class="thumbs">
-                                                    <div class="active" style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-1.jpg)"></div>
-                                                    <div style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-2.jpg)"></div>
-                                                    <div style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-3.jpg)"></div>
-                                                    <div style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-4.jpg)"></div>
-                                                    <div style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-5.jpg)"></div>
+
+                                                <div class="thumbs" >
+                                                    <div th:each="photo : ${feedback.getFeedbackPhotoList()}" th:style="'background-image:url(http://localhost:8080/' +${photo.photoName} +');'"
+                                                         th:classappend="${feedback.getFeedbackPhotoList().get(0).getId() == photo.getId()? 'active' : ''}"
+                                                    ></div>
+
 
                                                 </div>
                                             </div>
@@ -154,17 +154,18 @@
                                             <div class="media mb-3">
                                                 <div class="media-body">
                                                     <h4>Licod</h4>
-                                                    <div id="modal-feedback-time">
-                                                        22 Tháng 10 Năm 2018 lúc 23:46
+                                                    <div id="modal-feedback-time" th:text="'Ngày ' + ${#dates.day(feedback.time)}
+                                                                                            +' Tháng ' + ${#dates.month(feedback.time)}
+                                                                                            +' Năm ' + ${#dates.year(feedback.time)}
+                                                                                            +' lúc ' + ${#dates.format(feedback.time, 'HH:mm')}">
+
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="media">
                                                 <div class="media-body">
                                                     <div id="modal-feedback-description">
-                                                        <ul>
-                                                            <li>Lorem ipsum dolor sit amet, consectetur adipisici?</li>
-                                                        </ul>
+                                                        <p th:text="${feedback.getFeedbackDescription()}"></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,7 +194,7 @@
     </div>
     <!-- page container area end -->
     <!--    Gallery Js-->
-    <script src="./assets/js/gallery.js"></script>
+    <script src="assets/js/gallery.js"></script>
     <!-- jquery latest version -->
     <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->

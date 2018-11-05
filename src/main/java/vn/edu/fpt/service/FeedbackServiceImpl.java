@@ -117,4 +117,9 @@ public class FeedbackServiceImpl implements FeedbackService {
         }
         return null;
     }
+
+    @Override
+    public Feedback getFeedbackById(Long feedbackId) {
+        return feedbackRepository.findById(feedbackId);
+    }
 }

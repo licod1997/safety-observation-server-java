@@ -20,4 +20,5 @@ public interface FeedbackService {
     List<Feedback> getFeedbacksLastPage( Long lastNotificationId );
 
     Feedback setFeedbackRead( Long currentNotificationId );
+    Feedback getFeedbackById(Long feedbackId);
 }

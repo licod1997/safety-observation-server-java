@@ -81,4 +81,12 @@ public class FeedbackController {
         }
         return ResponseEntity.badRequest().build();
     }
+
+    @GetMapping( {"/chi-tiet-phan-hoi"}   )
+    public ModelAndView getFeedbackPage( @RequestParam(name = "id") Long id, ModelAndView mv ) {
+        Feedback feedback = feedbackService.getFeedbackById(id);
+        mv.addObject( "feedback", feedback );
+               mv.setViewName( "chi-tiet-phan-hoi" );
+        return mv;
+    }
 }

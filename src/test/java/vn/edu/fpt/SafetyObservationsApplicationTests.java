@@ -15,7 +15,7 @@ import java.util.List;
 
 @RunWith( SpringRunner.class )
 @SpringBootTest
-public class SafetyObservationsApplicationTests {
+public class  SafetyObservationsApplicationTests {
 
     @Test
     public void contextLoads() {
