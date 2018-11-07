@@ -133,16 +133,21 @@
                                                 <div class="images" >
                                                     <div
                                                             th:each="photo : ${feedback.getFeedbackPhotoList()}"
-                                                            th:style="'background-image:url(http://localhost:8080/' +${photo.photoName} +');'"
+                                                            th:style="'background-image:url(http://localhost:8080/' +${photo.getPhotoName()} +');'"
                                                             th:classappend="${feedback.getFeedbackPhotoList().get(0).getId() == photo.getId()? 'active' : ''}"
-                                                    ></div>
+
+                                                    >
+                                                        <span>
+                                                            <a th:href="'http://localhost:8080/downloadFile/'+ ${photo.getPhotoName()}">Download this photo</a>
+                                                        </span>
+                                                    </div>
 
                                                     <span class="left"></span>
                                                     <span class="right"></span>
                                                 </div>
 
                                                 <div class="thumbs" >
-                                                    <div th:each="photo : ${feedback.getFeedbackPhotoList()}" th:style="'background-image:url(http://localhost:8080/' +${photo.photoName} +');'"
+                                                    <div th:each="photo : ${feedback.getFeedbackPhotoList()}" th:style="'background-image:url(http://localhost:8080/' +${photo.getPhotoName()} +');'"
                                                          th:classappend="${feedback.getFeedbackPhotoList().get(0).getId() == photo.getId()? 'active' : ''}"
                                                     ></div>
 
@@ -169,7 +174,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="button-train">Train</button>
+                                            <div>
+                                                <form id="multipleUploadForm" name="multipleUploadForm">
+                                                    Chọn ảnh <input id="multipleFileUploadInput" type="file" name="files" multiple required><br><br>
+                                                    <button type="submit">Upload</button>
+                                                </form>
+                                                <button class="button-train">Train</button>
+                                            </div>
                                         </div>
                                     </div>
 

@@ -194,6 +194,8 @@
         }
 
 
+
+
     }
     if ( $( '#dataTable3' ).length ) {
         $( '#dataTable3' ).DataTable( {
@@ -281,6 +283,36 @@
             exitFullscreen();
             $( 'body' ).removeClass( 'expanded' );
         } );
+
+
     }
+
+    /*================================
+    Download uploadfile
+    ==================================*/
+    $('#multipleUploadForm').submit(function(event) {
+
+        var formData = new FormData(this);
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "http://localhost:8080/uploadMultipleFiles",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                alert("Tải lên thành công!");
+                console.log(response)
+            },
+            error: function (error) {
+                alert("Tải lên thất bại!");
+                console.log(error);
+            }
+        });
+
+        event.preventDefault();
+    });
+
+
 
 })( jQuery );

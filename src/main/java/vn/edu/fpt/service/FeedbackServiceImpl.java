@@ -122,4 +122,25 @@ public class FeedbackServiceImpl implements FeedbackService {
     public Feedback getFeedbackById(Long feedbackId) {
         return feedbackRepository.findById(feedbackId);
     }
+
+//    @Override
+//    public Feedback setFeedbackReject( Long feedbackId ) {
+//        Feedback feedback = feedbackRepository.findById( feedbackId );
+//        if(feedback!=null){
+//            feedback.setReject( true );
+//            return feedbackRepository.saveAndFlush( feedback );
+//        }
+//
+//        return null;
+//    }
+//
+//    @Override
+//    public FeedbackPhoto setPhotoReject( Long feedbackPhotoId ) {
+//        FeedbackPhoto feedbackPhoto = feedbackPhotoRepository.findById( feedbackPhotoId );
+//        if(feedbackPhoto!= null){
+//            feedbackPhoto.setRejet( true );
+//            return feedbackPhotoRepository.saveAndFlush( feedbackPhoto );
+//        }
+//        return null;
+//    }
 }

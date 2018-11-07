@@ -3,6 +3,7 @@ package vn.edu.fpt.service;
 import org.springframework.web.multipart.MultipartFile;
 import vn.edu.fpt.dto.FeedbackPhotoDTO;
 import vn.edu.fpt.entity.Feedback;
+import vn.edu.fpt.entity.FeedbackPhoto;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,5 +21,10 @@ public interface FeedbackService {
     List<Feedback> getFeedbacksLastPage( Long lastNotificationId );
 
     Feedback setFeedbackRead( Long currentNotificationId );
+
     Feedback getFeedbackById(Long feedbackId);
+
+//    Feedback setFeedbackReject(Long feedbackId);
+//
+//    FeedbackPhoto setPhotoReject(Long feedbackPhotoId);
 }

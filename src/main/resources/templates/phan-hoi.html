@@ -148,46 +148,43 @@
 
                                         <tbody style="text-align: left">
                                             <th:block th:fragment="feedbackTable">
-                                                <tr th:each="feedback : ${feedbackList}"  th:classappend="${feedback.getRead()} ? feedback-read : feedback-unread">
+                                                    <tr th:each="feedback : ${feedbackList}"  th:classappend="${feedback.getRead()} ? feedback-read : feedback-unread">
+                                                    <td th:text="'Licod đã gửi phản hồi'"></td>
 
-                                                        <td th:text="'Licod đã gửi phản hồi'"></td>
+                                                    <td>
+                                                        <div class="feedback-description" th:text="${feedback.feedbackDescription}"></div>
+                                                    </td>
 
-                                                        <td>
-                                                            <div class="feedback-description" th:text="${feedback.feedbackDescription}"></div>
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="feedback-time" th:text="'Ngày ' + ${#dates.day(feedback.time)}
+                                                    <td>
+                                                        <div class="feedback-time" th:text="'Ngày ' + ${#dates.day(feedback.time)}
                                                                                             +' Tháng ' + ${#dates.month(feedback.time)}
                                                                                             +' Năm ' + ${#dates.year(feedback.time)}
                                                                                             +' lúc ' + ${#dates.format(feedback.time, 'HH:mm')}">
 
-                                                            </div>
+                                                        </div>
 
-                                                        </td>
+                                                    </td>
 
-                                                        <!--<td style="display: none">-->
-                                                            <!--<div class="feeedback-username" th:text="'Licod'"></div>-->
-                                                            <!--<div class="feedback-id" th:text="${feedback.id}"></div>-->
-                                                            <!--<div class="feedback-time" th:text="${#dates.day(feedback.time)}-->
-                                                                                            <!--+' Tháng ' + ${#dates.month(feedback.time)}-->
-                                                                                            <!--+' Năm ' + ${#dates.year(feedback.time)}-->
-                                                                                            <!--+' lúc ' + ${#dates.format(feedback.time, 'HH:mm')} "></div>-->
-                                                            <!--<div class="feedback-description" th:text="${feedback.feedbackDescription}">-->
+                                                    <td style="display: none">
+                                                        <div class="feeedback-username" th:text="'Licod'"></div>
+                                                        <div class="feedback-id" th:text="${feedback.id}"></div>
+                                                        <div class="feedback-time" th:text="${#dates.day(feedback.time)}
+                                                                                            +' Tháng ' + ${#dates.month(feedback.time)}
+                                                                                            +' Năm ' + ${#dates.year(feedback.time)}
+                                                                                            +' lúc ' + ${#dates.format(feedback.time, 'HH:mm')} "></div>
+                                                        <div class="feedback-description" th:text="${feedback.feedbackDescription}">
 
-                                                            <!--</div>-->
+                                                        </div>
 
-                                                            <!--<div class="feedback-photo" th:each="photo : ${feedback.feedbackPhotoList}">-->
-                                                                <!--<div class="feedback-photo-id" th:text="${photo.id}"></div>-->
-                                                                <!--<div class="feedback-photo-url" th:text="'http://localhost:8080/' + ${photo.photoName}"></div>-->
-                                                            <!--</div>-->
+                                                        <div class="feedback-photo" th:each="photo : ${feedback.feedbackPhotoList}">
+                                                            <div class="feedback-photo-id" th:text="${photo.id}"></div>
+                                                            <div class="feedback-photo-url" th:text="'http://localhost:8080/' + ${photo.photoName}"></div>
+                                                        </div>
 
-                                                        <!--</td>-->
+                                                    </td>
                                                     <td style="text-align: right">
                                                         <a th:href="'/chi-tiet-phan-hoi?id=' + ${feedback.getId()}" >Chi tiết </a>
                                                     </td>
-
-
                                                 </tr>
                                             </th:block>
                                         </tbody>
@@ -197,7 +194,6 @@
                         </div>
                     </div>
                     <!-- Primary table end -->
-
                 </div>
             </div>
         </div>
