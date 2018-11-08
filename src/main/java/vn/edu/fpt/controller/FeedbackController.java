@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.servlet.view.RedirectView;
 import vn.edu.fpt.dto.FeedbackDTO;
 import vn.edu.fpt.entity.Feedback;
 import vn.edu.fpt.entity.FeedbackPhoto;
@@ -151,14 +152,16 @@ public class FeedbackController {
 
 
 
-//    @PostMapping( "/reject-image" )
-//    public ResponseEntity setPhotoReject( @RequestParam( name = "photoId" ) Long photoId ) {
-//        FeedbackPhoto feedbackPhoto = feedbackService.setPhotoReject( photoId );
-//        if ( feedbackPhoto != null ) {
-//            return ResponseEntity.ok().build();
-//        }
-//        return ResponseEntity.badRequest().build();
-//    }
+    @GetMapping( "/set-reject-photo" )
+    public RedirectView setPhotoReject( @RequestParam( name = "photoId" ) Long photoId, @RequestParam (name = "option") boolean option ) {
+        FeedbackPhoto feedbackPhoto = feedbackService.setPhotoReject( photoId, option );
+        if ( feedbackPhoto != null ) {
+//            return "set_reject_successfully";
+            return new RedirectView( "/chi-tiet-phan-hoi?id=" + feedbackPhoto.getFeedback().getId() );
+        }
+        return new RedirectView( "/chi-tiet-phan-hoi?id=" + feedbackPhoto.getFeedback().getId() );
+
+    }
 //    @PostMapping( "/reject-feedback" )
 //    public ResponseEntity setFeedbackReject( @RequestParam( name = "feedbackId" ) Long feedbackId ) {
 //        Feedback feedback = feedbackService.setFeedbackReject( feedbackId );

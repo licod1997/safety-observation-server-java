@@ -302,6 +302,7 @@
             contentType: false,
             success: function (response) {
                 alert("Tải lên thành công!");
+                window.location.reload(true);
                 console.log(response)
             },
             error: function (error) {
@@ -313,6 +314,12 @@
         event.preventDefault();
     });
 
-
+//============approve photo onclick======
+//     $( '.btn-approve' ).on( 'click', function () {
+//         $('.btn-approve').addClass('gone');
+//         $('.btn-reject').addClass('gone');
+//         $('.btn-download').removeClass('gone');
+//         $('.controler-nhatanh').removeClass('gone');
+//     } );
 
 })( jQuery );

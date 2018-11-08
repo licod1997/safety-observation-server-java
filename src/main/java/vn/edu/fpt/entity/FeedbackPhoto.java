@@ -13,11 +13,14 @@ public class FeedbackPhoto {
     private String photoName;
     @Column( name = "photo_directory" )
     private String photoDirectory;
+    @Column( name = "is_reject" )
+    private Boolean isReject;
     @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Feedback.class )
     @JoinColumn( name = "feedback_id", referencedColumnName = "id" )
     private Feedback feedback;
 
     public FeedbackPhoto() {
+        this.isReject=false;
     }
 
     public Long getId() {
@@ -52,6 +55,14 @@ public class FeedbackPhoto {
         this.feedback = feedback;
     }
 
+    public boolean isReject() {
+        return isReject;
+    }
+
+    public void setReject( boolean reject ) {
+        isReject = reject;
+    }
+
     @Override
     public String toString() {
         return "FeedbackPhoto{" +
@@ -59,6 +70,8 @@ public class FeedbackPhoto {
                 ", photoName='" + photoName + '\'' +
                 ", photoDirectory='" + photoDirectory + '\'' +
                 ", feedback=" + feedback +
+                ", isReject=" + isReject+
                 '}';
     }
+
 }

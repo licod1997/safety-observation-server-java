@@ -26,5 +26,5 @@ public interface FeedbackService {
 
 //    Feedback setFeedbackReject(Long feedbackId);
 //
-//    FeedbackPhoto setPhotoReject(Long feedbackPhotoId);
+    FeedbackPhoto setPhotoReject(Long feedbackPhotoId,boolean setOption);
 }

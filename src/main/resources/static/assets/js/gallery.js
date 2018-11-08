@@ -2,10 +2,11 @@
   'use strict';
   var init = function (elem) {
     var activeImageIndex = 0;
-    var thumbs = elem.querySelector('.thumbs').querySelectorAll('div');
-    var images = elem.querySelector('.images').querySelectorAll('div');
+    var thumbs = elem.querySelector('.thumbs').querySelectorAll('div:not([style*="display:none"])');
+      var images = elem.querySelector('.images').querySelectorAll('div:not([style*="display:none"])');
 
-    var activateImage = function(index) {
+
+      var activateImage = function(index) {
       if (!thumbs[index]) {
         return;
       }

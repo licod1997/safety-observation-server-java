@@ -72,4 +72,10 @@ public class Feedback {
                 ", time=" + time +
                 '}' + "\n";
     }
+    public long getIdPhotoFristReject(){
+        for ( int i = 0 ; i <this.feedbackPhotoList.size();i++ ){
+            if(!this.feedbackPhotoList.get( i ).isReject())return this.feedbackPhotoList.get( i ).getId();
+        }
+        return 0;
+    }
 }

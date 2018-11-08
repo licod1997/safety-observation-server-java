@@ -74,6 +74,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         for(int i=0; i<listFeedbackPhoto.size();i++){
             listFeedbackPhoto.get(i).setFeedback(feedback);
             listFeedbackPhoto.get(i).setPhotoDirectory(fileStorageLocation.toString());
+            listFeedbackPhoto.get( i ).setReject( false );
             feedbackPhotoRepository.save(listFeedbackPhoto.get(i));
         }
 
@@ -134,13 +135,13 @@ public class FeedbackServiceImpl implements FeedbackService {
 //        return null;
 //    }
 //
-//    @Override
-//    public FeedbackPhoto setPhotoReject( Long feedbackPhotoId ) {
-//        FeedbackPhoto feedbackPhoto = feedbackPhotoRepository.findById( feedbackPhotoId );
-//        if(feedbackPhoto!= null){
-//            feedbackPhoto.setRejet( true );
-//            return feedbackPhotoRepository.saveAndFlush( feedbackPhoto );
-//        }
-//        return null;
-//    }
+    @Override
+    public FeedbackPhoto setPhotoReject( Long feedbackPhotoId, boolean setOption ) {
+        FeedbackPhoto feedbackPhoto = feedbackPhotoRepository.findById( feedbackPhotoId );
+        if(feedbackPhoto!= null){
+            feedbackPhoto.setReject( setOption );
+            return feedbackPhotoRepository.saveAndFlush( feedbackPhoto );
+        }
+        return null;
+    }
 }

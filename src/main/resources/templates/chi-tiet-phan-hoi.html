@@ -130,17 +130,18 @@
                                     <div class="col-8">
 
                                         <div id="mygallery" class="gallery">
-                                            <div class="images" >
+                                            <div class="images">
+
                                                 <div
                                                         th:each="photo : ${feedback.getFeedbackPhotoList()}"
                                                         th:style="'background-image:url(http://localhost:8080/' +${photo.getPhotoName()} +');'"
-                                                        th:classappend="${feedback.getFeedbackPhotoList().get(0).getId() == photo.getId()? 'active' : ''}"
-
+                                                        th:classappend="${photo.getId()== feedback.getIdPhotoFristReject()? 'active' : ''}"
+                                                        th:styleappend="${photo.isReject()==true?'display:none;':''}"
                                                 >
 
-                                                        <ul class="wrapper-nhatanh" style="text-align: right;">
+                                                        <ul  class="wrapper-nhatanh" style="text-align: right;">
                                                             <li ><span class="btn-nhatanh btn-approve">Approve</span></li>
-                                                            <li><span class="btn-nhatanh btn-reject">Reject</span></li>
+                                                            <li><a th:href="'/set-reject-photo?photoId='+${photo.getId()+'&option=true'}"><span class="btn-nhatanh btn-reject">Reject</span></a></li>
                                                             <li><a th:href="'http://localhost:8080/downloadFile/'+ ${photo.getPhotoName()}"><span class="btn-nhatanh btn-download">Download</span></a></li>
                                                         </ul>
 
@@ -152,7 +153,8 @@
 
                                             <div class="thumbs" >
                                                 <div th:each="photo : ${feedback.getFeedbackPhotoList()}" th:style="'background-image:url(http://localhost:8080/' +${photo.getPhotoName()} +');'"
-                                                     th:classappend="${feedback.getFeedbackPhotoList().get(0).getId() == photo.getId()? 'active' : ''}"
+                                                     th:classappend="${photo.getId()== feedback.getIdPhotoFristReject()? 'active' : ''}"
+                                                     th:styleappend="${photo.isReject()==true?'display:none;':''}"
                                                 ></div>
 
 
