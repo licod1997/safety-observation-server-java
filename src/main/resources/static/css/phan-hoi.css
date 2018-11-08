@@ -130,5 +130,23 @@ td a:hover
     cursor:pointer;
 }
 .gone{
-    display: none;
+    display: none !important;
+}
+
+.feedback-controler{
+    display: inline-block;
+    position: absolute;
+    right: 1.5rem;
+    top: .7rem;
+    width: 100px;
+    background-color:rgba(0,0,0,0.3);
+    padding: 5px; z-index: 99999;
+    padding: 0px;
+    width: fit-content;
+}
+.btn-feedback-approve{
+    background-color: #1DE9B6;
+}
+.btn-feedback-reject{
+    background-color: #F4511E;
 }

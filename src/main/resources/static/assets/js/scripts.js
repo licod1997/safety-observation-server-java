@@ -314,12 +314,38 @@
         event.preventDefault();
     });
 
-//============approve photo onclick======
-//     $( '.btn-approve' ).on( 'click', function () {
-//         $('.btn-approve').addClass('gone');
-//         $('.btn-reject').addClass('gone');
-//         $('.btn-download').removeClass('gone');
-//         $('.controler-nhatanh').removeClass('gone');
-//     } );
+
+    //============apporve feeback onclick======
+    $( '.btn-feedback-approve' ).on( 'click', function () {
+        feedbackId = $('.feedbackId').text();
+        $.ajax( {
+            url: 'http://localhost:8080/set-reject-feedback?feedbackId='+feedbackId + '&optionFeedback=false',
+            method: 'GET', success: function (response) {
+                alert("Approve successfully");
+                console.log(response)
+                $('.feedback-controler').addClass('gone');
+            },
+            error: function (error) {
+                alert("Failed to Approve ");
+                console.log(error);
+            }
+        } );
+    } );
+
+    //============reject feeback onclick======
+    $( '.btn-feedback-reject' ).on( 'click', function () {
+        feedbackId = $('.feedbackId').text();
+        $.ajax( {
+            url: 'http://localhost:8080/set-reject-feedback?feedbackId='+feedbackId + '&optionFeedback=true',
+            method: 'GET', success: function (response) {
+                window.location.href = 'http://localhost:8080/'
+                console.log(response)
+            },
+            error: function (error) {
+                alert("Failed to Reject ");
+                console.log(error);
+            }
+        } );
+    } );
 
 })( jQuery );

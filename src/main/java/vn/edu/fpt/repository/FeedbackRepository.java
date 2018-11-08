@@ -1,6 +1,7 @@
 package vn.edu.fpt.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import vn.edu.fpt.entity.Feedback;
 
@@ -15,4 +16,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     List<Feedback> findTop10ByIdLessThanOrderByIdDesc( Long lastNotificationId );
 
     Feedback findById( Long id );
+
+
 }

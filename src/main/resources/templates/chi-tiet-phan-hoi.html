@@ -124,7 +124,18 @@
                 <div class="col-12 mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Chi tiết phản hồi</h4>
+                            <div>
+                                <span style="display: inline-block" class="header-title">Chi Tiết Phản Hồi</span>
+                                <script>
+                                    var feedbackId;
+                                </script>
+                                <span class="feedbackId" style="display: none;" th:text="${feedback.getId()}"></span>
+                                <ul class="feedback-controler">
+                                    <li class="btn-nhatanh btn-feedback-approve">Aprrove</li>
+                                    <li class="btn-nhatanh btn-feedback-reject">Reject</li>
+                                </ul>
+
+                            </div>
                             <div class="data-tables datatable-primary">
                                 <div class="row">
                                     <div class="col-8">
@@ -140,7 +151,7 @@
                                                 >
 
                                                         <ul  class="wrapper-nhatanh" style="text-align: right;">
-                                                            <li ><span class="btn-nhatanh btn-approve">Approve</span></li>
+                                                            <!--<li ><span class="btn-nhatanh btn-approve">Approve</span></li>-->
                                                             <li><a th:href="'/set-reject-photo?photoId='+${photo.getId()+'&option=true'}"><span class="btn-nhatanh btn-reject">Reject</span></a></li>
                                                             <li><a th:href="'http://localhost:8080/downloadFile/'+ ${photo.getPhotoName()}"><span class="btn-nhatanh btn-download">Download</span></a></li>
                                                         </ul>

@@ -162,13 +162,13 @@ public class FeedbackController {
         return new RedirectView( "/chi-tiet-phan-hoi?id=" + feedbackPhoto.getFeedback().getId() );
 
     }
-//    @PostMapping( "/reject-feedback" )
-//    public ResponseEntity setFeedbackReject( @RequestParam( name = "feedbackId" ) Long feedbackId ) {
-//        Feedback feedback = feedbackService.setFeedbackReject( feedbackId );
-//        if ( feedback != null ) {
-//            return ResponseEntity.ok().build();
-//        }
-//        return ResponseEntity.badRequest().build();
-//    }
+    @GetMapping( "/set-reject-feedback" )
+    public ResponseEntity setFeedbackReject( @RequestParam( name = "feedbackId" ) Long feedbackId, @RequestParam(name = "optionFeedback") boolean optionFeedback ) {
+        Feedback feedback = feedbackService.setFeedbackReject( feedbackId,optionFeedback );
+        if ( feedback != null ) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
 
 }

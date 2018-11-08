@@ -11,6 +11,17 @@ public class Feedback {
     @GeneratedValue( strategy = GenerationType.AUTO )
     @Column( name = "id" )
     private Long id;
+    @Column( name = "is_reject" )
+    private Boolean isReject;
+
+    public Boolean getReject() {
+        return isReject;
+    }
+
+    public void setReject( Boolean reject ) {
+        isReject = reject;
+    }
+
     @Column( name = "feedback_description" )
     private String feedbackDescription;
     @Temporal( TemporalType.TIMESTAMP )
