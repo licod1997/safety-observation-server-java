@@ -31,3 +31,101 @@
     bottom: 0;
 
 }
+
+.btn-nhatanh{
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin: 5px;
+    color: #fff;
+    border: 1px solid #ccc;
+}
+.btn-nhatanh:hover{
+    cursor: pointer;
+}
+.btn-approve{
+    background-color: #1DE9B6;
+}
+.btn-reject{
+    background-color: #F4511E;
+}
+.btn-download{
+    background-color: #546E7A;
+
+}
+.btn-train{
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #1DE9B6;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    vertical-align: middle;
+    margin: 0;
+}
+.wrapper-nhatanh{
+    display: block; position: absolute; width: 100px;background-color:rgba(0,0,0,0.3); padding: 5px; z-index: 99999;right: 0;
+}
+
+.controler-nhatanh{
+    display: block;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+button {
+    box-shadow: none;
+    border: 1px solid transparent;
+    font-size: 14px;
+    outline: none;
+    line-height: 100%;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 0.6rem 1rem;
+    border-radius: 2px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    min-height: 38px;
+}
+
+button.primary {
+    background-color: #128ff2;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    color: #fff;
+}
+
+input {
+    font-size: 0.9rem;
+}
+
+input[type="file"] {
+    border: 1px solid #128ff2;
+    padding: 6px;
+    max-width: 100%;
+}
+
+.file-input {
+    width: 98%;
+}
+.submit-btn {
+    display: block;
+    margin: 15px 0px 15px 0px;
+
+    min-width: 100px;
+}
+td  a{
+    text-decoration: none;
+    color: #000;
+}
+
+
+td a:hover
+{
+    color:#000;
+    text-decoration:none;
+    cursor:pointer;
+}

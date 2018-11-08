@@ -131,7 +131,6 @@
                                             <th>Người Gửi</th>
                                             <th style="text-align: left">Nội Dung</th>
                                             <th style="text-align: right">Thời Gian</th>
-                                            <th style="text-align: right">Chi Tiết </th>
                                         </thead>
                                     </table>
                                     <script>
@@ -149,19 +148,23 @@
                                         <tbody style="text-align: left">
                                             <th:block th:fragment="feedbackTable">
                                                     <tr th:each="feedback : ${feedbackList}"  th:classappend="${feedback.getRead()} ? feedback-read : feedback-unread">
-                                                    <td th:text="'Licod đã gửi phản hồi'"></td>
+                                                    <td >
+                                                        <a th:href="'/chi-tiet-phan-hoi?id=' + ${feedback.getId()}" ><div th:text="'Licod đã gửi phản hồi'"></div> </a>
 
+                                                    </td>
                                                     <td>
-                                                        <div class="feedback-description" th:text="${feedback.feedbackDescription}"></div>
+                                                        <a th:href="'/chi-tiet-phan-hoi?id=' + ${feedback.getId()}" ><div class="feedback-description" th:text="${feedback.feedbackDescription}"></div> </a>
+
                                                     </td>
 
                                                     <td>
-                                                        <div class="feedback-time" th:text="'Ngày ' + ${#dates.day(feedback.time)}
+                                                        <a th:href="'/chi-tiet-phan-hoi?id=' + ${feedback.getId()}" ><div class="feedback-time" th:text="'Ngày ' + ${#dates.day(feedback.time)}
                                                                                             +' Tháng ' + ${#dates.month(feedback.time)}
                                                                                             +' Năm ' + ${#dates.year(feedback.time)}
                                                                                             +' lúc ' + ${#dates.format(feedback.time, 'HH:mm')}">
 
-                                                        </div>
+                                                        </div> </a>
+
 
                                                     </td>
 
@@ -182,9 +185,7 @@
                                                         </div>
 
                                                     </td>
-                                                    <td style="text-align: right">
-                                                        <a th:href="'/chi-tiet-phan-hoi?id=' + ${feedback.getId()}" >Chi tiết </a>
-                                                    </td>
+
                                                 </tr>
                                             </th:block>
                                         </tbody>
