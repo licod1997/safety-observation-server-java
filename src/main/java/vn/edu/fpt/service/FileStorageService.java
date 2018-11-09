@@ -34,6 +34,10 @@ public class FileStorageService {
         }
     }
 
+    public Path getFileStorageLocation() {
+        return fileStorageLocation;
+    }
+
     public String storeFile( MultipartFile file) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());

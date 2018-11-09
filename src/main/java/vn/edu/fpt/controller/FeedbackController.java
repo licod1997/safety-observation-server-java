@@ -13,9 +13,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import vn.edu.fpt.dto.FeedbackDTO;
 import vn.edu.fpt.entity.Feedback;
 import vn.edu.fpt.entity.FeedbackPhoto;
+import vn.edu.fpt.entity.TrainFile;
 import vn.edu.fpt.payload.UploadFileResponse;
+import vn.edu.fpt.property.FileStorageProperties;
 import vn.edu.fpt.service.FeedbackService;
 import vn.edu.fpt.service.FileStorageService;
+import vn.edu.fpt.service.TrainService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -94,7 +97,7 @@ public class FeedbackController {
     }
 
     @GetMapping( {"/chi-tiet-phan-hoi"}   )
-    public ModelAndView getFeedbackPage( @RequestParam(name = "id") Long id, ModelAndView mv ) {
+    public ModelAndView getFeedbackDetail( @RequestParam(name = "id") Long id, ModelAndView mv ) {
         Feedback feedback = feedbackService.getFeedbackById(id);
         mv.addObject( "feedback", feedback );
                mv.setViewName( "chi-tiet-phan-hoi" );
@@ -170,5 +173,9 @@ public class FeedbackController {
         }
         return ResponseEntity.badRequest().build();
     }
+
+
+
+
 
 }

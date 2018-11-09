@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Chi tiêt phản hồi - Safe Vs Dang</title>
+    <title>Train - Safe Vs Dang</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" th:href="@{assets/images/icon/favicon.ico}">
     <link rel="stylesheet" href="assets/css/gallery.css">
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/metisMenu.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.min.css">
     <!-- amcharts css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
@@ -26,8 +27,7 @@
     <link rel="stylesheet" href="assets/css/default-css.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="./css/phan-hoi.css">
-
+    <link rel="stylesheet" href="css/phan-hoi.css">
     <!-- modernizr css -->
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -124,89 +124,31 @@
                 <div class="col-12 mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <div>
-                                <span style="display: inline-block" class="header-title">Chi Tiết Phản Hồi</span>
-                                <script>
-                                    var feedbackId;
-                                </script>
-                                <span class="feedbackId" style="display: none;" th:text="${feedback.getId()}"></span>
-                                <ul class="feedback-controler">
-                                    <li class="btn-nhatanh btn-feedback-approve">Aprrove</li>
-                                    <li class="btn-nhatanh btn-feedback-reject">Reject</li>
-                                </ul>
-
-                            </div>
+                            <h4 class="header-title">Danh sách file</h4>
                             <div class="data-tables datatable-primary">
-                                <div class="row">
-                                    <div class="col-8">
 
-                                        <div id="mygallery" class="gallery">
-                                            <div class="images">
+                               <div>
+                                   <ul>
+                                       <li th:each="file : ${fileNotTrainYetList}" th:text="${file.getFileName()}"></li>
+                                   </ul>
+                               </div>
 
-                                                <div
-                                                        th:each="photo : ${feedback.getFeedbackPhotoList()}"
-                                                        th:style="'background-image:url(http://localhost:8080/' +${photo.getPhotoName()} +');'"
-                                                        th:classappend="${photo.getId()== feedback.getIdPhotoFristReject()? 'active' : ''}"
-                                                        th:styleappend="${photo.isReject()==true?'display:none;':''}"
-                                                >
-
-                                                        <ul  class="wrapper-nhatanh" style="text-align: right;">
-                                                            <!--<li ><span class="btn-nhatanh btn-approve">Approve</span></li>-->
-                                                            <li><a th:href="'/set-reject-photo?photoId='+${photo.getId()+'&option=true'}"><span class="btn-nhatanh btn-reject">Reject</span></a></li>
-                                                            <li><a th:href="'http://localhost:8080/downloadFile/'+ ${photo.getPhotoName()}"><span class="btn-nhatanh btn-download">Download</span></a></li>
-                                                        </ul>
-
-                                                </div>
-
-                                                <span class="left"></span>
-                                                <span class="right"></span>
-                                            </div>
-
-                                            <div class="thumbs" >
-                                                <div th:each="photo : ${feedback.getFeedbackPhotoList()}" th:style="'background-image:url(http://localhost:8080/' +${photo.getPhotoName()} +');'"
-                                                     th:classappend="${photo.getId()== feedback.getIdPhotoFristReject()? 'active' : ''}"
-                                                     th:styleappend="${photo.isReject()==true?'display:none;':''}"
-                                                ></div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <div class="media mb-3">
-                                            <div class="media-body">
-                                                <h4>Licod</h4>
-                                                <div id="modal-feedback-time" th:text="'Ngày ' + ${#dates.day(feedback.time)}
-                                                                                            +' Tháng ' + ${#dates.month(feedback.time)}
-                                                                                            +' Năm ' + ${#dates.year(feedback.time)}
-                                                                                            +' lúc ' + ${#dates.format(feedback.time, 'HH:mm')}">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <div id="modal-feedback-description">
-                                                    <p th:text="${feedback.getFeedbackDescription()}"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="controler-nhatanh">
-                                            <form id="multipleUploadForm" name="multipleUploadForm">
-                                                <input class="file-input" id="multipleFileUploadInput" type="file" name="files" multiple required>
-                                                <button class="primary submit-btn" type="submit">Upload</button>
-                                            </form>
-                                        </div>
+                                <div>
+                                    <div class="">
+                                        <form id="multipleUploadTrainForm" name="multipleUploadForm">
+                                            <input class="file-input" id="multipleFileUploadInput" type="file" name="files" multiple required>
+                                            <button class="primary submit-btn" type="submit">Upload</button>
+                                        </form>
                                     </div>
                                 </div>
+
+                                <span class="btn-nhatanh btn-train">Train</span>
 
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Primary table end -->
-
             </div>
         </div>
     </div>
@@ -221,11 +163,56 @@
     <!-- footer area end-->
 </div>
 <!-- page container area end -->
-<!--    Gallery Js-->
-<script src="assets/js/gallery.js"></script>
-<script>
-    Gallery.init(document.getElementById('mygallery'));
-</script>
+
+<!--Popup - detail Feedback-->
+<div id="modal" class="modal fade show" style="display: none; padding-right: 17px;">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-8">
+                        <script>
+                            ;(function () {'use strict'; Gallery.init(document.getElementById('mygallery'));}());
+                        </script>
+                        <div id="mygallery" class="gallery">
+                            <div class="images">
+                                <div class="active" style="background-image: url(C:\Users\ANHNDNSE61922\Desktop\web-layout\templates\img\photo-1.jpg)"></div>
+                                <span class="left"></span>
+                                <span class="right"></span>
+                            </div>
+                            <div class="thumbs">
+                                <div class="active" style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-1.jpg)"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="media mb-3">
+                            <div class="media-body">
+                                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                                <h4>Licod</h4>
+                                <div id="modal-feedback-time">
+                                    22 Tháng 10 Năm 2018 lúc 23:46
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-body">
+                                <div id="modal-feedback-description">
+                                    <ul>
+                                        <li>Lorem ipsum dolor sit amet, consectetur adipisici?</li>
+                                    </ul>
+                                    <button class="button-train">Train</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--END - Popup - detail Feedback-->
 <!-- jquery latest version -->
 <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
 <!-- bootstrap 4 js -->
@@ -241,12 +228,12 @@
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-<!--    Galery plugin-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script>
 <!-- others plugins -->
 <script src="assets/js/plugins.js"></script>
 <script src="assets/js/scripts.js"></script>
-
+<!--    Galery plugin-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script>
+<script src="js/gallery.js"></script>
 
 </body>
 
