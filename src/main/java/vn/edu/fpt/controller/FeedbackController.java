@@ -58,10 +58,13 @@ public class FeedbackController {
     public ModelAndView getFeedbackPage( ModelAndView mv ) {
         List<Feedback> feedbackList = feedbackService.getFeedbacksLoadPage();
         System.out.println( feedbackList );
-        mv.addObject( "feedbackList", feedbackList );
-        mv.addObject( "firstId", feedbackList.get( 0 ).getId() );
-        mv.addObject( "lastId", feedbackList.get( feedbackList.size() - 1 ).getId() );
-        mv.setViewName( "phan-hoi" );
+       if(feedbackList.size() > 0){
+           mv.addObject( "feedbackList", feedbackList );
+           mv.addObject( "firstId", feedbackList.get( 0 ).getId() );
+           mv.addObject( "lastId", feedbackList.get( feedbackList.size() - 1 ).getId() );
+           mv.setViewName( "phan-hoi" );
+       }
+
         return mv;
     }
 

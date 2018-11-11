@@ -126,28 +126,29 @@
                             <div class="card-body">
                                 <h4 class="header-title">Phản Hồi</h4>
                                 <div class="data-tables datatable-primary">
-                                    <table id="dataTable3">
-                                        <thead>
+                                    <div th:if="${feedbackList != null}">
+                                        <table id="dataTable3">
+                                            <thead>
                                             <th>Người Gửi</th>
                                             <th style="text-align: left">Nội Dung</th>
                                             <th style="text-align: right">Thời Gian</th>
-                                        </thead>
-                                    </table>
-                                    <script>
-                                        var firstNotificationId;
-                                    var lastNotificationId;
-								</script>
+                                            </thead>
+                                        </table>
+                                        <script>
+                                            var firstNotificationId;
+                                            var lastNotificationId;
+                                        </script>
 
-                                    <table id="dataTable2" class="table-hover dataTable no-footer dtr-inline">
-                                        <thead class="text-capitalize">
+                                        <table id="dataTable2" class="table-hover dataTable no-footer dtr-inline">
+                                            <thead class="text-capitalize">
                                             <tr>
                                                 <th>Thời điểm</th>
                                             </tr>
-                                        </thead>
+                                            </thead>
 
-                                        <tbody style="text-align: left">
+                                            <tbody style="text-align: left">
                                             <th:block th:fragment="feedbackTable">
-                                                    <tr th:each="feedback : ${feedbackList}"  th:classappend="${feedback.getRead()} ? feedback-read : feedback-unread">
+                                                <tr th:each="feedback : ${feedbackList}"  th:classappend="${feedback.getRead()} ? feedback-read : feedback-unread">
                                                     <td >
                                                         <a th:href="'/chi-tiet-phan-hoi?id=' + ${feedback.getId()}" ><div th:text="'Licod đã gửi phản hồi'"></div> </a>
 
@@ -188,8 +189,12 @@
 
                                                 </tr>
                                             </th:block>
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div th:if="${feedbackList==null}">Danh sách rỗng</div>
+
                                 </div>
                             </div>
                         </div>

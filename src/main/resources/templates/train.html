@@ -128,20 +128,20 @@
                             <div class="data-tables datatable-primary">
 
                                <div th:if="${fileNotTrainYetList != null}">
-                                   <ul>
+                                   <ol>
                                        <li th:each="file : ${fileNotTrainYetList}" th:text="${file.getFileName()}"></li>
-                                   </ul>
+                                   </ol>
                                </div>
                                 <div th:if="${fileNotTrainYetList == null }">
                                     <p>Danh sách rỗng</p>
                                 </div>
 
-                                    <div class="wrapper-train-upload">
-                                        <form id="multipleUploadTrainForm" name="multipleUploadForm">
-                                            <input class="file-input" id="multipleFileUploadInput" type="file" name="files" multiple required>
-                                            <button class="primary submit-btn" type="submit">Upload</button>
-                                        </form>
-                                    </div>
+                                    <!--<div class="wrapper-train-upload">-->
+                                        <!--<form id="multipleUploadTrainForm" name="multipleUploadForm">-->
+                                            <!--<input class="file-input" id="multipleFileUploadInput" type="file" name="files" multiple required>-->
+                                            <!--<button class="primary submit-btn" type="submit">Upload</button>-->
+                                        <!--</form>-->
+                                    <!--</div>-->
 
                                 <span class="btn-nhatanh btn-train">Train</span>
 

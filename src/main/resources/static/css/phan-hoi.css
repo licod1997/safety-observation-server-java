@@ -56,13 +56,16 @@
 
 }
 .btn-train{
+    position: absolute;;
+    top: 0;
+    right: 0;
     width: 100px;
     height: 40px;
     line-height: 40px;
     background-color: #1DE9B6;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     vertical-align: middle;
-    margin: 0;
+    margin: 20px 20px 0 0;
 }
 .wrapper-nhatanh{
     display: block; position: absolute; width: 100px;background-color:rgba(0,0,0,0.3); padding: 5px; z-index: 99999;right: 0;

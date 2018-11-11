@@ -293,14 +293,13 @@
         $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',
-            url: "http://localhost:8080/uploadMultipleFiles",
+            url: "http://localhost:8080/uploadMultipleTrainFiles",
             data: formData,
             processData: false,
             contentType: false,
             success: function (response) {
                 alert("Tải lên thành công!");
                 window.location.reload(true);
-                console.log(response)
             },
             error: function (error) {
                 alert("Tải lên thất bại!");
