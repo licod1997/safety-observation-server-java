@@ -28,11 +28,14 @@ public class TrainController {
     @GetMapping( {"/train" } )
     public ModelAndView getTrainPage( ModelAndView mv ) {
         List<TrainFile> fileNotTrainYetList = trainService.getAllFileNotTrainYet();
-        System.out.println( fileNotTrainYetList );
-        mv.addObject( "fileNotTrainYetList", fileNotTrainYetList );
-        mv.addObject( "firstId", fileNotTrainYetList.get( 0 ).getId() );
-        mv.addObject( "lastId", fileNotTrainYetList.get( fileNotTrainYetList.size() - 1 ).getId() );
-        mv.setViewName( "train" );
+        if(fileNotTrainYetList.size() > 0 ){
+            System.out.println( fileNotTrainYetList );
+            mv.addObject( "fileNotTrainYetList", fileNotTrainYetList );
+            mv.addObject( "firstId", fileNotTrainYetList.get( 0 ).getId() );
+            mv.addObject( "lastId", fileNotTrainYetList.get( fileNotTrainYetList.size() - 1 ).getId() );
+            mv.setViewName( "train" );
+        }
+
         return mv;
     }
 
