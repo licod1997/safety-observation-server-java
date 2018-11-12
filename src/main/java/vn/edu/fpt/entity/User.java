@@ -27,6 +27,24 @@ public class User {
     public User() {
     }
 
+    public User( String username, String password ) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User( String username, String password, boolean enable ) {
+        this.username = username;
+        this.password = password;
+        this.enable = enable;
+    }
+
+    public User( String username, String password, boolean enable, Set<Role> roles ) {
+        this.username = username;
+        this.password = password;
+        this.enable = enable;
+        this.roles = roles;
+    }
+
     public Long getId() {
         return id;
     }

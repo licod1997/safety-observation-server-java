@@ -15,6 +15,8 @@ import vn.edu.fpt.service.FileStorageService;
 import vn.edu.fpt.service.TrainService;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,12 +47,15 @@ public class TrainController {
                 .stream()
                 .map(file -> uploadFile(file))
                 .collect( Collectors.toList());
-
+        Date time ;
         for ( MultipartFile file: files) {
+            time = Calendar.getInstance().getTime();
             TrainFile trainFile = new TrainFile();
             trainFile.setFileDirectory(fileStorageService.getFileStorageLocation().toString() );
             trainFile.setFileName( file.getOriginalFilename() );
+            trainFile.setTimeUpload( time );
             trainService.addFile( trainFile );
+
         }
         return list;
     }
