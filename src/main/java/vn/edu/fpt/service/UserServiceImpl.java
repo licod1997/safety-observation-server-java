@@ -83,4 +83,16 @@ public class UserServiceImpl implements UserService{
         return userRepository.findAllByUsernameContaining( username );
     }
 
+    @Override
+    public List<User> getAllUser() {
+        List<User> resultList = userRepository.findAll();
+        return resultList;
+    }
+
+    @Override
+    public List<User> getAllUserIsEnable() {
+        List<User> resultList = userRepository.findAllByEnableIsTrue();
+        return resultList;
+    }
+
 }
