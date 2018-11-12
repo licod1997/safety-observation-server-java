@@ -1,23 +1,23 @@
-package vn.edu.fpt.dto;
+package vn.edu.fpt.entity;
 
+import javax.persistence.*;
+
+@Table
+@Entity(name = "camera_location")
 public class CameraLocation {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "location", unique = true)
     private String location;
 
     public CameraLocation() {
     }
 
-    public CameraLocation(int id, String location) {
-        this.id = id;
-        this.location = location;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getLocation() {
