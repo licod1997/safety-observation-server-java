@@ -59,7 +59,7 @@ public class UserController {
     @GetMapping("/search-by-username")
     public List<User> searchByLikeUsername (@RequestParam("usernameSearch") String username) {
 
-        List<User> resultList = userService.findAllByUsernameContains( username );
+        List<User> resultList = userService.searchByUsername( username );
         return resultList;
 
     }
