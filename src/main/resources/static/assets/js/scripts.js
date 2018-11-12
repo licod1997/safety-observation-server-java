@@ -345,5 +345,83 @@
 
 
 
+    /*================================
+     Edit user form
+    ==================================*/
+    $('#editUserForm').submit(function(event) {
+        var userId = $('#userId').text();
+        var formData = new FormData(this)
+        formData.append('userId',Number(userId));
+        $.ajax({
+            type: "POST",
+            enctype: 'application/x-www-form-urlencoded',
+            url: "http://localhost:8080/edit-user-by-admin",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                alert("edit lên thành công!");
+                window.location.href = 'http://localhost:8080/quan-ly-user'
+            },
+            error: function (error) {
+                alert("edit lên thất bại!");
+                console.log(error);
+            }
+        });
+
+        event.preventDefault();
+    });
+
+
+    /*================================
+ Create new User
+==================================*/
+        $('#createNewUserForm').submit(function(event) {
+            var formData = new FormData(this);
+            $.ajax({
+                type: "POST",
+                enctype: 'application/x-www-form-urlencoded',
+                url: "http://localhost:8080/create-user-by-admin",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    alert("Tạo mới thành công!");
+                    window.location.href = 'http://localhost:8080/quan-ly-user'
+                },
+                error: function (error) {
+                    alert("Tạo mới thất bại!");
+                    console.log(error);
+                }
+            });
+
+        event.preventDefault();
+    });
+
+    /*================================
+     Search form
+    ==================================*/
+    // $('#searchUserForm').submit(function(event) {
+    //     var formData = new FormData(this);
+    //     $.ajax({
+    //         type: "GET",
+    //         enctype: 'application/x-www-form-urlencoded',
+    //         url: "http://localhost:8080/search-by-username?usernameSearch=",
+    //         data: formData,
+    //         processData: false,
+    //         contentType: false,
+    //         success: function (response) {
+    //             // alert("Tạo mới thành công!");
+    //             // window.location.href = 'http://localhost:8080/quan-ly-user'
+    //         },
+    //         error: function (error) {
+    //             alert("Không tìm thấy");
+    //             console.log(error);
+    //         }
+    //     });
+    //
+    //     event.preventDefault();
+    // });
+
 
 })( jQuery );

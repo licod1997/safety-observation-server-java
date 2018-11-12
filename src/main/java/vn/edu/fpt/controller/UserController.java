@@ -1,6 +1,7 @@
 package vn.edu.fpt.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,52 +22,68 @@ public class UserController {
 
 
     @PostMapping("/create-user")
-    public User createUser( @RequestParam("username") String username,
-                                   @RequestParam("password") String password) {
+    public ResponseEntity createUser( @RequestParam("username") String username,
+                                              @RequestParam("password") String password) {
         User user = userService.createUser( username,password );
-        return user;
+        if (user!= null){
+            ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
 
     }
 
     @PostMapping("/create-user-by-admin")
-    public User createUserByAdmin( @RequestParam("username") String username,
+    public ResponseEntity createUserByAdmin( @RequestParam("username") String username,
                                    @RequestParam("password") String password,
                                    @RequestParam("isEnable") boolean isEnable,
                                    @RequestParam("roleId") Integer roleId) {
 
         User user = userService.createUserByAdmin( username,password,isEnable,roleId );
-        return user;
+        if (user!= null){
+            ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
 
     }
 
     @PostMapping("/edit-user")
-    public User editUser( @RequestParam("userId") long userId,
-                                   @RequestParam("password") String password) {
-        return userService.editUser( userId,password );
-
+    public ResponseEntity editUser( @RequestParam("userId") long userId,
+                                   @RequestParam("password") String password ) {
+        User user= userService.editUser( userId,password );
+        if (user!= null){
+            ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/edit-user-by-admin")
-    public User editUserByAdmin(    @RequestParam("userId") Long userId,
-                                   @RequestParam("password") String password,
-                                   @RequestParam("isEnable") boolean isEnable,
-                                   @RequestParam("roleId") Integer roleId) {
+    public ResponseEntity editUserByAdmin( @RequestParam("userId") Long userId,
+                                           @RequestParam("password") String password,
+                                           @RequestParam("isEnable") boolean isEnable,
+                                           @RequestParam("roleId") Integer roleId) {
 
         User user = userService.editUserByAdministrator( userId,password,isEnable,roleId );
-        return user;
+        if (user!= null){
+            ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
 
     }
 
-    @GetMapping("/search-by-username")
-    public List<User> searchByLikeUsername (@RequestParam("usernameSearch") String username) {
+    @GetMapping("/ket-qua-tim-kiem")
+    public ModelAndView searchByUsername (@RequestParam("usernameSearch") String username, ModelAndView mv ) {
 
-        List<User> resultList = userService.searchByUsername( username );
-        return resultList;
+        List<User> resultSearchList = userService.searchByUsername( username.trim() );
+    if(resultSearchList.size() > 0){
+        mv.addObject( "resultSearchList",resultSearchList );
+    }
+        mv.setViewName( "ket-qua-tim-kiem" );
+        return mv;
 
     }
 
     @GetMapping("/quan-ly-user" )
-    public ModelAndView getFeedbackPage( ModelAndView mv ) {
+    public ModelAndView getManagUserPage( ModelAndView mv ) {
         List<User> userList = userService.getAllUserIsEnable();
 
         if(userList.size() > 0){
@@ -80,11 +97,32 @@ public class UserController {
     }
 
     @GetMapping("/disable-user")
-    public User disableUser (@RequestParam("userId") Long userId) {
+    public ResponseEntity disableUser (@RequestParam("userId") Long userId) {
 
         User user = userService.disableUser( userId );
-        return user;
+        if (user!= null){
+            ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
 
     }
+    @Autowired
+    RoleRepository roleRepository;
 
+    @GetMapping("/chi-tiet-user" )
+    public ModelAndView getDetailUser(@RequestParam("userId")Long userId, ModelAndView mv ) {
+        User user = userService.findByUserId(userId);
+        List<Role> roleList = roleRepository.findAll();
+        mv.addObject( "user", user );
+        mv.addObject( "roleList",roleList);
+        mv.setViewName( "chi-tiet-user" );
+        return mv;
+    }
+    @GetMapping("/tao-moi-user" )
+    public ModelAndView getCreatUserPage(ModelAndView mv ) {
+        List<Role> roleList = roleRepository.findAll();
+        mv.addObject( "roleList",roleList);
+        mv.setViewName( "tao-moi-user" );
+        return mv;
+    }
 }
