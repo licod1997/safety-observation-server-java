@@ -11,8 +11,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository <User,Long>{
     User findById(Long id);
-
-    List<User> findAllByUsernameContains(String username);
-
     List<User> findAllByUsernameContaining (String usernameSearch);
+    List<User> findAll();
+    List<User> findAllByEnableIsTrue();
 }

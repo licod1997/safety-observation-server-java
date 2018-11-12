@@ -19,4 +19,8 @@ public interface UserService {
     User findByUserId(Long userId);
 
     List<User>searchByUsername(String username);
+
+    List<User> getAllUser();
+
+    List<User> getAllUserIsEnable();
 }
