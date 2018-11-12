@@ -26,10 +26,17 @@ public class Notification {
     private CameraLocation cameraLocation;
 
     @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = User.class )
-    @JoinColumn( name = "user", referencedColumnName = "id" )
+    @JoinColumn( name = "user", referencedColumnName = "id")
     private User user;
 
     public Notification() {
+    }
+
+    public Notification(String imageURL, Date time, CameraLocation cameraLocation) {
+        this.imageURL = imageURL;
+        this.time = time;
+        this.cameraLocation = cameraLocation;
+        this.status = 0;
     }
 
     public Long getId() {

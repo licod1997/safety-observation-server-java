@@ -2,14 +2,15 @@ package vn.edu.fpt.service;
 
 import vn.edu.fpt.entity.Notification;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public interface NotificationService {
-    String sendNotification(String image_url, int cameraID, Date datetime);
+    Notification sendNotification(String image_url, Long cameraID, Long datetime);
 
-    Notification rejectNotification(Long id, int userID);
+    Notification rejectNotification(Long id, Long userID);
 
-    Notification doneNotification(Long id, int userID, String image_url);
+    Notification doneNotification(Long id, Long userID, String image_url);
 
 
 }
