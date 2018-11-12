@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import vn.edu.fpt.dto.DemoDTO;
+import vn.edu.fpt.dto.NotificationDTO;
 import vn.edu.fpt.service.DemoService;
 
 @RestController
@@ -20,4 +21,6 @@ public class DemoController {
     public ResponseEntity login( @RequestBody DemoDTO demoDTO ) {
         return ResponseEntity.ok( demoService.login(demoDTO.getUsername(), demoDTO.getPassword()) );
     }
+
+
 }

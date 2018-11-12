@@ -5,4 +5,5 @@ import vn.edu.fpt.entity.Demo;
 
 public interface DemoRepository extends JpaRepository<Demo, Long> {
     Demo findDemoByUsername( String username);
+
 }

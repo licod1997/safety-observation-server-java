@@ -10,68 +10,81 @@ public class Notification {
     @GeneratedValue( strategy = GenerationType.AUTO )
     @Column( name = "id" )
     private Long id;
-    @Column( name = "location" )
-    private String location;
+
+    @Column( name = "image_url" )
+    private String imageURL;
+
     @Temporal( TemporalType.TIMESTAMP )
     @Column( name = "time" )
     private Date time;
+
     @Column( name = "status" )
-    private String status;
-    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = NotificationStatus.class )
-    @JoinColumn( name = "notification_status_id", referencedColumnName = "id" )
-    private NotificationStatus notificationStatus;
+    private int status;
+
+    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = CameraLocation.class )
+    @JoinColumn( name = "camera_location", referencedColumnName = "id" )
+    private CameraLocation cameraLocation;
+
+    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = User.class )
+    @JoinColumn( name = "user", referencedColumnName = "id")
+    private User user;
 
     public Notification() {
+    }
+
+    public Notification(String imageURL, Date time, CameraLocation cameraLocation) {
+        this.imageURL = imageURL;
+        this.time = time;
+        this.cameraLocation = cameraLocation;
+        this.status = 0;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId( Long id ) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getLocation() {
-        return location;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setLocation( String location ) {
-        this.location = location;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public Date getTime() {
         return time;
     }
 
-    public void setTime( Date time ) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus( String status ) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public NotificationStatus getNotificationStatus() {
-        return notificationStatus;
+    public CameraLocation getCameraLocation() {
+        return cameraLocation;
     }
 
-    public void setNotificationStatus( NotificationStatus notificationStatus ) {
-        this.notificationStatus = notificationStatus;
+    public void setCameraLocation(CameraLocation cameraLocation) {
+        this.cameraLocation = cameraLocation;
     }
 
-    @Override
-    public String toString() {
-        return "Notification{" +
-                "id=" + id +
-                ", location='" + location + '\'' +
-                ", time=" + time +
-                ", status='" + status + '\'' +
-                ", notificationStatus=" + notificationStatus +
-                '}';
+    public User getUser() {
+        return user;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }
