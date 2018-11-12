@@ -285,7 +285,7 @@
     }
 
     /*================================
-    Download uploadfile
+     uploadfile to train
     ==================================*/
     $('#multipleUploadForm').submit(function(event) {
 
@@ -299,7 +299,6 @@
             contentType: false,
             success: function (response) {
                 alert("Tải lên thành công!");
-                window.location.reload(true);
             },
             error: function (error) {
                 alert("Tải lên thất bại!");
@@ -345,31 +344,6 @@
     } );
 
 
-    /*================================
-    Upload File to Train
-    ==================================*/
-    $('#multipleUploadTrainForm').submit(function(event) {
-
-        var formData = new FormData(this);
-        $.ajax({
-            type: "POST",
-            enctype: 'multipart/form-data',
-            url: "http://localhost:8080/uploadMultipleTrainFiles",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                alert("Tải lên thành công!");
-                window.location.reload(true);
-            },
-            error: function (error) {
-                alert("Tải lên thất bại!");
-                console.log(error);
-            }
-        });
-
-        event.preventDefault();
-    });
 
 
 })( jQuery );

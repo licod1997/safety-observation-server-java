@@ -128,9 +128,20 @@
                             <div class="data-tables datatable-primary">
 
                                <div th:if="${fileNotTrainYetList != null}">
-                                   <ol>
-                                       <li th:each="file : ${fileNotTrainYetList}" th:text="${file.getFileName()}"></li>
-                                   </ol>
+                                   <table class="table-train" border="0">
+                                       <thead>
+                                            <th>Tên File</th>
+                                            <th style="text-align: right">Thời gian</th>
+                                       </thead>
+                                       <tbody>
+                                            <tr  th:each="file : ${fileNotTrainYetList}">
+                                                <td th:text="${file.getFileName()}"></td>
+                                                <td style="text-align: right" th:text="${#dates.year(file.getTimeUpload())} +'-'+${#dates.month(file.getTimeUpload())}+'-'+${#dates.day(file.getTimeUpload())}+' ' + ${#dates.format(file.getTimeUpload(), 'HH:mm')}"></td>
+                                            </tr>
+                                       </tbody>
+                                   </table>
+
+
                                </div>
                                 <div th:if="${fileNotTrainYetList == null }">
                                     <p>Danh sách rỗng</p>

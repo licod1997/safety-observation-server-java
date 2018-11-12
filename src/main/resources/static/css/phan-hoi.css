@@ -57,8 +57,8 @@
 }
 .btn-train{
     position: absolute;;
-    top: 0;
-    right: 0;
+    top: -8px;
+    right: 5px;
     width: 100px;
     height: 40px;
     line-height: 40px;
@@ -156,4 +156,14 @@ td a:hover
 .wrapper-train-upload{
 
     margin-top: 100px;
+}
+.table-train{
+    width: 100%;
+    padding: 5px !important;
+}
+.table-train thead tr th {
+    padding: 10px;
+}
+.table-train tbody tr td {
+    padding:10px 0px 10px 5px;
 }

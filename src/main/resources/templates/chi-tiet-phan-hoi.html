@@ -177,10 +177,10 @@
                                         <div class="media mb-3">
                                             <div class="media-body">
                                                 <h4>Licod</h4>
-                                                <div id="modal-feedback-time" th:text="'Ngày ' + ${#dates.day(feedback.time)}
-                                                                                            +' Tháng ' + ${#dates.month(feedback.time)}
-                                                                                            +' Năm ' + ${#dates.year(feedback.time)}
-                                                                                            +' lúc ' + ${#dates.format(feedback.time, 'HH:mm')}">
+                                                <div id="modal-feedback-time" th:text="${#dates.year(feedback.time)}
+                                                                                            +'-' + ${#dates.month(feedback.time)}
+                                                                                            +'-' + ${#dates.day(feedback.time)}
+                                                                                            +' ' + ${#dates.format(feedback.time, 'HH:mm')}">
 
                                                 </div>
                                             </div>

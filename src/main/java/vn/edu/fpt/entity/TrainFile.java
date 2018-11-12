@@ -1,6 +1,7 @@
 package vn.edu.fpt.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Table
 @Entity( name = "train_file" )
@@ -15,7 +16,8 @@ public class TrainFile {
     private String fileDirectory;
     @Column( name = "is_train" )
     private Boolean isTrain;
-
+    @Column( name = "time_upload" )
+    private Date timeUpload;
 
     public TrainFile() {
         this.isTrain=false;
@@ -53,6 +55,14 @@ public class TrainFile {
         isTrain = train;
     }
 
+    public Date getTimeUpload() {
+        return timeUpload;
+    }
+
+    public void setTimeUpload( Date timeUpload ) {
+        this.timeUpload = timeUpload;
+    }
+
     @Override
     public String toString() {
         return "TrainFile{" +
@@ -60,6 +70,7 @@ public class TrainFile {
                 ", fileName='" + fileName + '\'' +
                 ", fileDirectory='" + fileDirectory + '\'' +
                 ", isTrain=" + isTrain +
+                ", timeUpload=" + timeUpload +
                 '}';
     }
 }
