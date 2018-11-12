@@ -1,41 +1,40 @@
 package vn.edu.fpt.dto;
 
 public class NotificationDTO {
-    private String imgae;
-    private String name;
-    private String location;
+    private int id;
+    private String image_url;
+    private String datetime;
+    private int status;
 
-    public NotificationDTO() {
+    public int getId() {
+        return id;
     }
 
-    public NotificationDTO(String imgae, String name, String location) {
-        this.imgae = imgae;
-        this.name = name;
-        this.location = location;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getImgae() {
-        return imgae;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImgae(String imgae) {
-        this.imgae = imgae;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
-    public String getName() {
-        return name;
+    public String getDatetime() {
+        return datetime;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
-    public String getLocation() {
-        return location;
+    public int getStatus() {
+        return status;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setStatus(int status) {
+        this.status = status;
     }
-
 }
