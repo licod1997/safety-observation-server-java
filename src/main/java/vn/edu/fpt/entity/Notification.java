@@ -25,10 +25,60 @@ public class Notification {
     @JoinColumn( name = "camera_location", referencedColumnName = "id" )
     private CameraLocation cameraLocation;
 
+    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = User.class )
+    @JoinColumn( name = "user", referencedColumnName = "id" )
+    private User user;
 
     public Notification() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public CameraLocation getCameraLocation() {
+        return cameraLocation;
+    }
+
+    public void setCameraLocation(CameraLocation cameraLocation) {
+        this.cameraLocation = cameraLocation;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {
