@@ -1,18 +1,12 @@
 package vn.edu.fpt.dto;
 
+
+import java.util.Date;
+
 public class NotificationDTO {
-    private int id;
     private String image_url;
-    private String datetime;
-    private int status;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private Date datetime;
+    private Long cameraID;
 
     public String getImage_url() {
         return image_url;
@@ -22,19 +16,19 @@ public class NotificationDTO {
         this.image_url = image_url;
     }
 
-    public String getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(String datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 
-    public int getStatus() {
-        return status;
+    public Long getCameraID() {
+        return cameraID;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setCameraID(Long cameraID) {
+        this.cameraID = cameraID;
     }
 }
