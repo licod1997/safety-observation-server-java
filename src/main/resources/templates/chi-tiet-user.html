@@ -131,10 +131,10 @@
 
                             <div class="data-tables datatable-primary">
                                 <form id="editUserForm">
-                                    <table border="0">
+                                    <table class="user-detail-table" border="0">
                                         <tr>
                                             <td>Username: </td>
-                                            <td th:text="${user.getUsername()}"></td>
+                                            <td ><input type="text" th:value="${user.getUsername()}" disabled="disabled"></td>
                                         </tr>
                                         <tr>
                                             <td>Password:</td>
@@ -153,8 +153,9 @@
                                         </tr>
                                         <tr>
                                             <td>Status:</td>
-                                            <td><input type="radio" name="isEnable"value="true" th:attr="checked=${user.isEnable()?'checked':'false'}"> Enable</td>
-                                            <td><input type="radio" name="isEnable"value="false" th:attr="checked=${!user.isEnable()?'checked':'false'}"> Disable</td>
+                                            <td><input type="radio" name="isEnable"value="true" th:attr="checked=${user.isEnable()?'checked':'false'}"> Enable
+                                                <br><input type="radio" name="isEnable"value="false" th:attr="checked=${!user.isEnable()?'checked':'false'}"> Disable
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td><button type="submit">Save</button></td>

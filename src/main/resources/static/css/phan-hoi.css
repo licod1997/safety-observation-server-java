@@ -181,3 +181,12 @@ td a:hover
     padding:10px 0px 10px 5px;
 
 }
+
+.user-detail-table{
+    width: 50%;
+}
+.user-detail-table tr td{
+    padding: 10px;
+    border-top: 0px!important;
+
+}
