@@ -96,7 +96,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public List<Feedback> getFeedbacksLoadPage() {
-        return feedbackRepository.findTop10ByOrderByIdDesc();
+        return feedbackRepository.findTop10ByIsRejectFalseOrderByIdDesc();
     }
 
     @Override
