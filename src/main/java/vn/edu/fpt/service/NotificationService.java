@@ -3,6 +3,7 @@ package vn.edu.fpt.service;
 import vn.edu.fpt.entity.Notification;
 
 import java.util.Date;
+import java.util.List;
 
 
 public interface NotificationService {
@@ -12,5 +13,7 @@ public interface NotificationService {
 
     Notification doneNotification(Long id, Long userID, String image_url);
 
+    List<Notification> getListNotificationByStatus(int status);
 
+    List<Notification> getAllNotification();
 }

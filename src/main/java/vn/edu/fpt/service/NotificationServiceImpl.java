@@ -10,6 +10,7 @@ import vn.edu.fpt.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
@@ -47,5 +48,15 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public Notification doneNotification(Long id, Long userID, String image_url) {
         return null;
+    }
+
+    @Override
+    public List<Notification> getListNotificationByStatus(int status) {
+        return notificationResponsitory.findNotificationByStatus(status);
+    }
+
+    @Override
+    public List<Notification> getAllNotification() {
+        return notificationResponsitory.findAll();
     }
 }
