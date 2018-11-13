@@ -385,13 +385,15 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function (response) {
-                    alert("Tạo mới thành công!");
-                    window.location.href = 'http://localhost:8080/quan-ly-user'
-                },
-                error: function (error) {
-                    alert("Tạo mới thất bại!");
-                    console.log(error);
+                complete: function(respone){
+                    if(respone.responseText === "create_successfully"){
+                        alert("Tạo mới thành công");
+                        window.location.href = 'http://localhost:8080/quan-ly-user'
+                    }else if(respone.responseText === "duplicate_username"){
+                        alert("Tên đăng nhập đã đươc sữ dụng");
+                    }else if(espone.responseText === "create_failed"){
+                        alert("Tạo mới thất bại");
+                    }
                 }
             });
 

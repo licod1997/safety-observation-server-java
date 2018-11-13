@@ -33,16 +33,23 @@ public class UserController {
     }
 
     @PostMapping("/create-user-by-admin")
-    public ResponseEntity createUserByAdmin( @RequestParam("username") String username,
+    public String createUserByAdmin( @RequestParam("username") String username,
                                    @RequestParam("password") String password,
                                    @RequestParam("isEnable") boolean isEnable,
                                    @RequestParam("roleId") Integer roleId) {
 
-        User user = userService.createUserByAdmin( username,password,isEnable,roleId );
-        if (user!= null){
-            ResponseEntity.ok().build();
+
+        User user = userService.findByUsername( username );
+        if(user!= null){
+            return "duplicate_username";
+        }else{
+            User user2 = userService.createUserByAdmin( username,password,isEnable,roleId );;
+            if (user2 != null){
+                return "create_successfully";
+            }
+            return "create_failed";
         }
-        return ResponseEntity.badRequest().build();
+
 
     }
 
