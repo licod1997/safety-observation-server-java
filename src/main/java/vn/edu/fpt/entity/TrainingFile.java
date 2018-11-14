@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Table
-@Entity( name = "train_file" )
-public class TrainFile {
+@Entity( name = "training_file" )
+public class TrainingFile {
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
     @Column( name = "id" )
@@ -19,7 +19,7 @@ public class TrainFile {
     @Column( name = "time_upload" )
     private Date timeUpload;
 
-    public TrainFile() {
+    public TrainingFile() {
         this.isTrain=false;
     }
 
@@ -65,7 +65,7 @@ public class TrainFile {
 
     @Override
     public String toString() {
-        return "TrainFile{" +
+        return "TrainingFile{" +
                 "id=" + id +
                 ", fileName='" + fileName + '\'' +
                 ", fileDirectory='" + fileDirectory + '\'' +

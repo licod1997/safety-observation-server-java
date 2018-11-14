@@ -1,14 +1,15 @@
 package vn.edu.fpt.service;
 
 import org.springframework.web.multipart.MultipartFile;
-import vn.edu.fpt.entity.TrainFile;
+import vn.edu.fpt.entity.TrainingFile;
 
 import java.util.List;
 
 public interface TrainService {
 
-List<TrainFile> getAllFileNotTrainYet();
-TrainFile setTrain(long trainFileId);
-String uploadTrainFile( MultipartFile []files );
-TrainFile addFile(TrainFile file);
+List<TrainingFile> getAllFileNotTrainYet();
+
+TrainingFile setTrain(long trainingFileId);
+
+TrainingFile addFile(TrainingFile file);
 }
