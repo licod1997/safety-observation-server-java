@@ -36,12 +36,15 @@ public class UserController {
     public String createUserByAdmin( @RequestParam("username") String username,
                                    @RequestParam("password") String password,
                                    @RequestParam("isEnable") boolean isEnable,
-                                   @RequestParam("roleId") Integer roleId) {
+                                   @RequestParam("roleId") Integer roleId,
+                                   @RequestParam("rePassword") String rePassword) {
 
 
         User user = userService.findByUsername( username );
         if(user!= null){
             return "duplicate_username";
+        }else if(!password.trim().equals( rePassword.trim() )){
+            return "rePass_not_match";
         }else{
             User user2 = userService.createUserByAdmin( username,password,isEnable,roleId );;
             if (user2 != null){

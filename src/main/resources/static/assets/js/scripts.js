@@ -391,9 +391,12 @@
                         window.location.href = 'http://localhost:8080/quan-ly-user'
                     }else if(respone.responseText === "duplicate_username"){
                         alert("Tên đăng nhập đã đươc sữ dụng");
-                    }else if(espone.responseText === "create_failed"){
+                    }else if(respone.responseText === "create_failed"){
                         alert("Tạo mới thất bại");
+                    }else if(respone.responseText === "rePass_not_match"){
+                        alert("Mật khẩu không trùng khớp, Xin thử lại");
                     }
+
                 }
             });
 
