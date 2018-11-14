@@ -64,9 +64,23 @@
                                 <span>Danh Sách</span></a>
                             <ul class="collapse">
                                 <li class="active">
-                                    <a href="phan-hoi.html">Phản Hồi</a>
+                                    <a href="phan-hoi.html">Phản hồi</a>
                                 </li>
-
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i>
+                                        <span>User</span></a>
+                                    <ul class="collapse">
+                                        <li>
+                                            <a href="quan-ly-user.html">Quản lý người dùng</a>
+                                        </li>
+                                        <li>
+                                            <a href="tao-moi-user.html">Tạo mới người dùng</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="train.html">Training</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -130,10 +144,12 @@
                                     var feedbackId;
                                 </script>
                                 <span class="feedbackId" style="display: none;" th:text="${feedback.getId()}"></span>
-                                <ul class="feedback-controler">
-                                    <li class="btn-nhatanh btn-feedback-approve">Aprrove</li>
-                                    <li class="btn-nhatanh btn-feedback-reject">Reject</li>
-                                </ul>
+                                <div th:styleappend="'display:'+${feedback.getReject()==false?'none':'block'}">
+                                    <ul class="feedback-controler">
+                                        <li class="btn-nhatanh btn-feedback-approve">APPROVE</li>
+                                        <li class="btn-nhatanh btn-feedback-reject">REJECT</li>
+                                    </ul>
+                                </div>
 
                             </div>
                             <div class="data-tables datatable-primary">
@@ -150,11 +166,12 @@
                                                         th:styleappend="${photo.isReject()==true?'display:none;':''}"
                                                 >
 
-                                                        <ul  class="wrapper-nhatanh" style="text-align: right;">
-                                                            <!--<li ><span class="btn-nhatanh btn-approve">Approve</span></li>-->
-                                                            <li><a th:href="'/set-reject-photo?photoId='+${photo.getId()+'&option=true'}"><span class="btn-nhatanh btn-reject">Reject</span></a></li>
-                                                            <li><a th:href="'http://localhost:8080/downloadFile/'+ ${photo.getPhotoName()}"><span class="btn-nhatanh btn-download">Download</span></a></li>
+                                                        <ul style="position: absolute;z-index: 99999;margin: 10px;">
+                                                            <li class="photo-bunton"><a th:href="'/set-reject-photo?photoId='+${photo.getId()+'&option=true'}"><i style="font-size: 1.5rem;color: #E64A19;" class="fa fa-times" aria-hidden="true"></i></a></li>
+                                                            <li class="photo-bunton"><a th:href="'http://localhost:8080/downloadFile/'+ ${photo.getPhotoName()}"><i style="font-size: 1.5rem;color: #00E676;" class="fa fa-download" aria-hidden="true"></i></a></li>
                                                         </ul>
+
+
 
                                                 </div>
 
@@ -176,15 +193,15 @@
                                     <div class="col-4">
                                         <div class="media mb-3">
                                             <div class="media-body">
-                                                <h4 th:text="${feedback.getUser().getUsername()}"></h4>
-                                                <div id="modal-feedback-time" th:text="${#dates.year(feedback.time)}
+                                                <span>Người gửi: <h5 style="display: inline-block" th:text="${feedback.getUser().getUsername()}"></h5></span>
+                                                <div>Thời gian: <h6 style="display: inline-block" id="modal-feedback-time" th:text="${#dates.year(feedback.time)}
                                                                                             +'-' + ${#dates.month(feedback.time)}
                                                                                             +'-' + ${#dates.day(feedback.time)}
                                                                                             +' ' + ${#dates.format(feedback.time, 'HH:mm')}">
-
-                                                </div>
+                                                </h6></div>
                                             </div>
                                         </div>
+                                        <hr>
                                         <div class="media">
                                             <div class="media-body">
                                                 <div id="modal-feedback-description">
@@ -193,7 +210,8 @@
                                             </div>
                                         </div>
                                         <div class="controler-nhatanh">
-                                            <form id="multipleUploadForm" name="multipleUploadForm">
+                                            <hr style="width: 95%;">
+                                            <form id="multipleUploadForm" name="multipleUploadForm"><span style=" display:inline-block ;margin-bottom: 10px;">Chọn file XML:</span>
                                                 <input class="file-input" id="multipleFileUploadInput" type="file" name="files" multiple required>
                                                 <button class="primary submit-btn" type="submit">Upload</button>
                                             </form>

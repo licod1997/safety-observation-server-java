@@ -59,7 +59,12 @@ public class UserServiceImpl implements UserService{
             setRole.add(role);
 
             user.setEnable( isEnable );
-            user.setPassword( password );
+            if(password.trim().isEmpty()){
+
+            }else{
+                user.setPassword( password );
+
+            }
            user.setRoles( setRole );
             return userRepository.saveAndFlush( user );
         }

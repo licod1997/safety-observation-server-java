@@ -26,7 +26,7 @@ public class UserController {
                                               @RequestParam("password") String password) {
         User user = userService.createUser( username,password );
         if (user!= null){
-            ResponseEntity.ok().build();
+            return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
 
@@ -58,7 +58,7 @@ public class UserController {
                                    @RequestParam("password") String password ) {
         User user= userService.editUser( userId,password );
         if (user!= null){
-            ResponseEntity.ok().build();
+           return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
     }
@@ -71,7 +71,7 @@ public class UserController {
 
         User user = userService.editUserByAdministrator( userId,password,isEnable,roleId );
         if (user!= null){
-            ResponseEntity.ok().build();
+           return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
 
@@ -108,7 +108,7 @@ public class UserController {
 
         User user = userService.disableUser( userId );
         if (user!= null){
-            ResponseEntity.ok().build();
+            return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
 
