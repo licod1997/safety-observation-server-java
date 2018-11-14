@@ -176,7 +176,7 @@
                                     <div class="col-4">
                                         <div class="media mb-3">
                                             <div class="media-body">
-                                                <h4>Licod</h4>
+                                                <h4 th:text="${feedback.getUser().getUsername()}"></h4>
                                                 <div id="modal-feedback-time" th:text="${#dates.year(feedback.time)}
                                                                                             +'-' + ${#dates.month(feedback.time)}
                                                                                             +'-' + ${#dates.day(feedback.time)}

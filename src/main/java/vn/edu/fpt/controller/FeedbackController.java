@@ -45,7 +45,7 @@ public class FeedbackController {
         long time = a.getTime();
 
 
-        return (feedbackService.sendFeedback(feedbackDTO.getFeedbackDescription(), feedbackDTO.getFeedbackPhotoList(), time));
+        return (feedbackService.sendFeedback(feedbackDTO.getFeedbackDescription(), feedbackDTO.getFeedbackPhotoList(), time,feedbackDTO.getUserId()));
     }
 
     @PostMapping(value = "/uploadImage")

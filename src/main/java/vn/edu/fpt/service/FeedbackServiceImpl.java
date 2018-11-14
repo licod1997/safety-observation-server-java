@@ -7,8 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.edu.fpt.dto.FeedbackPhotoDTO;
 import vn.edu.fpt.entity.Feedback;
 import vn.edu.fpt.entity.FeedbackPhoto;
+import vn.edu.fpt.entity.User;
 import vn.edu.fpt.repository.FeedbackPhotoRepository;
 import vn.edu.fpt.repository.FeedbackRepository;
+import vn.edu.fpt.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -29,10 +31,12 @@ public class FeedbackServiceImpl implements FeedbackService {
     private FeedbackRepository feedbackRepository;
     @Autowired
     private FeedbackPhotoRepository feedbackPhotoRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     @Override
-    public String sendFeedback(String description, FeedbackPhotoDTO[] listFeedbackPhotoDTO, Long time) {
+    public String sendFeedback(String description, FeedbackPhotoDTO[] listFeedbackPhotoDTO, Long time,Long userId) {
 
 
 
@@ -56,6 +60,7 @@ public class FeedbackServiceImpl implements FeedbackService {
             feedbackPhoto.setPhotoDirectory(listFeedbackPhotoDTO[i].getPhotoDirectory());
 
             feedbackPhoto.setPhotoName(listFeedbackPhotoDTO[i].getPhotoName());
+
             listFeedbackPhoto.add(feedbackPhoto);
         }
 
@@ -65,6 +70,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedback.setTime(new Date(time));
         feedback.setFeedbackPhotoList(listFeedbackPhoto);
         feedback.setFeedbackDescription(description.trim());
+        feedback.setUser( userRepository.findById( userId ) );
 
         feedbackRepository.saveAndFlush(feedback);
 

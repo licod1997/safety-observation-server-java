@@ -150,7 +150,7 @@
                                             <th:block th:fragment="feedbackTable">
                                                 <tr th:each="feedback : ${feedbackList}"  th:classappend="${feedback.getRead()} ? feedback-read : feedback-unread">
                                                     <td >
-                                                        <a th:href="'/chi-tiet-phan-hoi?id=' + ${feedback.getId()}" ><div th:text="'Licod đã gửi phản hồi'"></div> </a>
+                                                        <a th:href="'/chi-tiet-phan-hoi?id=' + ${feedback.getId()}" ><div th:text="${feedback.getUser().getUsername()}+' đã gửi phản hồi'"></div> </a>
 
                                                     </td>
                                                     <td>
@@ -170,7 +170,7 @@
                                                     </td>
 
                                                     <td style="display: none">
-                                                        <div class="feeedback-username" th:text="'Licod'"></div>
+                                                        <div class="feeedback-username" th:text="${feedback.getUser().getUsername()}"></div>
                                                         <div class="feedback-id" th:text="${feedback.id}"></div>
                                                         <div class="feedback-time" th:text="${#dates.year(feedback.time)}
                                                                                             +'-' + ${#dates.month(feedback.time)}
@@ -215,55 +215,7 @@
     </div>
     <!-- page container area end -->
 
-    <!--Popup - detail Feedback-->
-    <div id="modal" class="modal fade show" style="display: none; padding-right: 17px;">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <script>
-                                ;(function () {'use strict'; Gallery.init(document.getElementById('mygallery'));}());
-                            </script>
-                            <div id="mygallery" class="gallery">
-                                <div class="images">
-                                    <div class="active" style="background-image: url(C:\Users\ANHNDNSE61922\Desktop\web-layout\templates\img\photo-1.jpg)"></div>
-                                    <span class="left"></span>
-                                    <span class="right"></span>
-                                </div>
-                                <div class="thumbs">
-                                    <div class="active" style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-1.jpg)"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="media mb-3">
-                                <div class="media-body">
-                                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-                                    <h4>Licod</h4>
-                                    <div id="modal-feedback-time">
-                                        2018-10-22 23:46
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="media-body">
-                                    <div id="modal-feedback-description">
-                                        <ul>
-                                            <li>Lorem ipsum dolor sit amet, consectetur adipisici?</li>
-                                        </ul>
-                                        <button class="button-train">Train</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-    </div>
-    <!--END - Popup - detail Feedback-->
     <!-- jquery latest version -->
     <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->
@@ -284,7 +236,6 @@
     <script src="assets/js/scripts.js"></script>
 <!--    Galery plugin-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script>
-<script src="js/gallery.js"></script>
 
 </body>
 
