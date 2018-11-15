@@ -148,7 +148,7 @@ td a:hover
     display: inline-block;
     position: absolute;
     right: 1.5rem;
-    top: .7rem;
+    top: 1.2rem;
     width: 100px;
     /*background-color:rgba(0,0,0,0.3);*/
     padding: 5px; z-index: 99999;

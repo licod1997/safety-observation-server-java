@@ -144,38 +144,89 @@
                             <span style="display: none" id="userId" th:text="${user.getId()}"></span>
 
                             <div class="data-tables datatable-primary">
-                                <form id="editUserForm">
-                                    <table class="user-detail-table" border="0">
-                                        <tr>
-                                            <td>Username: </td>
-                                            <td ><input type="text" th:value="${user.getUsername()}" disabled="disabled"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Password:</td>
-                                            <td><input type="password" name="password"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Role:</td>
-                                            <td>
-                                                <select name="roleId">
-                                                    <option th:each="role:${roleList}"
-                                                            th:value="${role.getId()}"
-                                                            th:text="${role.getRoleName()}"
-                                                            th:attrappend="selected= ${user.getRole().getId() == role.getId() ? 'selected':'false'}"></option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Status:</td>
-                                            <td><input type="radio" name="isEnable"value="true" th:attr="checked=${user.isEnable()?'checked':'false'}"> Enable
-                                                <br><input type="radio" name="isEnable"value="false" th:attr="checked=${!user.isEnable()?'checked':'false'}"> Disable
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><button type="submit">Save</button></td>
-                                        </tr>
-                                    </table>
+                                <!--<form id="editUserForm">-->
+                                    <!--<table class="user-detail-table" border="0">-->
+                                        <!--<tr>-->
+                                            <!--<td>Username: </td>-->
+                                            <!--<td ><input type="text" th:value="${user.getUsername()}" disabled="disabled"></td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Password:</td>-->
+                                            <!--<td><input type="password" name="password"></td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Role:</td>-->
+                                            <!--<td>-->
+                                                <!--<select name="roleId">-->
+                                                    <!--<option th:each="role:${roleList}"-->
+                                                            <!--th:value="${role.getId()}"-->
+                                                            <!--th:text="${role.getRoleName()}"-->
+                                                            <!--th:attrappend="selected= ${user.getRole().getId() == role.getId() ? 'selected':'false'}"></option>-->
+                                                <!--</select>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Status:</td>-->
+                                            <!--<td><input type="radio" name="isEnable"value="true" th:attr="checked=${user.isEnable()?'checked':'false'}"> Enable-->
+                                                <!--<br><input type="radio" name="isEnable"value="false" th:attr="checked=${!user.isEnable()?'checked':'false'}"> Disable-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td><button type="submit">Save</button></td>-->
+                                        <!--</tr>-->
+                                    <!--</table>-->
+                                <!--</form>-->
+
+                                <form id="editUserForm" style="margin: auto; width: 50%" class="text-center border border-light p-5">
+
+                                    <p class="h4 mb-4">Edit User</p>
+
+                                    <div class="form-row mb-4">
+                                        <div class="col">
+                                            <input type="text" th:value="${user.getUsername()}" disabled="disabled"  class="form-control" name="username"  placeholder="Username">
+                                        </div>
+
+                                    </div>
+
+                                    <!--&lt;!&ndash; E-mail &ndash;&gt;-->
+                                    <!--<input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">-->
+
+                                    <!-- Password -->
+                                    <input type="password" name="password"  class="form-control" placeholder="Password">
+                                    <small  class="form-text text-muted mb-4">
+                                        At least 8 characters and 1 digit
+                                    </small>
+                                    <input type="password" name="rePassword"   class="form-control" placeholder="Re-Enter Password">
+                                    <small  class="form-text text-muted mb-4">
+                                    </small>
+
+                                    <!-- Subject -->
+                                    <label>Roles</label>
+                                    <select class="browser-default custom-select mb-4" name="roleId">
+                                        <option th:each="role:${roleList}"
+                                                th:value="${role.getId()}"
+                                                th:text="${role.getRoleName()}"
+                                                th:attrappend="selected= ${user.getRole().getId() == role.getId() ? 'selected':'false'}"></option>
+                                    </select>
+
+                                    <!-- Default inline 1-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="statusEnable"  name="isEnable" value="true" th:attr="checked=${user.isEnable()?'checked':'false'}" >
+                                        <label class="custom-control-label" for="statusEnable">Enable</label>
+                                    </div>
+
+                                    <!-- Default inline 2-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="statusDisable" name="isEnable" value="false" th:attr="checked=${!user.isEnable()?'checked':'false'}">
+                                        <label class="custom-control-label" for="statusDisable">Disable</label>
+                                    </div>
+                                    <!-- Sign up button -->
+                                    <button class="btn btn-info my-4 btn-block" type="submit">Save</button>
+
+
                                 </form>
+                                <!-- Default form register -->
+                                <!--ENd-Template-->
                             </div>
                         </div>
                     </div>

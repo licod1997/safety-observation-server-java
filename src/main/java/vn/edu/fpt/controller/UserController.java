@@ -67,17 +67,20 @@ public class UserController {
     }
 
     @PostMapping("/edit-user-by-admin")
-    public ResponseEntity editUserByAdmin( @RequestParam("userId") Long userId,
+    public String editUserByAdmin( @RequestParam("userId") Long userId,
                                            @RequestParam("password") String password,
                                            @RequestParam("isEnable") boolean isEnable,
-                                           @RequestParam("roleId") Integer roleId) {
+                                           @RequestParam("roleId") Integer roleId,
+                                           @RequestParam("rePassword") String rePassword){
 
-        User user = userService.editUserByAdministrator( userId,password,isEnable,roleId );
-        if (user!= null){
-           return ResponseEntity.ok().build();
+        if(!password.trim().equals( rePassword.trim() )){
+            return "rePass_not_match";
         }
-        return ResponseEntity.badRequest().build();
-
+        User user = userService.editUserByAdministrator( userId,password,isEnable,roleId );
+        if (user==null){
+            return "edit_failed";
+        }
+       return "edit_successfullly";
     }
 
     @GetMapping("/ket-qua-tim-kiem")

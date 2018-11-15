@@ -359,13 +359,15 @@
             data: formData,
             processData: false,
             contentType: false,
-            success: function (response) {
-                alert("edit lên thành công!");
-                window.location.href = 'http://localhost:8080/quan-ly-user'
-            },
-            error: function (error) {
-                alert("edit lên thất bại!");
-                console.log(error);
+            complete: function(respone) {
+                if (respone.responseText === "edit_successfullly") {
+                    alert("Cập nhật thành công");
+                    window.location.href = 'http://localhost:8080/quan-ly-user'
+                }else if (respone.responseText === "edit_failed") {
+                    alert("Cập nhật thất bại");
+                } else if (respone.responseText === "rePass_not_match") {
+                    alert("Mật khẩu không trùng khớp, Xin thử lại");
+                }
             }
         });
 
