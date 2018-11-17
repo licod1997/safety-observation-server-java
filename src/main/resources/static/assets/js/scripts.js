@@ -392,29 +392,16 @@
     });
 
     /*================================
-     Search form
+     Edit form
     ==================================*/
-    // $('#searchUserForm').submit(function(event) {
-    //     var formData = new FormData(this);
-    //     $.ajax({
-    //         type: "GET",
-    //         enctype: 'application/x-www-form-urlencoded',
-    //         url: "http://localhost:8080/search-by-username?usernameSearch=",
-    //         data: formData,
-    //         processData: false,
-    //         contentType: false,
-    //         success: function (response) {
-    //             // alert("Tạo mới thành công!");
-    //             // window.location.href = 'http://localhost:8080/quan-ly-user'
-    //         },
-    //         error: function (error) {
-    //             alert("Không tìm thấy");
-    //             console.log(error);
-    //         }
-    //     });
-    //
-    //     event.preventDefault();
-    // });
+    $( '#edit-open-form' ).on( 'click', function () {
+        $('#edit-role').removeAttr("disabled");
+        $("input[type=radio]").attr('disabled', false);
+        $('#edit-password').removeClass('gone');
+        $('#edit-open-form').addClass('gone');
+        $('#edit-save').removeClass('gone');
+    } );
+
 
 
 })( jQuery );

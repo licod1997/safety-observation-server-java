@@ -191,37 +191,42 @@
                                     <!--&lt;!&ndash; E-mail &ndash;&gt;-->
                                     <!--<input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">-->
 
-                                    <!-- Password -->
-                                    <input type="password" name="password"  class="form-control" placeholder="Password">
-                                    <small  class="form-text text-muted mb-4">
-                                        At least 8 characters and 1 digit
-                                    </small>
-                                    <input type="password" name="rePassword"   class="form-control" placeholder="Re-Enter Password">
-                                    <small  class="form-text text-muted mb-4">
-                                    </small>
+                                  <div id="edit-password" class="gone">
 
+                                      <!-- Password -->
+                                      <input type="password" name="password"  class="form-control" placeholder="Password">
+                                      <small  class="form-text text-muted mb-4">
+                                          At least 8 characters and 1 digit
+                                      </small>
+                                      <input type="password" name="rePassword"   class="form-control" placeholder="Re-Enter Password">
+                                      <small  class="form-text text-muted mb-4">
+                                      </small>
+
+                                  </div>
                                     <!-- Subject -->
-                                    <label>Roles</label>
-                                    <select class="browser-default custom-select mb-4" name="roleId">
+                                    <label for="edit-role">Roles</label>
+                                    <select id="edit-role" class="browser-default custom-select mb-4" name="roleId" disabled>
                                         <option th:each="role:${roleList}"
                                                 th:value="${role.getId()}"
                                                 th:text="${role.getRoleName()}"
                                                 th:attrappend="selected= ${user.getRole().getId() == role.getId() ? 'selected':'false'}"></option>
                                     </select>
-
+                                    <label>Status</label>
+                                    <br/>
                                     <!-- Default inline 1-->
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" class="custom-control-input" id="statusEnable"  name="isEnable" value="true" th:attr="checked=${user.isEnable()?'checked':'false'}" >
+                                    <div  class="custom-control custom-radio custom-control-inline">
+                                        <input disabled  type="radio" class="custom-control-input" id="statusEnable"  name="isEnable" value="true" th:attr="checked=${user.isEnable()?'checked':'false'}" >
                                         <label class="custom-control-label" for="statusEnable">Enable</label>
                                     </div>
 
                                     <!-- Default inline 2-->
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" class="custom-control-input" id="statusDisable" name="isEnable" value="false" th:attr="checked=${!user.isEnable()?'checked':'false'}">
+                                    <div  class="custom-control custom-radio custom-control-inline">
+                                        <input disabled type="radio" class="custom-control-input" id="statusDisable" name="isEnable" value="false" th:attr="checked=${!user.isEnable()?'checked':'false'}">
                                         <label class="custom-control-label" for="statusDisable">Disable</label>
                                     </div>
                                     <!-- Sign up button -->
-                                    <button class="btn btn-info my-4 btn-block" type="submit">Save</button>
+                                    <button id="edit-save" class="btn btn-info my-4 btn-block gone" type="submit">Save</button>
+                                    <span id="edit-open-form" style="display: inline-block" class="btn btn-info my-4 btn-block"> Edit</span>
 
 
                                 </form>
