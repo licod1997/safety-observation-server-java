@@ -7,15 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import vn.edu.fpt.entity.Feedback;
+import vn.edu.fpt.entity.FeedbackPhoto;
 import vn.edu.fpt.repository.FeedbackRepository;
 
-import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @RunWith( SpringRunner.class )
 @SpringBootTest
-public class  SafetyObservationsApplicationTests {
+public class SafetyObservationsApplicationTests {
 
     @Test
     public void contextLoads() {
@@ -29,7 +30,9 @@ public class  SafetyObservationsApplicationTests {
         MockNeat m = MockNeat.threadLocal();
         List<Feedback> feedbackList = m.reflect( Feedback.class )
                 .field( "time", new Date() )
-                .field("feedbackDescription", m.strings().size( m.ints().range( 10, 100 ) ))
+                .field( "isReject", m.bools() )
+                .field( "isRead", m.bools() )
+                .field( "feedbackDescription", m.strings().size( m.ints().range( 10, 100 ) ) )
                 .list( 50 )
                 .val();
 

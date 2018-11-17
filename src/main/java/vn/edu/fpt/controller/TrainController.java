@@ -23,9 +23,10 @@ import java.util.stream.Collectors;
 @RestController
 public class TrainController {
     @Autowired
-    private FileStorageService fileStorageService;
-    @Autowired
     TrainService trainService;
+    @Autowired
+    private FileStorageService fileStorageService;
+    private Thread thread;
 
     @GetMapping( {"/train" } )
     public ModelAndView getTrainPage( ModelAndView mv ) {
@@ -71,4 +72,29 @@ public class TrainController {
                 file.getContentType(), file.getSize());
     }
 
+    @GetMapping("/start-training")
+    public ResponseEntity startTraining(){
+        if (thread == null) {
+            thread = new Thread( trainService );
+        }
+        if (thread != null && !thread.isAlive()) {
+            thread.start();
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/check-training-thread")
+    public ResponseEntity checkTrainingThread(){
+        if (thread != null && thread.isAlive() ) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/stop-training")
+    public ResponseEntity stopTraining(){
+        trainService.stopProcessBuilder();
+        return ResponseEntity.ok().build();
+    }
 }

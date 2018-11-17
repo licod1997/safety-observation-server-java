@@ -5,10 +5,11 @@ import vn.edu.fpt.entity.TrainFile;
 
 import java.util.List;
 
-public interface TrainService {
+public interface TrainService extends Runnable {
 
 List<TrainFile> getAllFileNotTrainYet();
 TrainFile setTrain(long trainFileId);
 String uploadTrainFile( MultipartFile []files );
 TrainFile addFile(TrainFile file);
+    void stopProcessBuilder();
 }

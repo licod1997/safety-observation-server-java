@@ -12,6 +12,4 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
                 .addResourceHandler( "/**" )
                 .addResourceLocations( "classpath:/resources/", "classpath:/static/", "file:///C:/upload/" );
     }
-
-
 }

@@ -5,6 +5,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -54,7 +55,7 @@ public class FeedbackController {
         return feedbackService.uploadImage(img);
     }
 
-    @GetMapping({"/", "phan-hoi"})
+    @GetMapping({"/", "/phan-hoi"})
     public ModelAndView getFeedbackPage(ModelAndView mv) {
         List<Feedback> feedbackList = feedbackService.getFeedbacksLoadPage();
         System.out.println(feedbackList);
@@ -99,6 +100,7 @@ public class FeedbackController {
         return ResponseEntity.badRequest().build();
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping({"/chi-tiet-phan-hoi"})
     public ModelAndView getFeedbackDetail(@RequestParam(name = "id") Long id, ModelAndView mv) {
         Feedback feedback = feedbackService.getFeedbackById(id);
