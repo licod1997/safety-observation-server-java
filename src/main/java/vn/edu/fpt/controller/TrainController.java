@@ -43,6 +43,7 @@ public class TrainController {
 
     @PostMapping("/uploadMultipleTrainFiles")
     public List<UploadFileResponse> uploadMultipleTrainFiles( @RequestParam("files") MultipartFile[] files) {
+        //add them param User_ID khi đã có login
         List<UploadFileResponse> list = Arrays.asList(files)
                 .stream()
                 .map(file -> uploadFile(file))
@@ -54,6 +55,8 @@ public class TrainController {
             trainingFile.setFileDirectory(fileStorageService.getFileStorageLocation().toString() );
             trainingFile.setFileName( file.getOriginalFilename() );
             trainingFile.setTimeUpload( time );
+            //set thêm user vào khi có chức năng login
+            
             trainService.addFile( trainingFile );
 
         }
