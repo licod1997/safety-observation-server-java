@@ -113,7 +113,7 @@
                     <div class="breadcrumbs-area clearfix">
                         <ul class="breadcrumbs pull-left">
                             <li>
-                                <a href="">Danh Sách</a>
+                                <a href="#">Danh Sách</a>
                             </li>
                             <li><span>Phản Hồi</span></li>
                         </ul>
@@ -166,7 +166,7 @@
                                                         th:styleappend="${photo.isReject()==true?'display:none;':''}"
                                                 >
 
-                                                        <ul style="position: absolute;z-index: 99999;margin: 10px;">
+                                                        <ul id="photo-controller"  style="position: absolute;z-index: 99999;margin: 10px;" th:classappend="${feedback.getReject() == false ? '' : 'gone' }">
                                                             <li class="photo-bunton"><a th:href="'/set-reject-photo?photoId='+${photo.getId()+'&option=true'}"><i style="font-size: 1.5rem;color: #E64A19;" class="fa fa-times" aria-hidden="true"></i></a></li>
                                                             <li class="photo-bunton"><a th:href="'http://localhost:8080/downloadFile/'+ ${photo.getPhotoName()}"><i style="font-size: 1.5rem;color: #00E676;" class="fa fa-download" aria-hidden="true"></i></a></li>
                                                         </ul>
@@ -209,7 +209,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="controler-nhatanh">
+                                        <div th:classappend="${feedback.getReject() == false ? '' : 'gone' }" class="controler-nhatanh" id="upload-controler">
                                             <hr style="width: 95%;">
                                             <form id="multipleUploadForm" name="multipleUploadForm"><span style=" display:inline-block ;margin-bottom: 10px;">Chọn file XML:</span>
                                                 <input class="file-input" id="multipleFileUploadInput" type="file" name="files" multiple required>

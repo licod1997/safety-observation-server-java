@@ -303,6 +303,8 @@
                 alert("Approve successfully");
                 console.log(response)
                 $('.feedback-controler').addClass('gone');
+                $('#photo-controller').removeClass('gone');
+                $('#upload-controler').removeClass('gone');
             },
             error: function (error) {
                 alert("Failed to Approve ");
