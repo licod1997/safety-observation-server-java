@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Training - Safe Vs Dang</title>
+    <title>Tạo mới người dùng - Safe Vs Dang</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" th:href="@{assets/images/icon/favicon.ico}">
     <link rel="stylesheet" href="assets/css/gallery.css">
@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/metisMenu.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.min.css">
     <!-- amcharts css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
@@ -27,7 +26,8 @@
     <link rel="stylesheet" href="assets/css/default-css.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="css/phan-hoi.css">
+    <link rel="stylesheet" href="./css/phan-hoi.css">
+
     <!-- modernizr css -->
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -66,19 +66,19 @@
                                 <li>
                                     <a href="phan-hoi.html">Phản hồi</a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i>
                                         <span>User</span></a>
                                     <ul class="collapse">
                                         <li>
                                             <a href="quan-ly-user.html">Quản lý người dùng</a>
                                         </li>
-                                        <li>
+                                        <li class="active">
                                             <a href="tao-moi-user.html">Tạo mới người dùng</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="train.html">Training</a>
                                 </li>
                             </ul>
@@ -115,7 +115,7 @@
                             <li>
                                 <a href="#">Danh Sách</a>
                             </li>
-                            <li><span>Train</span></li>
+                            <li><span>Tạo mới người dùng</span></li>
                         </ul>
                     </div>
                 </div>
@@ -138,43 +138,105 @@
                 <div class="col-12 mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Danh sách file</h4>
-                            <div class="data-tables datatable-primary">
-
-                               <div th:if="${fileNotTrainYetList != null}">
-                                   <table class="table-train" border="0">
-                                       <thead>
-                                            <th>Tên File</th>
-                                            <th style="text-align: right">Thời gian</th>
-                                       </thead>
-                                       <tbody>
-                                            <tr  th:each="file : ${fileNotTrainYetList}">
-                                                <td th:text="${file.getFileName()}"></td>
-                                                <td style="text-align: right" th:text="${#dates.year(file.getTimeUpload())} +'-'+${#dates.month(file.getTimeUpload())}+'-'+${#dates.day(file.getTimeUpload())}+' ' + ${#dates.format(file.getTimeUpload(), 'HH:mm')}"></td>
-                                            </tr>
-                                       </tbody>
-                                   </table>
-
-
-                               </div>
-                                <div th:if="${fileNotTrainYetList == null }">
-                                    <p>Danh sách rỗng</p>
-                                </div>
-
-                                    <!--<div class="wrapper-train-upload">-->
-                                        <!--<form id="multipleUploadTrainForm" name="multipleUploadForm">-->
-                                            <!--<input class="file-input" id="multipleFileUploadInput" type="file" name="files" multiple required>-->
-                                            <!--<button class="primary submit-btn" type="submit">Upload</button>-->
-                                        <!--</form>-->
-                                    <!--</div>-->
-
-                                <button class="btn btn-primary btn-train">TRAIN</button>
-
+                            <div>
+                                <span style="display: inline-block" class="header-title">Tạo Mới Người Dùng</span>
                             </div>
+
+                            <div class="data-tables datatable-primary">
+                                <!--<form id="createNewUserForm" name="createNewUserForm">-->
+                                    <!--<table class="user-detail-table" border="0">-->
+                                        <!--<tr>-->
+                                            <!--<td>Username: </td>-->
+                                            <!--<td><input type="text" name="username" required></td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Password:</td>-->
+                                            <!--<td><input id="password" type="password" name="password" required></td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Re-Password:</td>-->
+                                            <!--<td><input id="rePassword" type="password" name="rePassword" required></td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Role:</td>-->
+                                            <!--<td>-->
+                                                <!--<select name="roleId">-->
+                                                    <!--<option th:each="role:${roleList}"-->
+                                                            <!--th:value="${role.getId()}"-->
+                                                            <!--th:text="${role.getRoleName()}"></option>-->
+                                                <!--</select>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Status:</td>-->
+                                            <!--<td><input type="radio" name="isEnable"value="true" checked="checked"> Enable-->
+                                                <!--<br/>-->
+                                                <!--<input type="radio" name="isEnable"value="false"> Disable-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td><button type="submit">Create</button></td>-->
+                                        <!--</tr>-->
+                                    <!--</table>-->
+                                <!--</form>-->
+                                                    <!--START-Template-->
+                                <!-- Default form register -->
+                                <form id="createNewUserForm" style="margin: auto; width: 50%" class="text-center border border-light p-5">
+
+                                    <!--<p class="h4 mb-4">Sign up</p>-->
+
+                                    <div class="form-row mb-4">
+                                        <div class="col">
+                                            <input type="text"  class="form-control" name="username" required placeholder="Username">
+                                        </div>
+
+                                    </div>
+
+                                    <!--&lt;!&ndash; E-mail &ndash;&gt;-->
+                                    <!--<input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">-->
+
+                                    <!-- Password -->
+                                    <input type="password" name="password" required  class="form-control" placeholder="Password">
+                                    <small  class="form-text text-muted mb-4">
+                                        At least 8 characters and 1 digit
+                                    </small>
+                                    <input type="password" name="rePassword" required  class="form-control" placeholder="Re-Enter Password">
+                                    <small  class="form-text text-muted mb-4">
+                                    </small>
+
+                                    <!-- Subject -->
+                                    <label>Roles</label>
+                                    <select class="browser-default custom-select mb-4" name="roleId">
+                                        <option th:each="role:${roleList}"
+                                                th:value="${role.getId()}"
+                                                th:text="${role.getRoleName()}"></option>
+                                    </select>
+
+                                    <!-- Default inline 1-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="statusEnable"  name="isEnable" value="true" checked>
+                                        <label class="custom-control-label" for="statusEnable">Enable</label>
+                                    </div>
+
+                                    <!-- Default inline 2-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input"  id="statusDisable" name="isEnable" value="false">
+                                        <label class="custom-control-label" for="statusDisable">Disable</label>
+                                    </div>
+                                    <!-- Sign up button -->
+                                    <button class="btn btn-info my-4 btn-block" type="submit">Create</button>
+
+
+                                </form>
+                                <!-- Default form register -->
+                                                    <!--ENd-Template-->
+                            </div>
+
                         </div>
                     </div>
                 </div>
                 <!-- Primary table end -->
+
             </div>
         </div>
     </div>
@@ -190,55 +252,6 @@
 </div>
 <!-- page container area end -->
 
-<!--Popup - detail Feedback-->
-<div id="modal" class="modal fade show" style="display: none; padding-right: 17px;">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-8">
-                        <script>
-                            ;(function () {'use strict'; Gallery.init(document.getElementById('mygallery'));}());
-                        </script>
-                        <div id="mygallery" class="gallery">
-                            <div class="images">
-                                <div class="active" style="background-image: url(C:\Users\ANHNDNSE61922\Desktop\web-layout\templates\img\photo-1.jpg)"></div>
-                                <span class="left"></span>
-                                <span class="right"></span>
-                            </div>
-                            <div class="thumbs">
-                                <div class="active" style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-1.jpg)"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="media mb-3">
-                            <div class="media-body">
-                                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-                                <h4>Licod</h4>
-                                <div id="modal-feedback-time">
-                                    22 Tháng 10 Năm 2018 lúc 23:46
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="media-body">
-                                <div id="modal-feedback-description">
-                                    <ul>
-                                        <li>Lorem ipsum dolor sit amet, consectetur adipisici?</li>
-                                    </ul>
-                                    <button class="button-train">Train</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!--END - Popup - detail Feedback-->
 <!-- jquery latest version -->
 <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
 <!-- bootstrap 4 js -->
@@ -254,12 +267,11 @@
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+
 <!-- others plugins -->
 <script src="assets/js/plugins.js"></script>
 <script src="assets/js/scripts.js"></script>
-<!--    Galery plugin-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script>
-<script src="js/gallery.js"></script>
+
 
 </body>
 

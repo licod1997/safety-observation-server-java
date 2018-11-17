@@ -161,22 +161,6 @@
 
         $.showDetail = function () {
             $( table ).find( 'tr' ).click( function () {
-                $( carousel ).empty();
-                $( this ).find( '.feedback-photo-url' ).each( function ( i, el ) {
-                    if ( i == 0 ) {
-                        var tab = '<div class="carousel-item img-fit active">\n' +
-                            '   <img class="d-block w-100" src="' + $( this ).text() + '">\n' +
-                            '</div>';
-                        $( carousel ).append( tab );
-                    } else {
-                        var tab = '<div class="carousel-item img-fit">\n' +
-                            '   <img class="d-block w-100" src="' + $( this ).text() + '">\n' +
-                            '</div>';
-                        $( carousel ).append( tab );
-                    }
-                } );
-                $( modalTimeField ).text( $( this ).find( '.feedback-time' ).text() );
-                $( modalDescriptionField ).text( $( this ).find( '.feedback-description' ).text() );
 
                 var tr = $( this );
                 if ( tr.hasClass( 'feedback-unread' ) ) {
@@ -319,6 +303,8 @@
                 alert("Approve successfully");
                 console.log(response)
                 $('.feedback-controler').addClass('gone');
+                $('#photo-controller').removeClass('gone');
+                $('#upload-controler').removeClass('gone');
             },
             error: function (error) {
                 alert("Failed to Approve ");
@@ -343,6 +329,78 @@
         } );
     } );
 
+
+
+    /*================================
+     Edit user form
+    ==================================*/
+    $('#editUserForm').submit(function(event) {
+        var userId = $('#userId').text();
+        var formData = new FormData(this)
+        formData.append('userId',Number(userId));
+        $.ajax({
+            type: "POST",
+            enctype: 'application/x-www-form-urlencoded',
+            url: "http://localhost:8080/edit-user-by-admin",
+            data: formData,
+            processData: false,
+            contentType: false,
+            complete: function(respone) {
+                if (respone.responseText === "edit_successfullly") {
+                    alert("Cập nhật thành công");
+                    window.location.href = 'http://localhost:8080/quan-ly-user'
+                }else if (respone.responseText === "edit_failed") {
+                    alert("Cập nhật thất bại");
+                } else if (respone.responseText === "rePass_not_match") {
+                    alert("Mật khẩu không trùng khớp, Xin thử lại");
+                }
+            }
+        });
+
+        event.preventDefault();
+    });
+
+
+    /*================================
+ Create new User
+==================================*/
+        $('#createNewUserForm').submit(function(event) {
+            var formData = new FormData(this);
+            $.ajax({
+                type: "POST",
+                enctype: 'application/x-www-form-urlencoded',
+                url: "http://localhost:8080/create-user-by-admin",
+                data: formData,
+                processData: false,
+                contentType: false,
+                complete: function(respone){
+                    if(respone.responseText === "create_successfully"){
+                        alert("Tạo mới thành công");
+                        window.location.href = 'http://localhost:8080/quan-ly-user'
+                    }else if(respone.responseText === "duplicate_username"){
+                        alert("Tên đăng nhập đã đươc sữ dụng");
+                    }else if(respone.responseText === "create_failed"){
+                        alert("Tạo mới thất bại");
+                    }else if(respone.responseText === "rePass_not_match"){
+                        alert("Mật khẩu không trùng khớp, Xin thử lại");
+                    }
+
+                }
+            });
+
+        event.preventDefault();
+    });
+
+    /*================================
+     Edit form
+    ==================================*/
+    $( '#edit-open-form' ).on( 'click', function () {
+        $('#edit-role').removeAttr("disabled");
+        $("input[type=radio]").attr('disabled', false);
+        $('#edit-password').removeClass('gone');
+        $('#edit-open-form').addClass('gone');
+        $('#edit-save').removeClass('gone');
+    } );
 
 
 

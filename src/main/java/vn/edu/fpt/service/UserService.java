@@ -23,4 +23,6 @@ public interface UserService {
     List<User> getAllUser();
 
     List<User> getAllUserIsEnable();
+
+    User findByUsername(String username);
 }

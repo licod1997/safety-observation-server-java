@@ -76,7 +76,7 @@
   text-align: center;
   cursor: pointer;
 height: 120px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .gallery .thumbs > div {
   box-sizing: border-box;

@@ -45,31 +45,41 @@
 .btn-nhatanh:hover{
     cursor: pointer;
 }
-.btn-approve{
-    background-color: #1DE9B6;
-}
-.btn-reject{
-    background-color: #F4511E;
-}
-.btn-download{
-    background-color: #546E7A;
 
-}
 .btn-train{
     position: absolute;;
     top: -8px;
     right: 5px;
     width: 100px;
     height: 40px;
-    line-height: 40px;
-    background-color: #1DE9B6;
+    background-color: #448AFF;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     vertical-align: middle;
     margin: 20px 20px 0 0;
+    font-weight: bold;
 }
-.wrapper-nhatanh{
-    display: block; position: absolute; width: 100px;background-color:rgba(0,0,0,0.3); padding: 5px; z-index: 99999;right: 0;
+
+.photo-bunton{
+    position: relative;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(0,0,0,0.3);
+    margin-right: 5px;
+    box-shadow: 1px 1px 0.5px #000;
 }
+
+
+.photo-bunton a {
+    position: absolute;
+    display: inline-block;
+    left: 50%;
+    top: 50%;
+    color: #cccccc;
+    transform: translateX(-50%) translateY(-50%);
+
+}
+
 
 .controler-nhatanh{
     display: block;
@@ -111,12 +121,11 @@ input[type="file"] {
 }
 
 .file-input {
-    width: 98%;
+    width: 95%;
 }
 .submit-btn {
     display: block;
     margin: 15px 0px 15px 0px;
-
     min-width: 100px;
 }
 td  a{
@@ -139,9 +148,9 @@ td a:hover
     display: inline-block;
     position: absolute;
     right: 1.5rem;
-    top: .7rem;
+    top: 1.2rem;
     width: 100px;
-    background-color:rgba(0,0,0,0.3);
+    /*background-color:rgba(0,0,0,0.3);*/
     padding: 5px; z-index: 99999;
     padding: 0px;
     width: fit-content;
@@ -166,4 +175,31 @@ td a:hover
 }
 .table-train tbody tr td {
     padding:10px 0px 10px 5px;
+}
+
+table.user-table{
+    width: 100%;
+    padding: 10px !important;
+}
+
+table.user-table thead tr th{
+    padding: 10px;
+
+}
+table.user-table td{
+    padding:5px 0px 5px 10px;
+
+}
+
+table.user-detail-table{
+    width: 50%;
+}
+table.user-detail-table tr td{
+    padding: 10px;
+    border-top: 0px!important;
+
+}
+form#searchUserForm{
+    display: block;
+    margin: 10px;
 }

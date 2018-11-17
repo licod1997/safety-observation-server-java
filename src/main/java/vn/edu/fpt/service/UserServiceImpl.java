@@ -59,7 +59,12 @@ public class UserServiceImpl implements UserService{
             setRole.add(role);
 
             user.setEnable( isEnable );
-            user.setPassword( password );
+            if(password.trim().isEmpty()){
+
+            }else{
+                user.setPassword( password );
+
+            }
            user.setRoles( setRole );
             return userRepository.saveAndFlush( user );
         }
@@ -93,6 +98,11 @@ public class UserServiceImpl implements UserService{
     public List<User> getAllUserIsEnable() {
         List<User> resultList = userRepository.findAllByEnableIsTrue();
         return resultList;
+    }
+
+    @Override
+    public User findByUsername( String username ) {
+        return userRepository.findByUsername( username );
     }
 
 }
