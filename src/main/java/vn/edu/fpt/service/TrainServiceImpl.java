@@ -4,9 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import vn.edu.fpt.entity.TrainFile;
-import vn.edu.fpt.repository.TrainFileRepository;
+import vn.edu.fpt.entity.TrainingFile;
+import vn.edu.fpt.repository.TrainingFileRepository;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,36 +20,30 @@ public class TrainServiceImpl implements TrainService {
     private Process process;
     private boolean breakCondition = false;
     @Autowired
-    TrainFileRepository trainFileRepository;
-
+    TrainingFileRepository trainingFileRepository;
     @Override
-    public List<TrainFile> getAllFileNotTrainYet() {
-        return trainFileRepository.findAllByIsTrainIsFalse();
+    public List<TrainingFile> getAllFileNotTrainYet() {
+        return trainingFileRepository.findAllByIsTrainIsFalse();
     }
 
     @Override
-    public TrainFile setTrain( long trainFileId ) {
-        TrainFile trainFile = trainFileRepository.findById( trainFileId );
-        if ( trainFile != null ) {
-            trainFile.setTrain( true );
-            return trainFileRepository.saveAndFlush( trainFile );
+    public TrainingFile setTrain( long trainFileId ) {
+        TrainingFile trainingFile = trainingFileRepository.findById( trainFileId );
+        if(trainingFile!= null){
+            trainingFile.setTrain( true );
+            return trainingFileRepository.saveAndFlush( trainingFile );
         }
         return null;
     }
 
     @Override
-    public String uploadTrainFile( MultipartFile[] files ) {
-        return null;
-    }
-
-    @Override
-    public TrainFile addFile( TrainFile file ) {
-        TrainFile fileInDB = trainFileRepository.findByFileName( file.getFileName() );
-        if ( fileInDB == null ) {
-            return trainFileRepository.saveAndFlush( file );
+    public TrainingFile addFile( TrainingFile file ) {
+        TrainingFile fileInDB = trainingFileRepository.findByFileName( file.getFileName() );
+        if(fileInDB == null){
+            return trainingFileRepository.saveAndFlush( file );
         }
         fileInDB.setTrain( false );
-        return trainFileRepository.saveAndFlush( fileInDB );
+        return trainingFileRepository.saveAndFlush( fileInDB );
     }
 
     @Override

@@ -8,6 +8,7 @@ public class FeedbackDTO {
     private String feedbackDescription;
     private Date time;
     private FeedbackPhotoDTO[] feedbackPhotoList;
+    private Long userId;
 
     public FeedbackDTO() {
     }
@@ -24,6 +25,7 @@ public class FeedbackDTO {
                 "feedbackDescription='" + feedbackDescription + '\'' +
                 ", time=" + time +
                 ", feedbackPhotoList=" + feedbackPhotoList +
+                ", userId=" + userId +
                 '}';
     }
 
@@ -49,5 +51,21 @@ public class FeedbackDTO {
 
     public void setFeedbackPhotoList(FeedbackPhotoDTO[] feedbackPhotoList) {
         this.feedbackPhotoList = feedbackPhotoList;
+    }
+
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId( Long userId ) {
+        this.userId = userId;
+    }
+
+    public FeedbackDTO( String feedbackDescription, Date time, FeedbackPhotoDTO[] feedbackPhotoList, Long userId ) {
+        this.feedbackDescription = feedbackDescription;
+        this.time = time;
+        this.feedbackPhotoList = feedbackPhotoList;
+        this.userId = userId;
     }
 }

@@ -14,7 +14,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import vn.edu.fpt.dto.FeedbackDTO;
 import vn.edu.fpt.entity.Feedback;
 import vn.edu.fpt.entity.FeedbackPhoto;
-import vn.edu.fpt.entity.TrainFile;
 import vn.edu.fpt.payload.UploadFileResponse;
 import vn.edu.fpt.property.FileStorageProperties;
 import vn.edu.fpt.service.FeedbackService;
@@ -46,7 +45,7 @@ public class FeedbackController {
         long time = a.getTime();
 
 
-        return (feedbackService.sendFeedback(feedbackDTO.getFeedbackDescription(), feedbackDTO.getFeedbackPhotoList(), time));
+        return (feedbackService.sendFeedback(feedbackDTO.getFeedbackDescription(), feedbackDTO.getFeedbackPhotoList(), time,feedbackDTO.getUserId()));
     }
 
     @PostMapping(value = "/uploadImage")

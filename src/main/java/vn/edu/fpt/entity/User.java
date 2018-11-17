@@ -81,7 +81,23 @@ public class User {
         return roles;
     }
 
+    public String getRoleName(){
+        for ( Role role : roles ){
+            return role.getRoleName();
+        }
+        return "not yet";
+    }
+
+    public Role getRole() {
+        if(roles.size()>0){
+            return (Role) roles.iterator().next();
+        }
+        return null;
+    }
+
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }
+

@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public interface FeedbackService {
-    String sendFeedback( String description, FeedbackPhotoDTO[] listFeedbackPhotoDTO, Long time );
+    String sendFeedback( String description, FeedbackPhotoDTO[] listFeedbackPhotoDTO, Long time,Long userId );
 
     String uploadImage( MultipartFile img ) throws IOException;
 

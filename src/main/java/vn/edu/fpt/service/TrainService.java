@@ -7,9 +7,10 @@ import java.util.List;
 
 public interface TrainService extends Runnable {
 
-List<TrainFile> getAllFileNotTrainYet();
-TrainFile setTrain(long trainFileId);
-String uploadTrainFile( MultipartFile []files );
-TrainFile addFile(TrainFile file);
+List<TrainingFile> getAllFileNotTrainYet();
+
+TrainingFile setTrain(long trainingFileId);
+
+TrainingFile addFile(TrainingFile file);
     void stopProcessBuilder();
 }

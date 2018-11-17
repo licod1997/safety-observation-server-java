@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import vn.edu.fpt.entity.TrainFile;
+import vn.edu.fpt.entity.TrainingFile;
 import vn.edu.fpt.payload.UploadFileResponse;
 import vn.edu.fpt.service.FileStorageService;
 import vn.edu.fpt.service.TrainService;
@@ -30,7 +30,7 @@ public class TrainController {
 
     @GetMapping( {"/train" } )
     public ModelAndView getTrainPage( ModelAndView mv ) {
-        List<TrainFile> fileNotTrainYetList = trainService.getAllFileNotTrainYet();
+        List<TrainingFile> fileNotTrainYetList = trainService.getAllFileNotTrainYet();
         if(fileNotTrainYetList.size() > 0 ){
             System.out.println( fileNotTrainYetList );
             mv.addObject( "fileNotTrainYetList", fileNotTrainYetList );
@@ -44,6 +44,7 @@ public class TrainController {
 
     @PostMapping("/uploadMultipleTrainFiles")
     public List<UploadFileResponse> uploadMultipleTrainFiles( @RequestParam("files") MultipartFile[] files) {
+        //add them param User_ID khi đã có login
         List<UploadFileResponse> list = Arrays.asList(files)
                 .stream()
                 .map(file -> uploadFile(file))
@@ -51,11 +52,13 @@ public class TrainController {
         Date time ;
         for ( MultipartFile file: files) {
             time = Calendar.getInstance().getTime();
-            TrainFile trainFile = new TrainFile();
-            trainFile.setFileDirectory(fileStorageService.getFileStorageLocation().toString() );
-            trainFile.setFileName( file.getOriginalFilename() );
-            trainFile.setTimeUpload( time );
-            trainService.addFile( trainFile );
+            TrainingFile trainingFile = new TrainingFile();
+            trainingFile.setFileDirectory(fileStorageService.getFileStorageLocation().toString() );
+            trainingFile.setFileName( file.getOriginalFilename() );
+            trainingFile.setTimeUpload( time );
+            //set thêm user vào khi có chức năng login
+            
+            trainService.addFile( trainingFile );
 
         }
         return list;

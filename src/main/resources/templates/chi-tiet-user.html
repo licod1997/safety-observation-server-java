@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Training - Safe Vs Dang</title>
+    <title>Chi tiết người dùng - Safe Vs Dang</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" th:href="@{assets/images/icon/favicon.ico}">
     <link rel="stylesheet" href="assets/css/gallery.css">
@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/metisMenu.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.min.css">
     <!-- amcharts css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
@@ -27,7 +26,8 @@
     <link rel="stylesheet" href="assets/css/default-css.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="css/phan-hoi.css">
+    <link rel="stylesheet" href="./css/phan-hoi.css">
+
     <!-- modernizr css -->
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -67,10 +67,10 @@
                                     <a href="phan-hoi.html">Phản hồi</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i>
+                                    <a class="active" href="javascript:void(0)" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i>
                                         <span>User</span></a>
                                     <ul class="collapse">
-                                        <li>
+                                        <li class="active">
                                             <a href="quan-ly-user.html">Quản lý người dùng</a>
                                         </li>
                                         <li>
@@ -78,7 +78,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="train.html">Training</a>
                                 </li>
                             </ul>
@@ -115,7 +115,7 @@
                             <li>
                                 <a href="#">Danh Sách</a>
                             </li>
-                            <li><span>Train</span></li>
+                            <li><span>Phản Hồi</span></li>
                         </ul>
                     </div>
                 </div>
@@ -138,43 +138,106 @@
                 <div class="col-12 mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Danh sách file</h4>
+                            <div>
+                                <span style="display: inline-block" class="header-title">Chi Tiết Người Dùng</span>
+                            </div>
+                            <span style="display: none" id="userId" th:text="${user.getId()}"></span>
+
                             <div class="data-tables datatable-primary">
+                                <!--<form id="editUserForm">-->
+                                    <!--<table class="user-detail-table" border="0">-->
+                                        <!--<tr>-->
+                                            <!--<td>Username: </td>-->
+                                            <!--<td ><input type="text" th:value="${user.getUsername()}" disabled="disabled"></td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Password:</td>-->
+                                            <!--<td><input type="password" name="password"></td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Role:</td>-->
+                                            <!--<td>-->
+                                                <!--<select name="roleId">-->
+                                                    <!--<option th:each="role:${roleList}"-->
+                                                            <!--th:value="${role.getId()}"-->
+                                                            <!--th:text="${role.getRoleName()}"-->
+                                                            <!--th:attrappend="selected= ${user.getRole().getId() == role.getId() ? 'selected':'false'}"></option>-->
+                                                <!--</select>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Status:</td>-->
+                                            <!--<td><input type="radio" name="isEnable"value="true" th:attr="checked=${user.isEnable()?'checked':'false'}"> Enable-->
+                                                <!--<br><input type="radio" name="isEnable"value="false" th:attr="checked=${!user.isEnable()?'checked':'false'}"> Disable-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td><button type="submit">Save</button></td>-->
+                                        <!--</tr>-->
+                                    <!--</table>-->
+                                <!--</form>-->
 
-                               <div th:if="${fileNotTrainYetList != null}">
-                                   <table class="table-train" border="0">
-                                       <thead>
-                                            <th>Tên File</th>
-                                            <th style="text-align: right">Thời gian</th>
-                                       </thead>
-                                       <tbody>
-                                            <tr  th:each="file : ${fileNotTrainYetList}">
-                                                <td th:text="${file.getFileName()}"></td>
-                                                <td style="text-align: right" th:text="${#dates.year(file.getTimeUpload())} +'-'+${#dates.month(file.getTimeUpload())}+'-'+${#dates.day(file.getTimeUpload())}+' ' + ${#dates.format(file.getTimeUpload(), 'HH:mm')}"></td>
-                                            </tr>
-                                       </tbody>
-                                   </table>
+                                <form id="editUserForm" style="margin: auto; width: 50%" class="text-center border border-light p-5">
+
+                                    <!--<p class="h4 mb-4">Edit User</p>-->
+
+                                    <div class="form-row mb-4">
+                                        <div class="col">
+                                            <input type="text" th:value="${user.getUsername()}" disabled="disabled"  class="form-control" name="username"  placeholder="Username">
+                                        </div>
+
+                                    </div>
+
+                                    <!--&lt;!&ndash; E-mail &ndash;&gt;-->
+                                    <!--<input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">-->
+
+                                  <div id="edit-password" class="gone">
+
+                                      <!-- Password -->
+                                      <input type="password" name="password"  class="form-control" placeholder="Password">
+                                      <small  class="form-text text-muted mb-4">
+                                          At least 8 characters and 1 digit
+                                      </small>
+                                      <input type="password" name="rePassword"   class="form-control" placeholder="Re-Enter Password">
+                                      <small  class="form-text text-muted mb-4">
+                                      </small>
+
+                                  </div>
+                                    <!-- Subject -->
+                                    <label for="edit-role">Roles</label>
+                                    <select id="edit-role" class="browser-default custom-select mb-4" name="roleId" disabled>
+                                        <option th:each="role:${roleList}"
+                                                th:value="${role.getId()}"
+                                                th:text="${role.getRoleName()}"
+                                                th:attrappend="selected= ${user.getRole().getId() == role.getId() ? 'selected':'false'}"></option>
+                                    </select>
+                                    <label>Status</label>
+                                    <br/>
+                                    <!-- Default inline 1-->
+                                    <div  class="custom-control custom-radio custom-control-inline">
+                                        <input disabled  type="radio" class="custom-control-input" id="statusEnable"  name="isEnable" value="true" th:attr="checked=${user.isEnable()?'checked':'false'}" >
+                                        <label class="custom-control-label" for="statusEnable">Enable</label>
+                                    </div>
+
+                                    <!-- Default inline 2-->
+                                    <div  class="custom-control custom-radio custom-control-inline">
+                                        <input disabled type="radio" class="custom-control-input" id="statusDisable" name="isEnable" value="false" th:attr="checked=${!user.isEnable()?'checked':'false'}">
+                                        <label class="custom-control-label" for="statusDisable">Disable</label>
+                                    </div>
+                                    <!-- Sign up button -->
+                                    <button id="edit-save" class="btn btn-info my-4 btn-block gone" type="submit">Save</button>
+                                    <span id="edit-open-form" style="display: inline-block" class="btn btn-info my-4 btn-block"> Edit</span>
 
 
-                               </div>
-                                <div th:if="${fileNotTrainYetList == null }">
-                                    <p>Danh sách rỗng</p>
-                                </div>
-
-                                    <!--<div class="wrapper-train-upload">-->
-                                        <!--<form id="multipleUploadTrainForm" name="multipleUploadForm">-->
-                                            <!--<input class="file-input" id="multipleFileUploadInput" type="file" name="files" multiple required>-->
-                                            <!--<button class="primary submit-btn" type="submit">Upload</button>-->
-                                        <!--</form>-->
-                                    <!--</div>-->
-
-                                <button class="btn btn-primary btn-train">TRAIN</button>
-
+                                </form>
+                                <!-- Default form register -->
+                                <!--ENd-Template-->
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Primary table end -->
+
             </div>
         </div>
     </div>
@@ -190,55 +253,6 @@
 </div>
 <!-- page container area end -->
 
-<!--Popup - detail Feedback-->
-<div id="modal" class="modal fade show" style="display: none; padding-right: 17px;">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-8">
-                        <script>
-                            ;(function () {'use strict'; Gallery.init(document.getElementById('mygallery'));}());
-                        </script>
-                        <div id="mygallery" class="gallery">
-                            <div class="images">
-                                <div class="active" style="background-image: url(C:\Users\ANHNDNSE61922\Desktop\web-layout\templates\img\photo-1.jpg)"></div>
-                                <span class="left"></span>
-                                <span class="right"></span>
-                            </div>
-                            <div class="thumbs">
-                                <div class="active" style="background-image: url(C:/Users/ANHNDNSE61922/Desktop/web-layout/templates/img/photo-1.jpg)"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="media mb-3">
-                            <div class="media-body">
-                                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-                                <h4>Licod</h4>
-                                <div id="modal-feedback-time">
-                                    22 Tháng 10 Năm 2018 lúc 23:46
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="media-body">
-                                <div id="modal-feedback-description">
-                                    <ul>
-                                        <li>Lorem ipsum dolor sit amet, consectetur adipisici?</li>
-                                    </ul>
-                                    <button class="button-train">Train</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!--END - Popup - detail Feedback-->
 <!-- jquery latest version -->
 <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
 <!-- bootstrap 4 js -->
@@ -257,9 +271,7 @@
 <!-- others plugins -->
 <script src="assets/js/plugins.js"></script>
 <script src="assets/js/scripts.js"></script>
-<!--    Galery plugin-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script>
-<script src="js/gallery.js"></script>
+
 
 </body>
 

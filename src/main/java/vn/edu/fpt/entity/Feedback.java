@@ -32,6 +32,10 @@ public class Feedback {
     @OneToMany( mappedBy = "feedback", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = FeedbackPhoto.class )
     private List<FeedbackPhoto> feedbackPhotoList;
 
+    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = User.class )
+    @JoinColumn( name = "user_id", referencedColumnName = "id" )
+    private User user;
+
     public Feedback() {
     }
 
@@ -81,6 +85,7 @@ public class Feedback {
                 "id=" + id +
                 ", feedbackDescription='" + feedbackDescription + '\'' +
                 ", time=" + time +
+                ", user=" + user +
                 '}' + "\n";
     }
     public long getIdPhotoFristReject(){
@@ -88,5 +93,13 @@ public class Feedback {
             if(!this.feedbackPhotoList.get( i ).isReject())return this.feedbackPhotoList.get( i ).getId();
         }
         return 0;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser( User user ) {
+        this.user = user;
     }
 }
