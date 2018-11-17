@@ -1,12 +1,12 @@
 package vn.edu.fpt.dto;
 
-public class AuthToken {
+public class AuthTokenDTO {
     private String token;
 
-    public AuthToken() {
+    public AuthTokenDTO() {
     }
 
-    public AuthToken( String token ) {
+    public AuthTokenDTO( String token ) {
         this.token = token;
     }
 

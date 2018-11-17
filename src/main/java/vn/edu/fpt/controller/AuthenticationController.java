@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.fpt.configuration.security.SecurityUser;
 import vn.edu.fpt.configuration.security.TokenProvider;
-import vn.edu.fpt.dto.AuthToken;
+import vn.edu.fpt.dto.AuthTokenDTO;
 
 @CrossOrigin( origins = "*", maxAge = 3600 )
 @RestController
@@ -34,6 +34,6 @@ public class AuthenticationController {
         );
         SecurityContextHolder.getContext().setAuthentication( authentication );
         final String token = tokenProvider.generateToken( authentication );
-        return ResponseEntity.ok( new AuthToken( token ) );
+        return ResponseEntity.ok( new AuthTokenDTO( token ) );
     }
 }
