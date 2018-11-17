@@ -161,22 +161,6 @@
 
         $.showDetail = function () {
             $( table ).find( 'tr' ).click( function () {
-                $( carousel ).empty();
-                $( this ).find( '.feedback-photo-url' ).each( function ( i, el ) {
-                    if ( i == 0 ) {
-                        var tab = '<div class="carousel-item img-fit active">\n' +
-                            '   <img class="d-block w-100" src="' + $( this ).text() + '">\n' +
-                            '</div>';
-                        $( carousel ).append( tab );
-                    } else {
-                        var tab = '<div class="carousel-item img-fit">\n' +
-                            '   <img class="d-block w-100" src="' + $( this ).text() + '">\n' +
-                            '</div>';
-                        $( carousel ).append( tab );
-                    }
-                } );
-                $( modalTimeField ).text( $( this ).find( '.feedback-time' ).text() );
-                $( modalDescriptionField ).text( $( this ).find( '.feedback-description' ).text() );
 
                 var tr = $( this );
                 if ( tr.hasClass( 'feedback-unread' ) ) {
