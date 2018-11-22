@@ -13,15 +13,6 @@ public class Feedback {
     private Long id;
     @Column( name = "is_reject" )
     private Boolean isReject;
-
-    public Boolean getReject() {
-        return isReject;
-    }
-
-    public void setReject( Boolean reject ) {
-        isReject = reject;
-    }
-
     @Column( name = "feedback_description" )
     private String feedbackDescription;
     @Temporal( TemporalType.TIMESTAMP )
@@ -31,7 +22,6 @@ public class Feedback {
     private Boolean isRead;
     @OneToMany( mappedBy = "feedback", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = FeedbackPhoto.class )
     private List<FeedbackPhoto> feedbackPhotoList;
-
     @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = User.class )
     @JoinColumn( name = "user_id", referencedColumnName = "id" )
     private User user;
@@ -63,12 +53,28 @@ public class Feedback {
         this.time = time;
     }
 
+    public Boolean getReject() {
+        return isReject;
+    }
+
+    public void setReject( Boolean reject ) {
+        isReject = reject;
+    }
+
     public List<FeedbackPhoto> getFeedbackPhotoList() {
         return feedbackPhotoList;
     }
 
     public void setFeedbackPhotoList( List<FeedbackPhoto> feedbackPhotoList ) {
         this.feedbackPhotoList = feedbackPhotoList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser( User user ) {
+        this.user = user;
     }
 
     public Boolean getRead() {
@@ -83,23 +89,11 @@ public class Feedback {
     public String toString() {
         return "Feedback{" +
                 "id=" + id +
+                ", isReject=" + isReject +
                 ", feedbackDescription='" + feedbackDescription + '\'' +
                 ", time=" + time +
-                ", user=" + user +
-                '}' + "\n";
-    }
-    public long getIdPhotoFristReject(){
-        for ( int i = 0 ; i <this.feedbackPhotoList.size();i++ ){
-            if(!this.feedbackPhotoList.get( i ).isReject())return this.feedbackPhotoList.get( i ).getId();
-        }
-        return 0;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser( User user ) {
-        this.user = user;
+                ", isRead=" + isRead +
+                ", feedbackPhotoList=" + feedbackPhotoList +
+                '}';
     }
 }

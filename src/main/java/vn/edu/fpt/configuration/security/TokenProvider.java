@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.dto.AuthTokenDTO;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -45,17 +46,21 @@ public class TokenProvider implements Serializable {
         return expiration.before( new Date() );
     }
 
-    public String generateToken( Authentication authentication ) {
+    public AuthTokenDTO generateToken( Authentication authentication ) {
         final String authorities = authentication.getAuthorities().stream()
                 .map( GrantedAuthority::getAuthority )
                 .collect( Collectors.joining( "," ) );
-        return Jwts.builder()
-                .setSubject( authentication.getName() )
-                .claim( AUTHORITIES_KEY, authorities )
-                .signWith( SignatureAlgorithm.HS256, SIGNING_KEY )
-                .setIssuedAt( new Date( System.currentTimeMillis() ) )
-                .setExpiration( new Date( System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000 ) )
-                .compact();
+        return new AuthTokenDTO(
+                HEADER_STRING + "=" + TOKEN_PREFIX +
+                Jwts.builder()
+                        .setSubject( authentication.getName() )
+                        .claim( AUTHORITIES_KEY, authorities )
+                        .signWith( SignatureAlgorithm.HS256, SIGNING_KEY )
+                        .setIssuedAt( new Date( System.currentTimeMillis() ) )
+                        .setExpiration( new Date( System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000 ) )
+                        .compact(),
+                System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000
+        );
     }
 
     public Boolean validateToken( String token, UserDetails userDetails ) {

@@ -7,7 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.edu.fpt.dto.FeedbackPhotoDTO;
 import vn.edu.fpt.entity.Feedback;
 import vn.edu.fpt.entity.FeedbackPhoto;
-import vn.edu.fpt.entity.User;
 import vn.edu.fpt.repository.FeedbackPhotoRepository;
 import vn.edu.fpt.repository.FeedbackRepository;
 import vn.edu.fpt.repository.UserRepository;
@@ -102,17 +101,17 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public List<Feedback> getFeedbacksLoadPage() {
-        return feedbackRepository.findTop10ByIsRejectFalseOrIsRejectNullOrderByIdDesc();
+        return feedbackRepository.findTop10ByIsRejectFalseOrderByIdDesc();
     }
 
     @Override
     public List<Feedback> getFeedbacksFirstPage( Long firstNotificationId ) {
-        return feedbackRepository.findByIsRejectFalseOrIsRejectNullAndIdGreaterThan( firstNotificationId );
+        return feedbackRepository.findByIsRejectFalseAndIdGreaterThan( firstNotificationId );
     }
 
     @Override
     public List<Feedback> getFeedbacksLastPage( Long lastNotificationId ) {
-        return feedbackRepository.findTop10ByIsRejectFalseOrIsRejectNullAndIdLessThanOrderByIdDesc( lastNotificationId );
+        return feedbackRepository.findTop10ByIsRejectFalseAndIdLessThanOrderByIdDesc( lastNotificationId );
     }
 
     @Override

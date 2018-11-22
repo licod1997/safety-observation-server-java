@@ -63,15 +63,4 @@ public class FeedbackPhoto {
         isReject = reject;
     }
 
-    @Override
-    public String toString() {
-        return "FeedbackPhoto{" +
-                "id=" + id +
-                ", photoName='" + photoName + '\'' +
-                ", photoDirectory='" + photoDirectory + '\'' +
-                ", feedback=" + feedback +
-                ", isReject=" + isReject+
-                '}';
-    }
-
 }

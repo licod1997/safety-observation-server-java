@@ -95,12 +95,6 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<User> getAllUserIsEnable() {
-        List<User> resultList = userRepository.findAllByEnableIsTrue();
-        return resultList;
-    }
-
-    @Override
     public User findByUsername( String username ) {
         return userRepository.findByUsername( username );
     }

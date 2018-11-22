@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Thông Báo - Safe Vs Dang</title>
+	<title>Quản lý người dùng - Safe Vs Dang</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/png" th:href="@{assets/images/icon/favicon.ico}">
 	<link rel="stylesheet" href="assets/css/gallery.css">
@@ -30,7 +30,7 @@
 	<link rel="stylesheet" href="assets/css/default-css.css">
 	<link rel="stylesheet" href="assets/css/styles.css">
 	<link rel="stylesheet" href="assets/css/responsive.css">
-	<link rel="stylesheet" href="css/phan-hoi.css">
+	<link rel="stylesheet" href="css/nguoi-dung.css">
 	<!-- modernizr css -->
 	<script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -53,7 +53,7 @@
 		<div class="sidebar-menu">
 			<div class="sidebar-header">
 				<div class="logo">
-					<a href="phan-hoi" class="need-auth-url">
+					<a href="phan-hoi.html">
 						<img src="assets/images/icon/logo.png" alt="logo">
 					</a>
 				</div>
@@ -66,10 +66,10 @@
 								<a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
 									<span>Danh Sách</span></a>
 								<ul class="collapse">
-									<li class="active">
+									<li>
 										<a href="phan-hoi" class="need-auth-url">Phản hồi</a>
 									</li>
-									<li>
+									<li class="active">
 										<a href="nguoi-dung" class="need-auth-url">Người dùng</a>
 									</li>
 								</ul>
@@ -124,7 +124,7 @@
 								<li>
 									<a href="#">Danh Sách</a>
 								</li>
-								<li><span>Phản Hồi</span></li>
+								<li><span>Người dùng</span></li>
 							</ul>
 						</div>
 					</div>
@@ -148,85 +148,31 @@
 					<div class="col-12 mt-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="header-title">Phản Hồi</h4>
+								<h4 class="header-title">Người dùng</h4>
 								<div class="data-tables datatable-primary">
-									<div th:if="${feedbackList != null}">
-										<script>
-                                            var firstNotificationId;
-                                            var lastNotificationId;
-										</script>
-										
-										<table id="dataTable2" class="table-hover dataTable no-footer dtr-inline text-center">
+									<div th:if="${userList != null}">
+										<table id="dataTable2" class="text-center">
 											<thead class="text-capitalize">
-												<tr>
-													<th>Người gửi</th>
-													<th>Nội dung</th>
-													<th>Thời điểm</th>
-												</tr>
+												<th>Tài khoản</th>
+												<th>Vị trí</th>
+												<th>Tình trạng</th>
 											</thead>
-											
 											<tbody>
-												<th:block th:fragment="feedbackTable">
-													<tr th:each="feedback : ${feedbackList}"
-													    th:classappend="${feedback.read} ? feedback-read : feedback-unread">
-														<td>
-															<a th:href="'/chi-tiet-phan-hoi?id=' + ${feedback.id}" class="need-auth-url">
-																<div th:text="${feedback.user.username}+' đã gửi phản hồi'"></div>
-															</a>
-														
-														</td>
-														<td>
-															<a th:href="'/chi-tiet-phan-hoi?id=' + ${feedback.id}" class="need-auth-url">
-																<div class="feedback-description"
-																     th:text="${feedback.feedbackDescription}"></div>
-															</a>
-														
-														</td>
-														
-														<td>
-															<a th:href="'/chi-tiet-phan-hoi?id=' + ${feedback.id}" class="need-auth-url">
-																<div class="feedback-time" th:text="${#dates.year(feedback.time)}
-                                                                                            +'-' + ${#dates.month(feedback.time)}
-                                                                                            +'-' + ${#dates.day(feedback.time)}
-                                                                                            +' ' + ${#dates.format(feedback.time, 'HH:mm')}">
-																
-																</div>
-															</a>
-														
-														
-														</td>
-														
-														<td style="display: none">
-															<div class="feeedback-username"
-															     th:text="${feedback.user.username}"></div>
-															<div class="feedback-id" th:text="${feedback.id}"></div>
-															<div class="feedback-time" th:text="${#dates.year(feedback.time)}
-                                                                                            +'-' + ${#dates.month(feedback.time)}
-                                                                                            +'-' + ${#dates.day(feedback.time)}
-                                                                                            +' ' + ${#dates.format(feedback.time, 'HH:mm')}"></div>
-															<div class="feedback-description"
-															     th:text="${feedback.feedbackDescription}">
-															
-															</div>
-															
-															<div class="feedback-photo"
-															     th:each="photo : ${feedback.feedbackPhotoList}">
-																<div class="feedback-photo-id"
-																     th:text="${photo.id}"></div>
-																<div class="feedback-photo-url"
-																     th:text="'http://localhost:8080/' + ${photo.photoName}"></div>
-															</div>
-														
-														</td>
-													
-													</tr>
-												</th:block>
+												<tr th:each="user:${userList}">
+													<td th:text="${user.username}"></td>
+													<td>
+														<th:block th:each="role : ${user.roles}"
+														          th:with="roleUppercase = ${#strings.substringAfter(role.roleName, 'ROLE_')}">
+															<p th:text="${#strings.toLowerCase(roleUppercase)}"
+															   class="text-capitalize"></p>
+														</th:block>
+													</td>
+													<td th:text="${user.enable ? 'Được phép hoạt động': 'Đã vô hiệu hóa' }"></td>
+												</tr>
 											</tbody>
 										</table>
-									
 									</div>
-									<div th:if="${feedbackList==null}">Danh sách rỗng</div>
-								
+									<div th:if="${userList == null}">Danh sách rỗng</div>
 								</div>
 							</div>
 						</div>
@@ -239,7 +185,7 @@
 		<!-- footer area start-->
 		<footer>
 			<div class="footer-area">
-				Safety Observation
+				Safe Oversations
 				<br />
 				Copyright &copy; 2018
 			</div>
@@ -266,7 +212,7 @@
 	<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 	<!-- others plugins -->
 	<script src="assets/js/plugins.js"></script>
-	<script src="js/phan-hoi.js"></script>
+	<script src="js/nguoi-dung.js"></script>
 
 
 </body>

@@ -33,7 +33,7 @@ public class AuthenticationController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication( authentication );
-        final String token = tokenProvider.generateToken( authentication );
-        return ResponseEntity.ok( new AuthTokenDTO( token ) );
+        final AuthTokenDTO authTokenDTO = tokenProvider.generateToken( authentication );
+        return ResponseEntity.ok( authTokenDTO );
     }
 }

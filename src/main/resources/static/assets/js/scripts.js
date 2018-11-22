@@ -98,89 +98,84 @@
 
         } );
     }
-    if ( $( '#dataTable2' ).length ) {
-        firstNotificationId = $( '.feedback-id' ).first().text();
-        lastNotificationId = $( '.feedback-id' ).last().text();
-        var table = $( '#dataTable2' );
-        var carousel = $( '#carouselFeedbackPhoto .carousel-inner' );
-        var modalTimeField = $( '#modal-feedback-time' );
-        var modalDescriptionField = $( '#modal-feedback-description' );
-        $( table ).find( 'thead' ).hide();
-        var interval = setInterval( function () {
-            $.ajax( {
-                url: 'http://localhost:8080/phan-hoi-moi?firstNotificationId=' + firstNotificationId,
-                method: 'POST',
-                success: function ( xhr ) {
-                    if ( xhr.trim() ) {
-                        $( table ).find( 'tbody' ).prepend( xhr.trim() );
-                        firstNotificationId = $( '.feedback-id' ).first().text();
-                        $.showDetail();
-                    }
-                },
-                error: function () {
-                    clearInterval( interval );
-                }
-            } );
-        }, 5000 );
+    // if ( $( '#dataTable2' ).length ) {
+    //     firstNotificationId = $( '.feedback-id' ).first().text();
+    //     lastNotificationId = $( '.feedback-id' ).last().text();
+    //     var table = $( '#dataTable2' );
+    //     var carousel = $( '#carouselFeedbackPhoto .carousel-inner' );
+    //     var modalTimeField = $( '#modal-feedback-time' );
+    //     var modalDescriptionField = $( '#modal-feedback-description' );
+    //     var interval = setInterval( function () {
+    //         $.ajax( {
+    //             url: 'http://localhost:8080/phan-hoi-moi?firstNotificationId=' + firstNotificationId,
+    //             method: 'POST',
+    //             success: function ( xhr ) {
+    //                 if ( xhr.trim() ) {
+    //                     $( table ).find( 'tbody' ).prepend( xhr.trim() );
+    //                     firstNotificationId = $( '.feedback-id' ).first().text();
+    //                     $.showDetail();
+    //                 }
+    //             },
+    //             error: function () {
+    //                 clearInterval( interval );
+    //             }
+    //         } );
+    //     }, 5000 );
+    //
+    //     $.fn.hasScrollBar = function () {
+    //         return this.get( 0 ).scrollHeight > this.height();
+    //     }
+    //
+    //     $.loadMore = function () {
+    //         if ( $( window ).scrollTop() + $( window ).height() == $( document ).height() ) {
+    //             $.ajax( {
+    //                 url: 'http://localhost:8080/phan-hoi-cu?lastNotificationId=' + lastNotificationId,
+    //                 method: 'POST',
+    //                 success: function ( xhr ) {
+    //                     if ( xhr.trim() ) {
+    //                         $( table ).find( 'tbody' ).append( xhr.trim() );
+    //                         lastNotificationId = $( '.feedback-id' ).last().text();
+    //                         $.showDetail();
+    //                     }
+    //                 },
+    //                 error: function () {
+    //                 }
+    //             } );
+    //         }
+    //     }
+    //
+    //     $( window ).resize( function () {
+    //         if ( !$( window ).hasScrollBar() ) {
+    //             $.loadMore();
+    //         }
+    //     } );
+    //
+    //     if ( !$( window ).hasScrollBar() ) {
+    //         $.loadMore();
+    //     }
+    //
+    //     $( window ).scroll( function () {
+    //         $.loadMore();
+    //     } );
+    //
+    //     $.showDetail = function () {
+    //         table.find( 'tr' ).click( function () {
+    //             var tr = $( this );
+    //             if ( tr.hasClass( 'feedback-unread' ) ) {
+    //                 $.ajax( {
+    //                     url: 'http://localhost:8080/da-xem-phan-hoi?currentNotificationId=' + tr.find( '.feedback-id' ).text(),
+    //                     method: 'POST',
+    //                     success: function ( xhr ) {
+    //                         tr.addClass( 'feedback-read' ).removeClass( 'feedback-unread' );
+    //                     },
+    //                     error: function () {
+    //                     }
+    //                 } );
+    //             }
+    //         } );
+    //     }
 
-        $.fn.hasScrollBar = function () {
-            return this.get( 0 ).scrollHeight > this.height();
-        }
-
-        $.loadMore = function () {
-            if ( $( window ).scrollTop() + $( window ).height() == $( document ).height() ) {
-                $.ajax( {
-                    url: 'http://localhost:8080/phan-hoi-cu?lastNotificationId=' + lastNotificationId,
-                    method: 'POST',
-                    success: function ( xhr ) {
-                        if ( xhr.trim() ) {
-                            $( table ).find( 'tbody' ).append( xhr.trim() );
-                            lastNotificationId = $( '.feedback-id' ).last().text();
-                            $.showDetail();
-                        }
-                    },
-                    error: function () {
-                    }
-                } );
-            }
-        }
-
-        $( window ).resize( function () {
-            if ( !$( window ).hasScrollBar() ) {
-                $.loadMore();
-            }
-        } );
-
-        if ( !$( window ).hasScrollBar() ) {
-            $.loadMore();
-        }
-
-        $( window ).scroll( function () {
-            $.loadMore();
-        } );
-
-        $.showDetail = function () {
-            $( table ).find( 'tr' ).click( function () {
-
-                var tr = $( this );
-                if ( tr.hasClass( 'feedback-unread' ) ) {
-                    $.ajax( {
-                        url: 'http://localhost:8080/da-xem-phan-hoi?currentNotificationId=' + tr.find( '.feedback-id' ).text(),
-                        method: 'POST',
-                        success: function ( xhr ) {
-                            tr.addClass( 'feedback-read' ).removeClass( 'feedback-unread' );
-                        },
-                        error: function () {
-                        }
-                    } );
-                }
-            } );
-        }
-
-
-
-
-    }
+    // }
     if ( $( '#dataTable3' ).length ) {
         $( '#dataTable3' ).DataTable( {
             responsive: true
@@ -271,137 +266,135 @@
     /*================================
      uploadfile to train
     ==================================*/
-    $('#multipleUploadForm').submit(function(event) {
+    $( '#multipleUploadForm' ).submit( function ( event ) {
 
-        var formData = new FormData(this);
-        $.ajax({
+        var formData = new FormData( this );
+        $.ajax( {
             type: "POST",
             enctype: 'multipart/form-data',
             url: "http://localhost:8080/uploadMultipleTrainFiles",
             data: formData,
             processData: false,
             contentType: false,
-            success: function (response) {
-                alert("Tải lên thành công!");
+            success: function ( response ) {
+                alert( "Tải lên thành công!" );
             },
-            error: function (error) {
-                alert("Tải lên thất bại!");
-                console.log(error);
+            error: function ( error ) {
+                alert( "Tải lên thất bại!" );
+                console.log( error );
             }
-        });
+        } );
 
         event.preventDefault();
-    });
+    } );
 
 
     //============apporve feeback onclick======
     $( '.btn-feedback-approve' ).on( 'click', function () {
-        feedbackId = $('.feedbackId').text();
+        feedbackId = $( '.feedbackId' ).text();
         $.ajax( {
-            url: 'http://localhost:8080/set-reject-feedback?feedbackId='+feedbackId + '&optionFeedback=false',
-            method: 'GET', success: function (response) {
-                alert("Approve successfully");
-                console.log(response)
-                $('.feedback-controler').addClass('gone');
-                $('#photo-controller').removeClass('gone');
-                $('#upload-controler').removeClass('gone');
+            url: 'http://localhost:8080/set-reject-feedback?feedbackId=' + feedbackId + '&optionFeedback=false',
+            method: 'GET', success: function ( response ) {
+                alert( "Approve successfully" );
+                console.log( response )
+                $( '.feedback-controler' ).addClass( 'gone' );
+                $( '#photo-controller' ).removeClass( 'gone' );
+                $( '#upload-controler' ).removeClass( 'gone' );
             },
-            error: function (error) {
-                alert("Failed to Approve ");
-                console.log(error);
+            error: function ( error ) {
+                alert( "Failed to Approve " );
+                console.log( error );
             }
         } );
     } );
 
     //============reject feeback onclick======
     $( '.btn-feedback-reject' ).on( 'click', function () {
-        feedbackId = $('.feedbackId').text();
+        feedbackId = $( '.feedbackId' ).text();
         $.ajax( {
-            url: 'http://localhost:8080/set-reject-feedback?feedbackId='+feedbackId + '&optionFeedback=true',
-            method: 'GET', success: function (response) {
+            url: 'http://localhost:8080/set-reject-feedback?feedbackId=' + feedbackId + '&optionFeedback=true',
+            method: 'GET', success: function ( response ) {
                 window.location.href = 'http://localhost:8080/'
-                console.log(response)
+                console.log( response )
             },
-            error: function (error) {
-                alert("Failed to Reject ");
-                console.log(error);
+            error: function ( error ) {
+                alert( "Failed to Reject " );
+                console.log( error );
             }
         } );
     } );
 
 
-
     /*================================
      Edit user form
     ==================================*/
-    $('#editUserForm').submit(function(event) {
-        var userId = $('#userId').text();
-        var formData = new FormData(this)
-        formData.append('userId',Number(userId));
-        $.ajax({
+    $( '#editUserForm' ).submit( function ( event ) {
+        var userId = $( '#userId' ).text();
+        var formData = new FormData( this )
+        formData.append( 'userId', Number( userId ) );
+        $.ajax( {
             type: "POST",
             enctype: 'application/x-www-form-urlencoded',
             url: "http://localhost:8080/edit-user-by-admin",
             data: formData,
             processData: false,
             contentType: false,
-            complete: function(respone) {
-                if (respone.responseText === "edit_successfullly") {
-                    alert("Cập nhật thành công");
+            complete: function ( respone ) {
+                if ( respone.responseText === "edit_successfullly" ) {
+                    alert( "Cập nhật thành công" );
                     window.location.href = 'http://localhost:8080/quan-ly-user'
-                }else if (respone.responseText === "edit_failed") {
-                    alert("Cập nhật thất bại");
-                } else if (respone.responseText === "rePass_not_match") {
-                    alert("Mật khẩu không trùng khớp, Xin thử lại");
+                } else if ( respone.responseText === "edit_failed" ) {
+                    alert( "Cập nhật thất bại" );
+                } else if ( respone.responseText === "rePass_not_match" ) {
+                    alert( "Mật khẩu không trùng khớp, Xin thử lại" );
                 }
             }
-        });
+        } );
 
         event.preventDefault();
-    });
+    } );
 
 
     /*================================
  Create new User
 ==================================*/
-        $('#createNewUserForm').submit(function(event) {
-            var formData = new FormData(this);
-            $.ajax({
-                type: "POST",
-                enctype: 'application/x-www-form-urlencoded',
-                url: "http://localhost:8080/create-user-by-admin",
-                data: formData,
-                processData: false,
-                contentType: false,
-                complete: function(respone){
-                    if(respone.responseText === "create_successfully"){
-                        alert("Tạo mới thành công");
-                        window.location.href = 'http://localhost:8080/quan-ly-user'
-                    }else if(respone.responseText === "duplicate_username"){
-                        alert("Tên đăng nhập đã đươc sữ dụng");
-                    }else if(respone.responseText === "create_failed"){
-                        alert("Tạo mới thất bại");
-                    }else if(respone.responseText === "rePass_not_match"){
-                        alert("Mật khẩu không trùng khớp, Xin thử lại");
-                    }
-
+    $( '#createNewUserForm' ).submit( function ( event ) {
+        var formData = new FormData( this );
+        $.ajax( {
+            type: "POST",
+            enctype: 'application/x-www-form-urlencoded',
+            url: "http://localhost:8080/create-user-by-admin",
+            data: formData,
+            processData: false,
+            contentType: false,
+            complete: function ( respone ) {
+                if ( respone.responseText === "create_successfully" ) {
+                    alert( "Tạo mới thành công" );
+                    window.location.href = 'http://localhost:8080/quan-ly-user'
+                } else if ( respone.responseText === "duplicate_username" ) {
+                    alert( "Tên đăng nhập đã đươc sữ dụng" );
+                } else if ( respone.responseText === "create_failed" ) {
+                    alert( "Tạo mới thất bại" );
+                } else if ( respone.responseText === "rePass_not_match" ) {
+                    alert( "Mật khẩu không trùng khớp, Xin thử lại" );
                 }
-            });
+
+            }
+        } );
 
         event.preventDefault();
-    });
+    } );
 
     /*================================
      Edit form
     ==================================*/
     $( '#edit-open-form' ).on( 'click', function () {
-        $('#edit-role').removeAttr("disabled");
-        $("input[type=radio]").attr('disabled', false);
-        $('#edit-password').removeClass('gone');
-        $('#edit-open-form').addClass('gone');
-        $('#edit-save').removeClass('gone');
+        $( '#edit-role' ).removeAttr( "disabled" );
+        $( "input[type=radio]" ).attr( 'disabled', false );
+        $( '#edit-password' ).removeClass( 'gone' );
+        $( '#edit-open-form' ).addClass( 'gone' );
+        $( '#edit-save' ).removeClass( 'gone' );
     } );
-
 
 
 })( jQuery );

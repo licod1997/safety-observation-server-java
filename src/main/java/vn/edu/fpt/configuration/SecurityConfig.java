@@ -12,9 +12,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import vn.edu.fpt.configuration.security.JwtAuthenticationEntryPoint;
 import vn.edu.fpt.configuration.security.JwtAuthenticationFilter;
 import vn.edu.fpt.configuration.security.SecurityUserDetailService;
+
+import static vn.edu.fpt.configuration.security.Constants.*;
 
 @Configuration
 @EnableWebSecurity
@@ -25,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationEntryPoint unauthorizedHandler;
     @Autowired
     private SecurityUserDetailService securityUserDetailService;
+
     @Autowired
     public void globalUserDetails( AuthenticationManagerBuilder auth ) throws Exception {
         auth.userDetailsService( securityUserDetailService );
@@ -33,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure( WebSecurity web ) throws Exception {
         web.ignoring().antMatchers( "/", "/resources/**", "/static/**", "/*.html", "/**/*.html", "/**/*.css",
-                "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.gif", "/**/*.svg", "/**/*.ico", "/**/*.ttf", "/**/*.woff" );
+                "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.gif", "/**/*.svg", "/**/*.ico", "/**/*.ttf", "/**/*.woff", "/**/*.woff2" );
     }
 
     @Override
@@ -41,13 +45,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers( "/token/*", "/signup" ).permitAll()
+                .antMatchers( GENERATE_TOKEN_URL, SIGN_UP_URL, SIGN_IN_URL ).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint( unauthorizedHandler ).and()
                 .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS )
                 .and()
-                .addFilterBefore( authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class );
+                .addFilterBefore( authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class )
+                .logout()
+                .logoutRequestMatcher( new AntPathRequestMatcher( "/dang-xuat" ) )
+                .logoutSuccessUrl( "/dang-nhap" );
     }
 
     @Bean

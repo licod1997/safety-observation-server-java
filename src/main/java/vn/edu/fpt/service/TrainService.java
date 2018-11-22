@@ -1,7 +1,6 @@
 package vn.edu.fpt.service;
 
-import org.springframework.web.multipart.MultipartFile;
-import vn.edu.fpt.entity.TrainFile;
+import vn.edu.fpt.entity.TrainingFile;
 
 import java.util.List;
 
