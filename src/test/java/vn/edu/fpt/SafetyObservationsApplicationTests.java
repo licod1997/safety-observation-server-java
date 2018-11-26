@@ -6,14 +6,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import vn.edu.fpt.entity.Feedback;
-import vn.edu.fpt.entity.Role;
-import vn.edu.fpt.entity.User;
-import vn.edu.fpt.repository.FeedbackRepository;
-import vn.edu.fpt.repository.RoleRepository;
-import vn.edu.fpt.repository.UserRepository;
+import vn.edu.fpt.entity.*;
+import vn.edu.fpt.repository.*;
 
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -63,5 +58,30 @@ public class SafetyObservationsApplicationTests {
                 .val();
 
         userRepository.save( userList );
+    }
+
+    @Autowired
+    private NotificationResponsitory notificationResponsitory;
+
+    @Test
+    public void test1() {
+        Notification notification = new Notification();
+        notification.setImageURL( "abc" );
+        notification.setStatus( 1 );
+        notification.setImageURL( "abc" );
+        notificationResponsitory.save( notification );
+    }
+
+    @Autowired
+    private NotificationFeedbackRepository notificationFeedbackRepository;
+
+    @Test
+    public void test2() {
+        Notification notification = notificationResponsitory.findById( (long) 4 );
+        System.out.println( notification.toString() );
+        NotificationFeedback notificationFeedback = new NotificationFeedback();
+        notificationFeedback.setDescription( "abc" );
+        notificationFeedback.setNotification( notification );
+        notificationFeedbackRepository.save( notificationFeedback );
     }
 }

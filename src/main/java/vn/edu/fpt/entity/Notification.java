@@ -26,13 +26,16 @@ public class Notification {
     private CameraLocation cameraLocation;
 
     @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = User.class )
-    @JoinColumn( name = "user", referencedColumnName = "id")
+    @JoinColumn( name = "user", referencedColumnName = "id" )
     private User user;
+
+    @OneToOne( mappedBy = "notification", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private NotificationFeedback notificationFeedback;
 
     public Notification() {
     }
 
-    public Notification(String imageURL, Date time, CameraLocation cameraLocation) {
+    public Notification( String imageURL, Date time, CameraLocation cameraLocation ) {
         this.imageURL = imageURL;
         this.time = time;
         this.cameraLocation = cameraLocation;
@@ -43,7 +46,7 @@ public class Notification {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId( Long id ) {
         this.id = id;
     }
 
@@ -51,7 +54,7 @@ public class Notification {
         return imageURL;
     }
 
-    public void setImageURL(String imageURL) {
+    public void setImageURL( String imageURL ) {
         this.imageURL = imageURL;
     }
 
@@ -59,7 +62,7 @@ public class Notification {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime( Date time ) {
         this.time = time;
     }
 
@@ -67,7 +70,7 @@ public class Notification {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus( int status ) {
         this.status = status;
     }
 
@@ -75,7 +78,7 @@ public class Notification {
         return cameraLocation;
     }
 
-    public void setCameraLocation(CameraLocation cameraLocation) {
+    public void setCameraLocation( CameraLocation cameraLocation ) {
         this.cameraLocation = cameraLocation;
     }
 
@@ -83,8 +86,25 @@ public class Notification {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser( User user )    {
         this.user = user;
     }
 
+    public NotificationFeedback getNotificationFeedback() {
+        return notificationFeedback;
+    }
+
+    public void setNotificationFeedback( NotificationFeedback notificationFeedback ) {
+        this.notificationFeedback = notificationFeedback;
+    }
+
+    @Override
+    public String toString() {
+        return "Notification{" +
+                "id=" + id +
+                ", imageURL='" + imageURL + '\'' +
+                ", time=" + time +
+                ", status=" + status +
+                '}';
+    }
 }
