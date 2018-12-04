@@ -9,4 +9,5 @@ public class Constants {
     public static final String SIGN_IN_URL = "/dang-nhap";
     public static final String SIGN_UP_URL = "/dang-ky";
     public static final String GENERATE_TOKEN_URL = "/token/*";
+    public static final String CAMERA_URL = "/camera/*";
 }
