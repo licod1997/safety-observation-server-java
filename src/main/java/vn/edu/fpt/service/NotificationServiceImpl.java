@@ -2,6 +2,7 @@ package vn.edu.fpt.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.dto.NotificationDTO;
 import vn.edu.fpt.entity.CameraLocation;
 import vn.edu.fpt.entity.Notification;
 import vn.edu.fpt.repository.CameraLocationRepository;
@@ -23,11 +24,10 @@ public class NotificationServiceImpl implements NotificationService {
     @Autowired
     private CameraLocationRepository cameraLocationRepository;
 
-    @Transactional
     @Override
     public String createNotification(String image_url, Long cameraID, Long datetime) {
         CameraLocation cameraLocation = cameraLocationRepository.findById(cameraID);
-        if(cameraLocation == null)
+        if (cameraLocation == null)
             return null;
 
         Notification notification = new Notification();
@@ -57,6 +57,6 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public List<Notification> getAllNotification() {
-        return notificationResponsitory.findAll();
+        return notificationResponsitory.findAllByOrderByStatusAsc();
     }
 }

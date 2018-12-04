@@ -1,8 +1,6 @@
 package vn.edu.fpt.dto;
 
 
-import java.util.Date;
-
 public class NotificationDTO {
     private String image_url;
     private Long datetime;

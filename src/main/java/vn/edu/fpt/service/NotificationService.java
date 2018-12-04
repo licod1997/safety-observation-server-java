@@ -1,5 +1,6 @@
 package vn.edu.fpt.service;
 
+import vn.edu.fpt.dto.NotificationDTO;
 import vn.edu.fpt.entity.Notification;
 
 import java.util.Date;

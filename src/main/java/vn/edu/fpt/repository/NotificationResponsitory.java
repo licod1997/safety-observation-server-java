@@ -9,4 +9,6 @@ public interface NotificationResponsitory extends JpaRepository<Notification,Lon
     Notification findById( Long id );
 
     List<Notification> findNotificationByStatus(int status);
+
+    List<Notification> findAllByOrderByStatusAsc();
 }
