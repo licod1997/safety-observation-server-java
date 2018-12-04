@@ -9,7 +9,7 @@ import vn.edu.fpt.repository.NotificationFeedbackRepository;
 import vn.edu.fpt.repository.NotificationResponsitory;
 
 @Service
-public class NotificationFeedbackImpl implements NotificationFeedbackService {
+public class NotificationFeedbackServiceImpl implements NotificationFeedbackService {
     @Autowired
     private NotificationFeedbackRepository notificationFeedbackRepository;
     @Autowired
