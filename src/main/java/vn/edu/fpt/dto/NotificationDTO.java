@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class NotificationDTO {
     private String image_url;
-    private Date datetime;
+    private Long datetime;
     private Long cameraID;
 
     public String getImage_url() {
@@ -16,11 +16,11 @@ public class NotificationDTO {
         this.image_url = image_url;
     }
 
-    public Date getDatetime() {
+    public Long getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(Date datetime) {
+    public void setDatetime(Long datetime) {
         this.datetime = datetime;
     }
 

@@ -10,7 +10,7 @@ public class CameraLocation {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "location", unique = true)
+    @Column(name = "location")
     private String location;
 
     public CameraLocation() {

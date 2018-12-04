@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public interface NotificationService {
-    Notification sendNotification(String image_url, Long cameraID, Long datetime);
+    String createNotification(String image_url, Long cameraID, Long datetime);
 
     Notification rejectNotification(Long id, Long userID);
 

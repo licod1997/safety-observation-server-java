@@ -25,7 +25,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Transactional
     @Override
-    public Notification sendNotification(String image_url, Long cameraID, Long datetime) {
+    public String createNotification(String image_url, Long cameraID, Long datetime) {
         CameraLocation cameraLocation = cameraLocationRepository.findById(cameraID);
         if(cameraLocation == null)
             return null;
@@ -37,7 +37,7 @@ public class NotificationServiceImpl implements NotificationService {
         notification.setTime(new Date(datetime));
 
         notificationResponsitory.save(notification);
-        return notification;
+        return "create_noti_success";
     }
 
     @Override
