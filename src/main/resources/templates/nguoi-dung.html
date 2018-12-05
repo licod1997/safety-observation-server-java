@@ -151,14 +151,14 @@
 								<h4 class="header-title">Người dùng</h4>
 								<div class="data-tables datatable-primary">
 									<div th:if="${userList != null}">
-										<table id="dataTable2" class="text-center">
+										<table id="dataTable2" class="text-center table-hover">
 											<thead class="text-capitalize">
 												<th>Tài khoản</th>
 												<th>Vị trí</th>
 												<th>Tình trạng</th>
 											</thead>
 											<tbody>
-												<tr th:each="user:${userList}">
+												<tr th:each="user : ${userList}">
 													<td th:text="${user.username}"></td>
 													<td>
 														<th:block th:each="role : ${user.roles}"
@@ -167,7 +167,15 @@
 															   class="text-capitalize"></p>
 														</th:block>
 													</td>
-													<td th:text="${user.enable ? 'Được phép hoạt động': 'Đã vô hiệu hóa' }"></td>
+													<td>
+														Vô hiệu hóa
+														<label class="switch">
+															<input type="checkbox" th:checked="${user.enable ? true : false}">
+															<span class="slider round"></span>
+														</label>
+														Được phép hoạt động
+														<div class="user-id" th:text="${user.id}" style="display: none"></div>
+													</td>
 												</tr>
 											</tbody>
 										</table>

@@ -75,6 +75,23 @@
             searching: true,
             pagingType: "full_numbers"
         } );
+
+        $( ".switch input" ).change( function ( e ) {
+            var checkbox = $( this );
+            var userId = $( $( '.user-id' )[$( this ).index()] ).text();
+            var enable = this.checked;
+            $.ajax( {
+                url: host + '/cap-nhat-tai-khoan?' + token + '&userId=' + userId + '&enable=' + enable,
+                method: 'POST',
+                async: false,
+                success: function ( data, textStatus, xhr ) {
+
+                },
+                error: function ( xhr, textStatus, error ) {
+                    checkbox.prop( 'checked', !enable );
+                }
+            } );
+        } );
     }
 
     /*================================
@@ -156,4 +173,6 @@
             $( this ).attr( 'href', $( this ).attr( 'href' ) + '?' + token );
         }
     } );
+
+
 })( jQuery );

@@ -4,18 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.configuration.security.SecurityUser;
+import vn.edu.fpt.dto.UserAdministrationDTO;
 import vn.edu.fpt.entity.Role;
 import vn.edu.fpt.entity.User;
 import vn.edu.fpt.repository.RoleRepository;
 import vn.edu.fpt.service.UserService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class UserController {
@@ -23,71 +22,19 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
-    @PostMapping( "/create-user" )
-    public ResponseEntity createUser( @RequestParam( "username" ) String username,
-                                      @RequestParam( "password" ) String password ) {
-        User user = userService.createUser( username, password );
-        if ( user != null ) {
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.badRequest().build();
-
-    }
-
     @PreAuthorize( "hasRole('ROLE_ADMIN')" )
     @PostMapping( "/tao-tai-khoan" )
     public ResponseEntity createUserByAdmin( @RequestParam( "username" ) String username,
-                                             @RequestParam( "password" ) String password,
-                                             @RequestParam( "roleId" ) Integer roleId ) {
+                                             @RequestParam( "password" ) String password) {
         User user = userService.findByUsername( username );
         if ( user != null ) {
             return ResponseEntity.badRequest().body( "Tài khoản đã tồn tại." );
         }
-        user = userService.createUserByAdmin( username, password, true, roleId );
+        user = userService.createUserByAdmin( username, password, true );
         if ( user != null ) {
-            return ResponseEntity.ok().body("Đã tạo tài khoản thành công.");
+            return ResponseEntity.ok().body( "Đã tạo tài khoản thành công." );
         }
         return ResponseEntity.badRequest().body( "Có lỗi đã xảy ra." );
-    }
-
-    @PostMapping( "/edit-user" )
-    public ResponseEntity editUser( @RequestParam( "userId" ) long userId,
-                                    @RequestParam( "password" ) String password ) {
-        User user = userService.editUser( userId, password );
-        if ( user != null ) {
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.badRequest().build();
-    }
-
-    @PostMapping( "/edit-user-by-admin" )
-    public String editUserByAdmin( @RequestParam( "userId" ) Long userId,
-                                   @RequestParam( "password" ) String password,
-                                   @RequestParam( "isEnable" ) boolean isEnable,
-                                   @RequestParam( "roleId" ) Integer roleId,
-                                   @RequestParam( "rePassword" ) String rePassword ) {
-
-        if ( !password.trim().equals( rePassword.trim() ) ) {
-            return "rePass_not_match";
-        }
-        User user = userService.editUserByAdministrator( userId, password, isEnable, roleId );
-        if ( user == null ) {
-            return "edit_failed";
-        }
-        return "edit_successfullly";
-    }
-
-    @GetMapping( "/ket-qua-tim-kiem" )
-    public ModelAndView searchByUsername( @RequestParam( "usernameSearch" ) String username, ModelAndView mv ) {
-
-        List<User> resultSearchList = userService.searchByUsername( username.trim() );
-        if ( resultSearchList.size() > 0 ) {
-            mv.addObject( "resultSearchList", resultSearchList );
-        }
-        mv.setViewName( "ket-qua-tim-kiem" );
-        return mv;
-
     }
 
     @PreAuthorize( "hasRole('ROLE_ADMIN')" )
@@ -107,17 +54,6 @@ public class UserController {
         }
 
         return mv;
-    }
-
-    @GetMapping( "/disable-user" )
-    public ResponseEntity disableUser( @RequestParam( "userId" ) Long userId ) {
-
-        User user = userService.disableUser( userId );
-        if ( user != null ) {
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.badRequest().build();
-
     }
 
     @Autowired
@@ -145,5 +81,19 @@ public class UserController {
         mv.addObject( "roleList", roleList );
         mv.setViewName( "tao-tai-khoan" );
         return mv;
+    }
+
+    @PreAuthorize( "hasRole('ROLE_ADMIN')" )
+    @PostMapping( "/cap-nhat-tai-khoan" )
+    public ResponseEntity updateUser( @RequestParam("userId") Long userId,
+                                      @RequestParam("enable") Boolean enable) {
+        User user = userService.updateUserByAdmin( userId, enable );
+        if (user != null) {
+            UserAdministrationDTO userAdministrationDTO = new UserAdministrationDTO();
+            userAdministrationDTO.setUserId( user.getId() );
+            userAdministrationDTO.setEnable( user.isEnable() );
+            return ResponseEntity.ok( userAdministrationDTO );
+        }
+        return ResponseEntity.badRequest().build();
     }
 }

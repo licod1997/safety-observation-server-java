@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @RestController
 public class TrainController {
     @Autowired
-    TrainService trainService;
+    private TrainService trainService;
     @Autowired
     private FileStorageService fileStorageService;
     private Thread thread;
@@ -86,18 +86,21 @@ public class TrainController {
                 file.getContentType(), file.getSize() );
     }
 
+    @PreAuthorize( "hasRole('ROLE_ADMIN')" )
     @GetMapping( "/bat-dau-huan-luyen" )
     public ResponseEntity startTraining() {
         if ( thread == null ) {
             thread = new Thread( trainService );
         }
         if ( thread != null && !thread.isAlive() ) {
+            trainService.preprocessBeforeTraining();
             thread.start();
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
     }
 
+    @PreAuthorize( "hasRole('ROLE_ADMIN')" )
     @GetMapping( "/kiem-tra-tien-trinh-huan-luyen" )
     public ResponseEntity checkTrainingThread() {
         if ( thread != null && thread.isAlive() ) {
@@ -112,7 +115,6 @@ public class TrainController {
                 if ( listOfFiles[i].isFile() ) {
                     Matcher matcher = pattern.matcher( listOfFiles[i].getName() );
                     if ( matcher.find() ) {
-                        System.out.println( matcher.group( 1 ) );
                         listFile.add( Integer.parseInt( matcher.group( 1 ) ) );
                     }
                 }
@@ -126,7 +128,8 @@ public class TrainController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping( "/stop-training" )
+    @PreAuthorize( "hasRole('ROLE_ADMIN')" )
+    @GetMapping( "/dung-huan-luyen" )
     public ResponseEntity stopTraining() {
         trainService.stopProcessBuilder();
         return ResponseEntity.ok().build();

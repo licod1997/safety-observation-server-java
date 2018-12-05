@@ -179,7 +179,6 @@
             url: host + '/tao-tai-khoan?' + token
                 + '&username=' + $( '#inputUsername' ).val()
                 + '&password=' + $( '#inputPassword' ).val()
-                + '&roleId=' + $( '#roleId' ).val()
             ,
             method: 'POST',
             success: function ( xhr ) {

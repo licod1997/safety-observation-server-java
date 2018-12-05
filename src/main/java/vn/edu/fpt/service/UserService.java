@@ -6,21 +6,13 @@ import java.util.List;
 
 public interface UserService {
 
-    User createUser(String username, String password);
+    User createUserByAdmin( String username, String password, boolean isEnable );
 
-    User createUserByAdmin(String username, String password,boolean isEnable,Integer roleId);
-
-    User editUser(Long id,String password);
-
-    User editUserByAdministrator(Long id, String password,Boolean isEnable,Integer roleId);
-
-    User disableUser(Long id);
-
-    User findByUserId(Long userId);
-
-    List<User>searchByUsername(String username);
+    User findByUserId( Long userId );
 
     List<User> getAllUser();
 
-    User findByUsername(String username);
+    User findByUsername( String username );
+
+    User updateUserByAdmin( Long userId, Boolean enable );
 }
