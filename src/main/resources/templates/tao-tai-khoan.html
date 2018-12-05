@@ -146,7 +146,7 @@
 				<div class="row">
 					<!-- Primary table start -->
 					<div class="col-12 mt-5">
-						<div class="card">
+						<div class="card" style="background: #F3F8FB;">
 							<div class="card-body">
 								<div class="login-box">
 									<form class="mt-5">
@@ -173,17 +173,8 @@
 												<input type="password" id="inputRePassword">
 												<i class="ti-lock"></i>
 											</div>
-											<div class="form-group">
-												<label class="col-form-label">Quyền hạn</label>
-												<select class="custom-select" id="roleId">
-													<th:block th:each="role : ${roleList}"
-													          th:with="roleUppercase = ${#strings.substringAfter(role.roleName, 'ROLE_')}">
-														<option th:with="roleLowercase = ${#strings.toLowerCase(roleUppercase)}" th:text="${#strings.capitalize(roleLowercase)}" th:value="${role.id}"></option>
-													</th:block>
-												</select>
-											</div>
 											<div class="submit-btn-area">
-												<button id="form_submit" type="button">Đăng ký <i
+												<button id="form_submit" type="button">Xác nhận <i
 														class="ti-arrow-right"></i></button>
 												<div class="login-other row mt-4">
 												</div>

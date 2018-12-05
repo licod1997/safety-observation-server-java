@@ -6,10 +6,13 @@ import java.util.List;
 
 public interface TrainService extends Runnable {
 
-List<TrainingFile> getAllFileNotTrainYet();
+    List<TrainingFile> getAllFileNotTrainYet();
 
-TrainingFile setTrain(long trainingFileId);
+    TrainingFile setTrain( long trainingFileId );
 
-TrainingFile addFile(TrainingFile file);
+    TrainingFile addFile( TrainingFile file );
+
     void stopProcessBuilder();
+
+    void preprocessBeforeTraining();
 }

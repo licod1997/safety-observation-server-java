@@ -7,91 +7,45 @@ import vn.edu.fpt.entity.User;
 import vn.edu.fpt.repository.RoleRepository;
 import vn.edu.fpt.repository.UserRepository;
 
-import java.util.Collections;
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collector;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
     @Autowired
     RoleRepository roleRepository;
 
-
     @Override
-    public User createUser( String username, String password ) {
-        User user = new User( username,password,true );
+    public User createUserByAdmin( String username, String password, boolean isEnable ) {
+        Set<Role> setRole = new HashSet<Role>();
+        Role role = roleRepository.findByRoleName( "ROLE_USER" );
+        setRole.add( role );
+
+        User user = new User( username, password, isEnable, setRole );
         userRepository.saveAndFlush( user );
         return user;
-    }
-
-    @Override
-    public User createUserByAdmin( String username, String password, boolean isEnable, Integer roleId ) {
-      Set<Role> setRole = new HashSet<Role>(  );
-      Role role = roleRepository.findById(roleId);
-      setRole.add(role);
-
-        User user = new User( username,password,isEnable, setRole);
-        userRepository.saveAndFlush( user );
-        return user;
-    }
-
-    @Override
-    public User editUser( Long id, String password ) {
-        User user = userRepository.findById( id );
-        if(user!= null){
-            user.setPassword( password );
-            return userRepository.saveAndFlush( user );
-        }
-        return null;
-    }
-
-    @Override
-    public User editUserByAdministrator( Long id, String password, Boolean isEnable, Integer roleId ) {
-        User user = userRepository.findById( id );
-        if(user!= null){
-            Set<Role> setRole = new HashSet<Role>(  );
-            Role role = roleRepository.findById(roleId);
-            setRole.add(role);
-
-            user.setEnable( isEnable );
-            if(password.trim().isEmpty()){
-
-            }else{
-                user.setPassword( password );
-
-            }
-           user.setRoles( setRole );
-            return userRepository.saveAndFlush( user );
-        }
-        return null;
-    }
-
-    @Override
-    public User disableUser( Long id ) {
-       User user= userRepository.findById( id );
-       user.setEnable( false );
-       return userRepository.saveAndFlush( user );
     }
 
     @Override
     public User findByUserId( Long userId ) {
-       return userRepository.findById( userId );
-    }
-
-    @Override
-    public List<User> searchByUsername( String username ) {
-        return userRepository.findAllByUsernameContaining( username );
+        return userRepository.findById( userId );
     }
 
     @Override
     public List<User> getAllUser() {
-        List<User> resultList = userRepository.findAll();
-        return resultList;
+        Role role = roleRepository.findByRoleName( "ROLE_USER" );
+        if (role != null) {
+            Set<Role> roleSet = new HashSet<>();
+            roleSet.add( role );
+            List<User> resultList = userRepository.findByRolesIn( roleSet );
+            return resultList;
+        }
+        return null;
     }
 
     @Override
@@ -99,4 +53,14 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByUsername( username );
     }
 
+    @Transactional
+    @Override
+    public User updateUserByAdmin( Long userId, Boolean enable ) {
+        User user = userRepository.findById( userId );
+        if ( user != null ) {
+            user.setEnable( enable );
+            return userRepository.save( user );
+        }
+        return null;
+    }
 }
