@@ -1,5 +1,7 @@
 package vn.edu.fpt.service;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,12 @@ import java.util.List;
 @Service
 public class TrainServiceImpl implements TrainService {
     Logger logger = LoggerFactory.getLogger( TrainServiceImpl.class );
-    private static String PATH_TO_TRAINING = "C:/Users/Notebook/Desktop/train_model/models/research/object_detection/";
+    private static String PATH_TO_TRAINING_DIR = "C:/Users/Notebook/Desktop/train_model/models/research/object_detection/";
     private Process process;
     private boolean breakCondition = false;
     @Autowired
     TrainingFileRepository trainingFileRepository;
+
     @Override
     public List<TrainingFile> getAllFileNotTrainYet() {
         return trainingFileRepository.findAllByIsTrainIsFalse();
@@ -29,7 +32,7 @@ public class TrainServiceImpl implements TrainService {
     @Override
     public TrainingFile setTrain( long trainFileId ) {
         TrainingFile trainingFile = trainingFileRepository.findById( trainFileId );
-        if(trainingFile!= null){
+        if ( trainingFile != null ) {
             trainingFile.setTrain( true );
             return trainingFileRepository.saveAndFlush( trainingFile );
         }
@@ -39,7 +42,7 @@ public class TrainServiceImpl implements TrainService {
     @Override
     public TrainingFile addFile( TrainingFile file ) {
         TrainingFile fileInDB = trainingFileRepository.findByFileName( file.getFileName() );
-        if(fileInDB == null){
+        if ( fileInDB == null ) {
             return trainingFileRepository.saveAndFlush( file );
         }
         fileInDB.setTrain( false );
@@ -60,8 +63,8 @@ public class TrainServiceImpl implements TrainService {
         };
         try {
             for ( String cmd : commands ) {
-                exec( cmd, PATH_TO_TRAINING );
-                if (breakCondition) break;
+                exec( cmd, PATH_TO_TRAINING_DIR );
+                if ( breakCondition ) break;
             }
         } catch ( IOException e ) {
             logger.error( "TrainServiceImpl: " + e );
@@ -72,7 +75,7 @@ public class TrainServiceImpl implements TrainService {
     }
 
     public void stopProcessBuilder() {
-        System.out.println(1);
+        System.out.println( 1 );
         breakCondition = true;
         process.destroy();
         process.destroyForcibly();
@@ -85,8 +88,8 @@ public class TrainServiceImpl implements TrainService {
                 "/c",
                 cmd );
         builder.directory( new File( dir ) );
-        builder.redirectOutput( ProcessBuilder.Redirect.INHERIT);
-        builder.redirectError( ProcessBuilder.Redirect.INHERIT);
+        builder.redirectOutput( ProcessBuilder.Redirect.INHERIT );
+        builder.redirectError( ProcessBuilder.Redirect.INHERIT );
         process = builder.start();
         process.waitFor();
         BufferedReader br = new BufferedReader( new InputStreamReader( process.getInputStream() ) );
@@ -97,5 +100,34 @@ public class TrainServiceImpl implements TrainService {
             logger.info( line );
         }
         process.destroy();
+    }
+
+    @Override
+    public void preprocessBeforeTraining() {
+        List<TrainingFile> trainingFileList = trainingFileRepository.findAllByIsTrainIsFalse();
+        for ( TrainingFile trainingFile : trainingFileList ) {
+            File xmlFile = new File( trainingFile.getFileDirectory() + "\\" + trainingFile.getFileName() );
+            File jpgFile = new File( trainingFile.getFileDirectory() + "\\" + FilenameUtils.removeExtension( trainingFile.getFileName() ) + ".jpg" );
+
+            File xmlFileTrain = new File( PATH_TO_TRAINING_DIR + "\\images\\train\\" + trainingFile.getFileName() );
+            File jpgFileTrain = new File( PATH_TO_TRAINING_DIR + "\\images\\train\\" + FilenameUtils.removeExtension( trainingFile.getFileName() ) + ".jpg" );
+            File xmlFileImg = new File( PATH_TO_TRAINING_DIR + "\\images\\" + trainingFile.getFileName() );
+            File jpgFileImg = new File( PATH_TO_TRAINING_DIR + "\\images\\" + FilenameUtils.removeExtension( trainingFile.getFileName() ) + ".jpg" );
+
+            if ( xmlFile.exists() && jpgFile.exists() ) {
+                try {
+                    FileUtils.copyFile( xmlFile, xmlFileTrain );
+                    FileUtils.copyFile( xmlFile, xmlFileImg );
+
+                    FileUtils.copyFile( jpgFile, jpgFileTrain );
+                    FileUtils.copyFile( jpgFile, jpgFileImg );
+
+                    trainingFile.setTrain( true );
+                } catch ( IOException e ) {
+                    logger.error( "TrainServiceImpl: " + e );
+                }
+            }
+        }
+        trainingFileRepository.save( trainingFileList );
     }
 }

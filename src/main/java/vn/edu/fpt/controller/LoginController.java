@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class LoginController {
 
-    @GetMapping( "/dang-nhap" )
+    @GetMapping( {"/", "/dang-nhap"} )
     public ModelAndView getLoginPage( ModelAndView mv ) {
         mv.setViewName( "dang-nhap" );
         return mv;
