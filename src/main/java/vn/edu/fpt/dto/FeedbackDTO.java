@@ -9,6 +9,7 @@ public class FeedbackDTO {
     private Date time;
     private FeedbackPhotoDTO[] feedbackPhotoList;
     private Long userId;
+    private String username;
 
     public FeedbackDTO() {
     }
@@ -67,5 +68,13 @@ public class FeedbackDTO {
         this.time = time;
         this.feedbackPhotoList = feedbackPhotoList;
         this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

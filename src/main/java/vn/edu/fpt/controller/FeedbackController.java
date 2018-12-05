@@ -40,12 +40,9 @@ public class FeedbackController {
             produces = "application/json"
     )
 
-    public String sendFeedback( @RequestBody FeedbackDTO feedbackDTO ) {
-        Date a = feedbackDTO.getTime();
-        long time = a.getTime();
+    public String sendFeedback( @RequestBody FeedbackDTO feedbackDTO) {
 
-
-        return (feedbackService.sendFeedback( feedbackDTO.getFeedbackDescription(), feedbackDTO.getFeedbackPhotoList(), time, feedbackDTO.getUserId() ));
+        return (feedbackService.sendFeedback( feedbackDTO.getFeedbackDescription(), feedbackDTO.getFeedbackPhotoList(), feedbackDTO.getTime(), feedbackDTO.getUsername()));
     }
 
     @PostMapping( value = "/uploadImage" )

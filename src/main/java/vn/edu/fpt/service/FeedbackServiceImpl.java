@@ -35,7 +35,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Transactional
     @Override
-    public String sendFeedback(String description, FeedbackPhotoDTO[] listFeedbackPhotoDTO, Long time,Long userId) {
+    public String sendFeedback(String description, FeedbackPhotoDTO[] listFeedbackPhotoDTO, Date time,String username) {
 
 
 
@@ -66,10 +66,10 @@ public class FeedbackServiceImpl implements FeedbackService {
         //save feedback
         Feedback feedback = new Feedback();
 
-        feedback.setTime(new Date(time));
+        feedback.setTime(time);
         feedback.setFeedbackPhotoList(listFeedbackPhoto);
         feedback.setFeedbackDescription(description.trim());
-        feedback.setUser( userRepository.findById( userId ) );
+        feedback.setUser( userRepository.findByUsername( username ) );
 
         feedbackRepository.saveAndFlush(feedback);
 

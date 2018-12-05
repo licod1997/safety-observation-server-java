@@ -6,11 +6,12 @@ import vn.edu.fpt.entity.Feedback;
 import vn.edu.fpt.entity.FeedbackPhoto;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 
 public interface FeedbackService {
-    String sendFeedback( String description, FeedbackPhotoDTO[] listFeedbackPhotoDTO, Long time,Long userId );
+    String sendFeedback(String description, FeedbackPhotoDTO[] listFeedbackPhotoDTO, Date time, String username );
 
     String uploadImage( MultipartFile img ) throws IOException;
 

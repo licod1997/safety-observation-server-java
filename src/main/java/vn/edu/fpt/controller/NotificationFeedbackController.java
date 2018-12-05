@@ -20,7 +20,11 @@ public class NotificationFeedbackController {
     @PreAuthorize( "hasRole('ROLE_USER')" )
     @PostMapping( "/create-notification-feedback" )
     public ResponseEntity createNotificationFeedback( @RequestBody NotificationFeedbackDTO notificationFeedbackDTO ) {
-        NotificationFeedback notificationFeedback = notificationFeedbackService.createNotificationFeedback( notificationFeedbackDTO );
+        String description = notificationFeedbackDTO.getDescription();
+        String imageURL = notificationFeedbackDTO.getImageURL();
+        Long notiID = notificationFeedbackDTO.getNotificationId();
+        System.out.println(notiID);
+        NotificationFeedback notificationFeedback = notificationFeedbackService.createNotificationFeedback( description,notiID, imageURL );
         if ( notificationFeedback != null ) {
             notificationFeedbackDTO.setId( notificationFeedback.getId() );
             notificationFeedbackDTO.setDescription( notificationFeedback.getDescription() );

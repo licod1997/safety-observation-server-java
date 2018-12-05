@@ -16,13 +16,15 @@ public class NotificationFeedbackServiceImpl implements NotificationFeedbackServ
     private NotificationResponsitory notificationResponsitory;
 
     @Override
-    public NotificationFeedback createNotificationFeedback( NotificationFeedbackDTO notificationFeedbackDTO ) {
-        Notification notification = notificationResponsitory.findById( notificationFeedbackDTO.getNotificationId() );
+    public NotificationFeedback createNotificationFeedback(String description, Long notiID, String imageURL ) {
+        Notification notification = notificationResponsitory.findById( notiID);
         NotificationFeedback notificationFeedback = new NotificationFeedback();
         if ( notification != null ) {
-            notificationFeedback.setDescription( notificationFeedbackDTO.getDescription() );
-            notificationFeedback.setImageURL( notificationFeedbackDTO.getImageURL() );
-            notification.setNotificationFeedback( notificationFeedback );
+            notificationFeedback.setDescription( description );
+            notificationFeedback.setImageURL(imageURL);
+            notificationFeedback.setNotification(notification);
+            notification.setStatus(1);
+            notificationResponsitory.save(notification);
             return notificationFeedbackRepository.save( notificationFeedback );
         }
         return null;
