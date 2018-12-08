@@ -15,4 +15,7 @@ public interface UserService {
     User findByUsername( String username );
 
     User updateUserByAdmin( Long userId, Boolean enable );
+
+    User updatePersonalInfo(String username, String password); //because personal info have only password can change
+
 }

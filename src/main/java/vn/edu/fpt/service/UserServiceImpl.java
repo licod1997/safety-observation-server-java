@@ -63,4 +63,16 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public User updatePersonalInfo( String username, String password ) {
+        User user = userRepository.findByUsername( username );
+        if(user != null){
+            user.setPassword( password );
+            return userRepository.saveAndFlush( user );
+        }
+
+        return null;
+    }
+
 }

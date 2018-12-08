@@ -108,11 +108,13 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<Feedback> getFeedbacksFirstPage( Long firstNotificationId ) {
         return feedbackRepository.findByIsRejectFalseAndIdGreaterThan( firstNotificationId );
+       // return feedbackRepository.findByIsRejectIsNotTrueAndIdGreaterThan( firstNotificationId );
     }
 
     @Override
     public List<Feedback> getFeedbacksLastPage( Long lastNotificationId ) {
-        return feedbackRepository.findTop10ByIsRejectFalseAndIdLessThanOrderByIdDesc( lastNotificationId );
+       return feedbackRepository.findTop10ByIsRejectFalseAndIdLessThanOrderByIdDesc( lastNotificationId );
+       // return  feedbackRepository.findTop10ByIsRejectIsNotTrueAndIdLessThanOrderByIdDesc( lastNotificationId );
     }
 
     @Override
