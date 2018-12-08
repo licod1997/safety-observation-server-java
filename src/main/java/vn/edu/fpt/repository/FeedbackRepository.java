@@ -19,5 +19,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 
     Feedback findById( Long id );
 
+    List<Feedback> findTop10ByIsRejectIsNullOrIsRejectIsFalseOrderByIdDesc();
 
 }

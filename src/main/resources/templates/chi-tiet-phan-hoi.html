@@ -175,12 +175,12 @@
 														<ul id="photo-controller"
 														    style="position: absolute;z-index: 100;margin: 10px;"
 														    th:classappend="${feedback.reject == false ? '' : 'gone' }">
-															<li class="photo-button">
-																<a th:href="'/loai-bo-hinh-anh?photoId=' + ${photo.id} + '&option=true'"
-																   class="need-auth-url">
-																	<i style="font-size: 1.5rem;color: #E64A19;"
-																	   class="fa fa-times" aria-hidden="true"></i></a>
-															</li>
+															<!--<li class="photo-button">-->
+																<!--<a th:href="'/loai-bo-hinh-anh?photoId=' + ${photo.id} + '&option=true'"-->
+																   <!--class="need-auth-url">-->
+																	<!--<i style="font-size: 1.5rem;color: #E64A19;"-->
+																	   <!--class="fa fa-times" aria-hidden="true"></i></a>-->
+															<!--</li>-->
 															<li class="photo-button">
 																<a th:href="'/downloadFile/' + ${photo.photoName}"
 																   class="need-auth-url">

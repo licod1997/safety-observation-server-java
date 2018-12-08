@@ -101,7 +101,8 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public List<Feedback> getFeedbacksLoadPage() {
-        return feedbackRepository.findTop10ByIsRejectFalseOrderByIdDesc();
+       // return feedbackRepository.findTop10ByIsRejectFalseOrderByIdDesc();
+        return feedbackRepository.findTop10ByIsRejectIsNullOrIsRejectIsFalseOrderByIdDesc();
     }
 
     @Override
