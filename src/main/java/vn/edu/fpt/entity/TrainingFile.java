@@ -18,9 +18,9 @@ public class TrainingFile {
     private Boolean isTrain;
     @Column( name = "time_upload" )
     private Date timeUpload;
-//    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = User.class )
-//    @JoinColumn( name = "user_id", referencedColumnName = "id" )
-//    private User user;
+    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = User.class )
+    @JoinColumn( name = "user_id", referencedColumnName = "id" )
+    private User user;
 
     public TrainingFile() {
         this.isTrain=false;
@@ -66,35 +66,25 @@ public class TrainingFile {
         this.timeUpload = timeUpload;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser( User user ) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
 
-//    @Override
-//    public String
-//    toString() {
-//        return "TrainingFile{" +
-//                "id=" + id +
-//                ", fileName='" + fileName + '\'' +
-//                ", fileDirectory='" + fileDirectory + '\'' +
-//                ", isTrain=" + isTrain +
-//                ", timeUpload=" + timeUpload +
-//                ", user=" + user +
-//                '}';
-//    }
+    public void setUser( User user ) {
+        this.user = user;
+    }
 
     @Override
-    public String toString() {
+    public String
+    toString() {
         return "TrainingFile{" +
                 "id=" + id +
                 ", fileName='" + fileName + '\'' +
                 ", fileDirectory='" + fileDirectory + '\'' +
                 ", isTrain=" + isTrain +
                 ", timeUpload=" + timeUpload +
+                ", user=" + user +
                 '}';
     }
+
 }
