@@ -76,9 +76,9 @@
             pagingType: "full_numbers"
         } );
 
-        $( ".switch input" ).change( function ( e ) {
+        $( ".switch-button" ).click( function ( e ) {
             var checkbox = $( this );
-            var userId = $( $( '.user-id' )[$( this ).index()] ).text();
+            var userId = $( $( '.user-id' )[checkbox.closest('tr').index()] ).text();
             var enable = this.checked;
             $.ajax( {
                 url: host + '/cap-nhat-tai-khoan?' + token + '&userId=' + userId + '&enable=' + enable,
