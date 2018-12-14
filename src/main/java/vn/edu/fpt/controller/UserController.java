@@ -75,7 +75,7 @@ public class UserController {
                                           Authentication auth ) {
         if ( auth != null ) {
             SecurityUser securityUser = (SecurityUser) auth.getPrincipal();
-            mv.addObject( "loggedInUser", securityUser.getUsername() );
+            mv.addObject( "loggedInUser", securityUser.getUsername());
         }
         List<Role> roleList = roleRepository.findAll();
         mv.addObject( "roleList", roleList );
@@ -95,5 +95,30 @@ public class UserController {
             return ResponseEntity.ok( userAdministrationDTO );
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @PreAuthorize( "hasAnyRole('ROLE_ADMIN','ROLE_USER')" )
+    @PostMapping( "/cap-nhat-thong-tin-ca-nhan" )
+    public ResponseEntity updatePersonalInfo( @RequestParam("username") String username,
+                                      @RequestParam("password") String password) {
+        User user = userService.updatePersonalInfo( username, password );
+        if (user != null) {
+            return ResponseEntity.ok().body( "Cập nhật thông tin thành công." );
+        }
+        return ResponseEntity.badRequest().body( "Có lỗi đã xảy ra." );
+    }
+
+    @PreAuthorize( "hasAnyRole('ROLE_ADMIN','ROLE_USER')" )
+    @GetMapping( "/cap-nhat-thong-tin-ca-nhan" )
+    public ModelAndView getUpdateUserPage( ModelAndView mv,
+                                          Authentication auth ) {
+        if ( auth != null ) {
+            SecurityUser securityUser = (SecurityUser) auth.getPrincipal();
+            mv.addObject( "loggedInUser", securityUser.getUsername() );
+        }
+        List<Role> roleList = roleRepository.findAll();
+        mv.addObject( "roleList", roleList );
+        mv.setViewName( "cap-nhat-thong-tin-ca-nhan" );
+        return mv;
     }
 }

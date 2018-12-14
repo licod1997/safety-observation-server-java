@@ -180,6 +180,7 @@ public class FeedbackController {
 
     }
 
+    @PreAuthorize( "hasRole('ROLE_ADMIN')" )
     @GetMapping( "/set-reject-feedback" )
     public ResponseEntity setFeedbackReject( @RequestParam( name = "feedbackId" ) Long feedbackId, @RequestParam( name = "optionFeedback" ) boolean optionFeedback ) {
         Feedback feedback = feedbackService.setFeedbackReject( feedbackId, optionFeedback );

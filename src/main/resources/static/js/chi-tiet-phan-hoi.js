@@ -169,4 +169,42 @@
             }
         })
     } );
+
+    //============apporve feeback onclick======
+    $( '.btn-feedback-approve' ).on( 'click', function () {
+        feedbackId = $( '.feedbackId' ).text();
+        $.ajax( {
+            url: 'http://localhost:8080/set-reject-feedback?feedbackId=' + feedbackId + '&optionFeedback=false&'+token,
+            method: 'GET', success: function ( response ) {
+                alert( "Approve successfully" );
+                console.log( response )
+                $( '.feedback-controler' ).addClass( 'gone' );
+                $( '#photo-controller' ).removeClass( 'gone' );
+                $( '#upload-controler' ).removeClass( 'gone' );
+            },
+            error: function ( error ) {
+                alert( "Đã xảy ra lỗi! Xin thử lại." );
+                console.log( error );
+            }
+        } );
+    } );
+
+    //============reject feeback onclick======
+    $( '.btn-feedback-reject' ).on( 'click', function () {
+        feedbackId = $( '.feedbackId' ).text();
+        $.ajax( {
+            url: 'http://localhost:8080/set-reject-feedback?feedbackId=' + feedbackId + '&optionFeedback=true&'+token,
+            method: 'GET', success: function ( response ) {
+                window.location.href = 'http://localhost:8080/phan-hoi?'+ token
+                console.log( response )
+            },
+            error: function ( error ) {
+                alert( "Đã xảy ra lỗi! Xin thử lại." );
+                console.log( error );
+            }
+        } );
+    } );
+
+
+
 })( jQuery );

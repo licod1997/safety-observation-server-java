@@ -86,4 +86,5 @@ public class TrainingFile {
                 ", user=" + user +
                 '}';
     }
+
 }

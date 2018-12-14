@@ -61,6 +61,7 @@ public class FeedbackServiceImpl implements FeedbackService {
             feedbackPhoto.setPhotoName(listFeedbackPhotoDTO[i].getPhotoName());
 
             listFeedbackPhoto.add(feedbackPhoto);
+
         }
 
         //save feedback
@@ -69,8 +70,9 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedback.setTime(time);
         feedback.setFeedbackPhotoList(listFeedbackPhoto);
         feedback.setFeedbackDescription(description.trim());
-        feedback.setUser( userRepository.findByUsername( username ) );
-
+        feedback.setUser( userRepository.findByUsername( "anhntt" ) );
+        feedback.setRead(false);
+        feedback.setReject(false);
         feedbackRepository.saveAndFlush(feedback);
 
 
@@ -101,17 +103,20 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public List<Feedback> getFeedbacksLoadPage() {
-        return feedbackRepository.findTop10ByIsRejectFalseOrderByIdDesc();
+       // return feedbackRepository.findTop10ByIsRejectFalseOrderByIdDesc();
+        return feedbackRepository.findTop10ByIsRejectIsNullOrIsRejectIsFalseOrderByIdDesc();
     }
 
     @Override
     public List<Feedback> getFeedbacksFirstPage( Long firstNotificationId ) {
         return feedbackRepository.findByIsRejectFalseAndIdGreaterThan( firstNotificationId );
+       // return feedbackRepository.findByIsRejectIsNotTrueAndIdGreaterThan( firstNotificationId );
     }
 
     @Override
     public List<Feedback> getFeedbacksLastPage( Long lastNotificationId ) {
-        return feedbackRepository.findTop10ByIsRejectFalseAndIdLessThanOrderByIdDesc( lastNotificationId );
+       return feedbackRepository.findTop10ByIsRejectFalseAndIdLessThanOrderByIdDesc( lastNotificationId );
+       // return  feedbackRepository.findTop10ByIsRejectIsNotTrueAndIdLessThanOrderByIdDesc( lastNotificationId );
     }
 
     @Override

@@ -136,6 +136,7 @@
 									class="fa fa-angle-down"></i></h4>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="/dang-xuat">Đăng xuất</a>
+								<a class="dropdown-item need-auth-url" href="/cap-nhat-thong-tin-ca-nhan">Cập Nhật Thông tin cá nhân</a>
 							</div>
 						</div>
 					</div>
@@ -170,7 +171,7 @@
 													<td>
 														Vô hiệu hóa
 														<label class="switch">
-															<input type="checkbox" th:checked="${user.enable ? true : false}">
+															<input class="switch-button" type="checkbox" th:checked="${user.enable ? true : false}">
 															<span class="slider round"></span>
 														</label>
 														Được phép hoạt động
