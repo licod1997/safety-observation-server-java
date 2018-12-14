@@ -71,9 +71,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 
         feedback.setFeedbackPhotoList(listFeedbackPhoto);
         feedback.setFeedbackDescription(description.trim());
-        feedback.setUser( userRepository.findByUsername( "anhntt" ) );
+        feedback.setUser( userRepository.findByUsername( username ) );
         feedback.setRead(false);
-        feedback.setReject(false);
+//        feedback.setReject(false);
         feedbackRepository.saveAndFlush(feedback);
 
 

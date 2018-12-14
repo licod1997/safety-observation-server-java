@@ -44,7 +44,7 @@ public class FeedbackController {
 
         return (feedbackService.sendFeedback( feedbackDTO.getFeedbackDescription(), feedbackDTO.getFeedbackPhotoList(), feedbackDTO.getTime(), feedbackDTO.getUsername()));
     }
-
+    @PreAuthorize( "hasAnyRole('ROLE_ADMIN','ROLE_USER')" )
     @PostMapping( value = "/uploadImage" )
 
     public String uploadImage( @RequestPart( name = "img" ) MultipartFile img ) throws IOException {
