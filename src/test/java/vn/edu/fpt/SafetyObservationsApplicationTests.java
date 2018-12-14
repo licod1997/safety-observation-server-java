@@ -46,18 +46,18 @@ public class SafetyObservationsApplicationTests {
 
     @Test
     public void test() {
-        MockNeat m = MockNeat.threadLocal();
-        Set<Role> roleSet = new HashSet<>();
-        roleSet.add( roleRepository.findById( 2 ) );
-        List<User> userList = m.reflect( User.class )
-                .field( "username", m.strings().size( m.ints().range( 5, 20 ) ) )
-                .field( "password", m.strings().size( m.ints().range( 5, 20 ) ) )
-                .field( "enable", m.bools() )
-                .field( "roles", roleSet )
-                .list( 50 )
-                .val();
-
-        userRepository.save( userList );
+//        MockNeat m = MockNeat.threadLocal();
+//        Set<Role> roleSet = new HashSet<>();
+//        roleSet.add( roleRepository.findById( 2 ) );
+//        List<User> userList = m.reflect( User.class )
+//                .field( "username", m.strings().size( m.ints().range( 5, 20 ) ) )
+//                .field( "password", m.strings().size( m.ints().range( 5, 20 ) ) )
+//                .field( "enable", m.bools() )
+//                .field( "roles", roleSet )
+//                .list( 50 )
+//                .val();
+//
+//        userRepository.save( userList );
     }
 
     @Autowired
