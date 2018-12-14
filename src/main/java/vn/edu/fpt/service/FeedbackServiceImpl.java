@@ -66,8 +66,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 
         //save feedback
         Feedback feedback = new Feedback();
-
+//        java.sql.Date date = new java.sql.Date(time.getTime());
         feedback.setTime(time);
+
         feedback.setFeedbackPhotoList(listFeedbackPhoto);
         feedback.setFeedbackDescription(description.trim());
         feedback.setUser( userRepository.findByUsername( "anhntt" ) );

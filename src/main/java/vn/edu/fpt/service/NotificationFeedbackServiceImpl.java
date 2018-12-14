@@ -29,4 +29,10 @@ public class NotificationFeedbackServiceImpl implements NotificationFeedbackServ
         }
         return null;
     }
+
+    @Override
+    public NotificationFeedback getNotificationFeedback(Long id) {
+        NotificationFeedback notificationFeedback = notificationFeedbackRepository.findByNotification_Id(id);
+        return notificationFeedback;
+    }
 }
