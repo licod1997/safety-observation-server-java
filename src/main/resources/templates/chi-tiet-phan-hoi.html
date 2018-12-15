@@ -170,12 +170,12 @@
 											<div id="mygallery" class="gallery">
 												<div class="images">
 													<div th:each="photo,iter : ${feedback.feedbackPhotoList}"
-													     th:style="'background-image:url(http://localhost:8080/' +'upload/'+ ${photo.photoName} +');'"
+													     th:style="'background-image:url(http://localhost:8080/'+ ${photo.photoName} +');'"
 													     th:classappend="${iter.index == 0 ? 'active' : ''}"
 													     th:styleappend="${photo.reject == true ? 'display:none;':''}">
 														<ul id="photo-controller"
 														    style="position: absolute;z-index: 100;margin: 10px;"
-														    th:classappend="${feedback.reject == false ? '' : 'gone' }">
+														    th:classappend="${feedback.reject == false ? 'block' : 'gone' }">
 															<!--<li class="photo-button">-->
 																<!--<a th:href="'/loai-bo-hinh-anh?photoId=' + ${photo.id} + '&option=true'"-->
 																   <!--class="need-auth-url">-->
@@ -200,7 +200,7 @@
 												
 												<div class="thumbs">
 													<div th:each="photo,iter : ${feedback.feedbackPhotoList}"
-													     th:style="'background-image:url(http://localhost:8080/'+'upload/' + ${photo.photoName} +');'"
+													     th:style="'background-image:url(http://localhost:8080/' + ${photo.photoName} +');'"
 													     th:classappend="${iter.index == 0 ? 'active' : ''}"
 													     th:styleappend="${photo.reject == true ? 'display:none;':''}">
 													

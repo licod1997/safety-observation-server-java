@@ -11,9 +11,9 @@ import java.util.List;
 public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     List<Feedback> findTop10ByOrderByIdDesc();
 
-    List<Feedback> findByIsRejectFalseAndIdGreaterThan( Long firstNotificationId );
+    List<Feedback> findByIsRejectFalseAndIdGreaterThanOrIsRejectIsNullAndIdGreaterThan( Long firstNotificationId, Long firstNotificationID );
 
-    List<Feedback> findTop10ByIsRejectFalseAndIdLessThanOrderByIdDesc( Long lastNotificationId );
+    List<Feedback> findTop10ByIsRejectFalseAndIdLessThanOrIsRejectIsNullAndIdLessThanOrderByIdDesc( Long lastNotificationId, Long lastNotificationID );
 
     List<Feedback> findTop10ByIsRejectFalseOrderByIdDesc();
 
